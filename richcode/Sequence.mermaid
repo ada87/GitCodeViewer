@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant U as User
+    participant C as Client
+    participant A as API Server
+    participant D as Database
+    participant N as Notification Service
+
+    U->>C: Create Task
+    C->>A: POST /api/tasks
+    Note over A,D: Validate task data
+    A->>D: INSERT INTO tasks
+    D-->>A: Task created
+    A-->>C: Return task data
+    C-->>U: Show created task
+
+    Note over U,N: Async notification
+    A->>N: Send notification
+    N-->>A: Notification queued
+    A-->>C: Task created response
+
+    par Parallel notification
+        N->>U: Email notification
+    and
+        N->>U: Push notification
+    end

@@ -1,0 +1,17 @@
+flowchart TD
+    A[Start: Create Task] --> B{Valid Input?}
+    B -->|No| C[Show Error]
+    C --> A
+    B -->|Yes| D[Save to Database]
+    D --> E[Send Notification]
+    E --> F{Assignee Exists?}
+    F -->|Yes| G[Notify Assignee]
+    F -->|No| H[Log Unassigned]
+    G --> I[Update Task Status]
+    H --> I
+    I --> J[End: Task Created]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style J fill:#e8f5e9
+    style C fill:#ffebee

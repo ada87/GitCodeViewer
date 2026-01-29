@@ -1,0 +1,20 @@
+{
+  "app": {
+    "name": "TaskFlow",
+    "version": "1.0.0"
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Implement auth",
+      "priority": "high",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "title": "Write tests",
+      "priority": "medium",
+      "status": "pending"
+    }
+  ]
+}

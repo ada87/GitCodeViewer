@@ -1,0 +1,38 @@
+classDiagram
+    class Task {
+        +int id
+        +string title
+        +string priority
+        +string status
+        +create()
+        +update()
+        +delete()
+    }
+
+    class TaskManager {
+        +Map~int, Task~ tasks
+        +createTask()
+        +getTask()
+        +listTasks()
+        +deleteTask()
+    }
+
+    class Priority {
+        <<enumeration>>
+        LOW
+        MEDIUM
+        HIGH
+        CRITICAL
+    }
+
+    class TaskStatus {
+        <<enumeration>>
+        PENDING
+        IN_PROGRESS
+        REVIEW
+        COMPLETED
+    }
+
+    Task "1" *-- "1" Priority : has
+    Task "1" *-- "1" TaskStatus : has
+    TaskManager "1" --> "*" Task : manages

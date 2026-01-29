@@ -1,0 +1,27 @@
+// Sass Sample Code - Task Management Styles
+//
+// @see https://sass-lang.com/documentation
+
+$primary-color: #3b82f6;
+$success-color: #22c55e;
+$warning-color: #f59e0b;
+$danger-color: #ef4444;
+
+$priorities: (
+    'low': $success-color,
+    'medium': $primary-color,
+    'high': $warning-color,
+    'critical': $danger-color
+);
+
+.task {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid;
+
+    @each $priority, $color in $priorities {
+        &--#{$priority} {
+            border-left-color: $color;
+        }
+    }
+}

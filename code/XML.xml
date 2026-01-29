@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * XML Sample Code - Task Management Configuration
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/XML
+ -->
+
+<task-management app="TaskFlow" version="1.0.0">
+    <tasks>
+        <task id="1">
+            <title>Implement auth</title>
+            <priority>high</priority>
+            <status>in_progress</status>
+        </task>
+        <task id="2">
+            <title>Write tests</title>
+            <priority>medium</priority>
+            <status>pending</status>
+        </task>
+    </tasks>
+</task-management>

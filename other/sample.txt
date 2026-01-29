@@ -1,0 +1,10 @@
+This is a sample text file for testing GitCode Viewer's text file support.
+
+It contains multiple lines of text to demonstrate how the application
+handles plain text files with various content types.
+
+Features tested:
+- Line numbering
+- Word wrapping
+- Character encoding
+- Large file handling

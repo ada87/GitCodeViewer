@@ -1,0 +1,22 @@
+# YAML Sample Code - Task Management Configuration
+#
+# @see https://yaml.org/spec/1.2.2/
+
+app:
+  name: TaskFlow
+  version: 1.0.0
+
+tasks:
+  defaults:
+    priority: medium
+    status: pending
+
+  items:
+    - id: 1
+      title: Implement auth
+      priority: high
+      status: in_progress
+    - id: 2
+      title: Write tests
+      priority: medium
+      status: pending
