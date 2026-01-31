@@ -1,5 +1,7 @@
 # Visualizador de Código Git
 
+[English](./README.md) | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | Português (Brasil)
+
 Uma ferramenta de leitura de código-fonte de alto desempenho, ajudando você a visualizar código a qualquer hora e em qualquer lugar.
 
 No app **GitCode Viewer**, você pode pesquisar `GitCodeViewer` no GitHub ou clonar `https://github.com/ada87/GitCodeViewer.git` para testar.

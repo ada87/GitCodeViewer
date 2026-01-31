@@ -1,5 +1,7 @@
 # Git代码阅读器 (GitCode Viewer)
 
+[English](./README.md) | 简体中文 | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md)
+
 
 一款高性能源码阅读工具，助您随时随地查看代码。
 

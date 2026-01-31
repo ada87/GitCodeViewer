@@ -1,5 +1,7 @@
 # Gitコードビューアー
 
+[English](./README.md) | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | 日本語 | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md)
+
 いつでもどこでもコードを表示できる高性能なソースコード閲覧ツールです。
 
 **GitCode Viewer** アプリでは、GitHub で `GitCodeViewer` を検索するか、`https://github.com/ada87/GitCodeViewer.git` をクローンして試せます。

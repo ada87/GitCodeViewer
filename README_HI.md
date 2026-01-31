@@ -1,5 +1,7 @@
 # Git कोड व्यूअर
 
+[English](./README.md) | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | हिन्दी | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md)
+
 एक उच्च-प्रदर्शन सोर्स कोड रीडिंग टूल है जो आपको कभी भी, कहीं भी कोड देखने में मदद करता है।
 
 **GitCode Viewer** ऐप में, आप GitHub पर `GitCodeViewer` खोज सकते हैं या `https://github.com/ada87/GitCodeViewer.git` को क्लोन करके इसे आज़मा सकते हैं।
