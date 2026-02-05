@@ -1,0 +1,30 @@
+graph TB
+    subgraph Client App
+        UI[User Interface]
+        Store[Zustand Store]
+        Git[Isomorphic-Git Engine]
+        FS[React Native FS]
+    end
+
+    subgraph "Local Device Storage"
+        RepoDir[Repositories /documents/repos/]
+        Settings[Settings JSON]
+    end
+
+    subgraph "Remote Git Providers"
+        GitHub[GitHub.com]
+        GitLab[GitLab.com]
+        Others[Other Git Servers]
+    end
+
+    UI -->|Action| Store
+    Store -->|Command| Git
+    Git -->|Read/Write| FS
+    FS -->|I/O| RepoDir
+    
+    Git -->|Clone/Pull (HTTPS)| GitHub
+    Git -->|Clone/Pull (HTTPS)| GitLab
+    Git -->|Clone/Pull (HTTPS)| Others
+
+    classDef box fill:#fff,stroke:#333,stroke-width:2px;
+    class UI,Store,Git,FS box;

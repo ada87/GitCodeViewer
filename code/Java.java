@@ -1,133 +1,180 @@
-/**
- * Java Sample Code - Task Management System
- *
- * A comprehensive example demonstrating Java OOP design
- * including generics, streams, Optional, and records.
- *
- * @see https://docs.oracle.com/javase/
- * @version 17+
- */
+package com.xdnote.codeviewer;
 
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 
-public final class TaskManager {
-    public enum Priority {
-        LOW("low"), MEDIUM("medium"), HIGH("high"), CRITICAL("critical");
-
-        private final String value;
-        Priority(String value) { this.value = value; }
-        public String getValue() { return value; }
-    }
-
-    public enum TaskStatus {
-        PENDING("pending"), IN_PROGRESS("in_progress"),
-        REVIEW("review"), COMPLETED("completed"), CANCELLED("cancelled");
-
-        private final String value;
-        TaskStatus(String value) { this.value = value; }
-        public String getValue() { return value; }
-    }
-
-    public static class Task {
-        private final int id;
-        private String title;
-        private String description;
-        private final Priority priority;
-        private TaskStatus status;
-        private String assignee;
-        private final LocalDateTime createdAt;
-        private final Set<String> tags;
-
-        public Task(int id, String title, String description, Priority priority) {
-            this.id = id;
-            this.title = title;
-            this.description = description;
-            this.priority = priority;
-            this.status = TaskStatus.PENDING;
-            this.createdAt = LocalDateTime.now();
-            this.tags = new HashSet<>();
-        }
-
-        // Getters
-        public int getId() { return id; }
-        public String getTitle() { return title; }
-        public String getDescription() { return description; }
-        public Priority getPriority() { return priority; }
-        public TaskStatus getStatus() { return status; }
-        public String getAssignee() { return assignee; }
-        public LocalDateTime getCreatedAt() { return createdAt; }
-        public Set<String> getTags() { return Collections.unmodifiableSet(tags); }
-
-        public void setStatus(TaskStatus status) { this.status = status; }
-        public void setAssignee(String assignee) { this.assignee = assignee; }
-        public void addTag(String tag) { this.tags.add(tag); }
-
-        public boolean hasTag(String tag) { return tags.contains(tag); }
-
-        @Override
-        public String toString() {
-            return String.format("Task#%d: %s [%s]", id, title, status.getValue());
-        }
-    }
-
-    public static class TaskManagerImpl {
-        private final Map<Integer, Task> tasks = new ConcurrentHashMap<>();
-        private int nextId = 1;
-
-        public Task createTask(String title, String description, Priority priority) {
-            Task task = new Task(nextId++, title, description, priority);
-            tasks.put(task.getId(), task);
-            return task;
-        }
-
-        public boolean updateTask(int id, Function<Task, Void> updater) {
-            Task task = tasks.get(id);
-            if (task == null) return false;
-            updater.apply(task);
-            return true;
-        }
-
-        public boolean deleteTask(int id) {
-            return tasks.remove(id) != null;
-        }
-
-        public List<Task> getAllTasks() {
-            return Collections.unmodifiableList(new ArrayList<>(tasks.values()));
-        }
-
-        public List<Task> filterTasks(Priority priority, TaskStatus status) {
-            return tasks.values().stream()
-                    .filter(t -> priority == null || t.getPriority() == priority)
-                    .filter(t -> status == null || t.getStatus() == status)
-                    .collect(Collectors.toList());
-        }
-
-        public Map<String, Integer> getStatistics() {
-            Map<String, Integer> stats = new LinkedHashMap<>();
-            stats.put("total", tasks.size());
-            return stats;
-        }
-    }
+/**
+ * GitCode Viewer Backend Service Simulation
+ * Demonstrates Java 8+ features, OOP, Generics, and Annotations.
+ */
+public class Java {
 
     public static void main(String[] args) {
-        TaskManagerImpl manager = new TaskManagerImpl();
+        System.out.println("Starting Java Repo Service...");
 
-        Task task1 = manager.createTask(
-                "Implement user authentication",
-                "Add JWT-based authentication system",
-                Priority.HIGH
+        RepoService service = new RepoService();
+
+        // Adding mock data
+        service.addRepo(new Repository("101", "spring-boot", "Java", true));
+        service.addRepo(new Repository("102", "react-native", "TypeScript", false));
+        service.addRepo(new Repository("103", "linux-kernel", "C", false));
+
+        // Stream API usage
+        System.out.println("\n--- Public Repositories ---");
+        List<Repository> publicRepos = service.findPublicRepos();
+        publicRepos.forEach(System.out::println);
+
+        // Optional usage
+        System.out.println("\n--- Search Result ---");
+        String searchId = "102";
+        service.findRepoById(searchId).ifPresentOrElse(
+            repo -> System.out.println("Found: " + repo.getName()),
+            () -> System.out.println("Repo with ID " + searchId + " not found.")
         );
 
-        manager.updateTask(task1.getId(), t -> {
-            t.setStatus(TaskStatus.IN_PROGRESS);
-            t.setAssignee("Alice");
-            return null;
-        });
+        // Lambda & sorting
+        System.out.println("\n--- Sorted by Name ---");
+        service.getAllRepos().stream()
+            .sorted((r1, r2) -> r1.getName().compareToIgnoreCase(r2.getName()))
+            .forEach(r -> System.out.println(r.getName() + " (" + r.getLanguage() + ")"));
 
-        System.out.println("Tasks created: " + manager.getAllTasks().size());
+        // Exception handling
+        try {
+            service.cloneRepo("999"); // Non-existent
+        } catch (RepoNotFoundException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        
+        // Polymorphism
+        GitOperation pushOp = new PushOperation();
+        GitOperation pullOp = new PullOperation();
+        
+        executeOperation(pushOp);
+        executeOperation(pullOp);
     }
+    
+    public static void executeOperation(GitOperation op) {
+        op.execute();
+    }
+}
+
+// Custom Exception
+class RepoNotFoundException extends Exception {
+    public RepoNotFoundException(String message) {
+        super(message);
+    }
+}
+
+// Interface
+interface Identifiable {
+    String getId();
+}
+
+// Model Class
+class Repository implements Identifiable, Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    private String id;
+    private String name;
+    private String language;
+    private boolean isPrivate;
+    private LocalDateTime createdAt;
+
+    public Repository(String id, String name, String language, boolean isPrivate) {
+        this.id = id;
+        this.name = name;
+        this.language = language;
+        this.isPrivate = isPrivate;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public String getName() { return name; }
+    public String getLanguage() { return language; }
+    public boolean isPrivate() { return isPrivate; }
+
+    @Override
+    public String toString() {
+        return String.format("Repo[id=%s, name=%s, lang=%s, private=%s]", 
+            id, name, language, isPrivate);
+    }
+}
+
+// Service Class
+class RepoService {
+    private Map<String, Repository> database = new HashMap<>();
+
+    public void addRepo(Repository repo) {
+        database.put(repo.getId(), repo);
+    }
+
+    public Optional<Repository> findRepoById(String id) {
+        return Optional.ofNullable(database.get(id));
+    }
+
+    public List<Repository> getAllRepos() {
+        return new ArrayList<>(database.values());
+    }
+
+    public List<Repository> findPublicRepos() {
+        return database.values().stream()
+                .filter(r -> !r.isPrivate())
+                .collect(Collectors.toList());
+    }
+
+    public void cloneRepo(String id) throws RepoNotFoundException {
+        if (!database.containsKey(id)) {
+            throw new RepoNotFoundException("Repository " + id + " does not exist.");
+        }
+        System.out.println("Cloning repo " + id + "...");
+        // Simulation of IO
+        try { Thread.sleep(500); } catch (InterruptedException e) {}
+        System.out.println("Clone complete.");
+    }
+}
+
+// Abstract Class & Polymorphism
+abstract class GitOperation {
+    abstract void execute();
+}
+
+class PushOperation extends GitOperation {
+    @Override
+    void execute() {
+        System.out.println(">> git push origin main");
+        System.out.println("   Uploading objects... 100%");
+    }
+}
+
+class PullOperation extends GitOperation {
+    @Override
+    void execute() {
+        System.out.println(">> git pull origin main");
+        System.out.println("   Fast-forward merge...");
+    }
+}
+
+// Generics Example
+class Response<T> {
+    private T data;
+    private int status;
+    private String message;
+
+    public Response(T data, int status, String message) {
+        this.data = data;
+        this.status = status;
+        this.message = message;
+    }
+
+    public T getData() { return data; }
 }

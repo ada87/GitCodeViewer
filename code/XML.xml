@@ -1,21 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- * XML Sample Code - Task Management Configuration
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/XML
- -->
+<!-- 
+  GitCode Viewer Configuration Manifest
+  Demonstrates XML Syntax: Elements, Attributes, Namespaces, CDATA
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.xdnote.codeviewer"
+          versionCode="1"
+          versionName="1.0.0">
 
-<task-management app="TaskFlow" version="1.0.0">
-    <tasks>
-        <task id="1">
-            <title>Implement auth</title>
-            <priority>high</priority>
-            <status>in_progress</status>
-        </task>
-        <task id="2">
-            <title>Write tests</title>
-            <priority>medium</priority>
-            <status>pending</status>
-        </task>
-    </tasks>
-</task-management>
+    <!-- Application Metadata -->
+    <meta-data
+        android:name="created_by"
+        android:value="CodeViewer Team" />
+        
+    <meta-data
+        android:name="description"
+        android:value="A high-performance offline Git client" />
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <!-- Theme Configuration -->
+    <style-config>
+        <theme id="default" mode="system">
+            <color name="primary">#3b82f6</color>
+            <color name="secondary">#8b5cf6</color>
+            <color name="background">#0f172a</color>
+            <font family="Roboto" size="14" />
+        </theme>
+        
+        <theme id="high-contrast" mode="light">
+            <color name="primary">#000000</color>
+            <color name="background">#ffffff</color>
+        </theme>
+    </style-config>
+
+    <!-- Supported Languages List -->
+    <languages>
+        <language id="js" name="JavaScript">
+            <extension>.js</extension>
+            <extension>.jsx</extension>
+            <highlighting>true</highlighting>
+        </language>
+        
+        <language id="py" name="Python">
+            <extension>.py</extension>
+            <interpreter path="/usr/bin/python3" />
+        </language>
+
+        <language id="xml" name="XML">
+            <extension>.xml</extension>
+            <extension>.xsd</extension>
+            <validation>strict</validation>
+        </language>
+        
+        <!-- Example with CDATA for embedded script -->
+        <language id="html" name="HTML">
+            <template>
+                <![CDATA[
+                <html>
+                    <head><title>New File</title></head>
+                    <body>
+                        <h1>Welcome</h1>
+                    </body>
+                </html>
+                ]]>
+            </template>
+        </language>
+    </languages>
+
+    <!-- Application Components -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CodeViewer">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|uiMode">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".ViewerActivity" />
+
+        <!-- File Provider for sharing files -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+    </application>
+
+    <!-- Repository Configuration -->
+    <repositories>
+        <repo url="https://github.com/facebook/react.git" branch="main">
+            <local-path>/data/repos/react</local-path>
+            <auto-sync>true</auto-sync>
+            <exclude-patterns>
+                <pattern>node_modules/*</pattern>
+                <pattern>dist/*</pattern>
+            </exclude-patterns>
+        </repo>
+        
+        <repo url="https://github.com/torvalds/linux.git">
+            <local-path>/data/repos/linux</local-path>
+            <auto-sync>false</auto-sync> <!-- Manual sync only -->
+        </repo>
+    </repositories>
+
+</manifest>

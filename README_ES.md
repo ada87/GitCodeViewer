@@ -2,48 +2,34 @@
 
 [English](./README.md) | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | Español | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md)
 
-Una herramienta de lectura de código fuente de alto rendimiento que te ayuda a ver código en cualquier momento y lugar.
+![Feature Graphic](./other/feature-graphic.png)
 
-En la app **GitCode Viewer**, puedes buscar `GitCodeViewer` en GitHub o clonar `https://github.com/ada87/GitCodeViewer.git` para probarlo.
+Una herramienta de lectura de código fuente de alto rendimiento que te ayuda a ver código en cualquier momento y lugar.
 
 ## Características
 
-- **Git sin conexión:** Visualiza sin conexión después de clonar. Compatible con branch, log y otras operaciones de Git, y con repositorios privados.
-- **Resaltado de sintaxis:** Compatible con lenguajes principales (HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML, etc.).
-- **Lectura de documentos:** Compatible con Markdown, Mermaid (.mmd, .mermaid), Jupyter (.ipynb) y más.
-- **Temas:** Compatible con modos Claro/Oscuro y estilos de VS Code/JetBrains.
-- **GitHub:** Descubre y descarga rápidamente proyectos públicos populares.
+1. **Git sin conexión:** Visualiza sin conexión después de clonar. Compatible con branch, log y otras operaciones de Git, y con repositorios privados.
+2. **Resaltado de sintaxis:** Compatible con lenguajes principales (HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML, etc.).
+3. **Lectura de documentos:** Compatible con Markdown, Mermaid (.mmd, .mermaid), Jupyter (.ipynb) y más.
+4. **Temas:** Compatible con modos Claro/Oscuro y estilos de VS Code/JetBrains.
+5. **GitHub:** Descubre y descarga rápidamente proyectos públicos populares.
 
-## Lenguajes de programación
+## 🚀 Demostración en vivo
 
-* [Astro](./code/Astro.astro)
-* [C](./code/C.c)
-* [C++](./code/Cpp.cpp)
-* [CSS](./code/CSS.css)
-* [Dart](./code/Dart.dart)
-* [Go](./code/Go.go)
-* [HTML](./code/HTML.html)
-* [Java](./code/Java.java)
-* [JavaScript](./code/JavaScript.js)
-* [JSON](./code/JSON.json)
-* [Kotlin](./code/Kotlin.kt)
-* [Markdown](./code/Markdown.md)
-* [PHP](./code/PHP.php)
-* [Python](./code/Python.py)
-* [Ruby](./code/Ruby.rb)
-* [Rust](./code/Rust.rs)
-* [Sass (SCSS)](./code/Sass.scss)
-* [Shell](./code/Shell.sh)
-* [SQL](./code/SQL.sql)
-* [Swift](./code/Swift.swift)
-* [TypeScript](./code/TypeScript.ts)
-* [Vue](./code/Vue.vue)
-* [XML](./code/XML.xml)
-* [YAML](./code/YAML.yaml)
+📱 **¿Viendo dentro de la App?** Toque los archivos a continuación para previsualizar el resaltado de sintaxis y las capacidades de renderizado.
 
-## Ejemplos de documentos
+> **¿Cómo obtener este repositorio?**
+> Busque `GitCodeViewer` en la aplicación, o toque **+** -> **Clonar** e ingrese:
+> `https://github.com/ada87/GitCodeViewer.git`
 
-* [Diagrama de clases Mermaid](./code-rich/ClassDiagram.mmd)
-* [Diagrama de flujo Mermaid](./code-rich/FlowChart.mmd)
-* [Notebook de Jupyter](./code-rich/Jupyter.ipynb)
-* [Diagrama de secuencia Mermaid](./code-rich/Sequence.mermaid)
+### 1. Lenguajes de programación
+
+[Astro](./code/Astro.astro) | [C](./code/C.c) | [C++](./code/Cpp.cpp) | [CSS](./code/CSS.css) | [Dart](./code/Dart.dart) | [Go](./code/Go.go)
+[HTML](./code/HTML.html) | [Java](./code/Java.java) | [JavaScript](./code/JavaScript.js) | [JSON](./code/JSON.json) | [Kotlin](./code/Kotlin.kt) | [Markdown](./code/Markdown.md)
+[PHP](./code/PHP.php) | [Python](./code/Python.py) | [Ruby](./code/Ruby.rb) | [Rust](./code/Rust.rs) | [Sass (SCSS)](./code/Sass.scss) | [Shell](./code/Shell.sh)
+[SQL](./code/SQL.sql) | [Swift](./code/Swift.swift) | [TypeScript](./code/TypeScript.ts) | [Vue](./code/Vue.vue) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml)
+
+### 2. Documentos enriquecidos y visualizaciones
+
+[Markdown y Matemáticas (LaTeX)](./code-rich/Markdown-All-In-One.md) | [Notebook de Jupyter (.ipynb)](./code-rich/Jupyter.ipynb) | [Diagrama complejo de Mermaid](./code-rich/Complex-Architecture.mmd)
+[Diagrama de flujo](./code-rich/FlowChart.mmd) | [Diagrama de secuencia](./code-rich/Sequence.mermaid) | [Diagrama de clases](./code-rich/ClassDiagram.mmd)

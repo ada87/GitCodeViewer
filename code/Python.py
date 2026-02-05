@@ -1,169 +1,135 @@
-/**
- * Python Sample Code - Task Management System
- *
- * A comprehensive example demonstrating modern Python features
- * including dataclasses, type hints, decorators, and async/await.
- *
- * @see https://docs.python.org/3/
- * @version 1.0.0
- */
+"""
+GitCode Viewer - Python Backend Simulation
+Demonstrates: Classes, Decorators, Type Hints, AsyncIO, DataClasses
+"""
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, Callable
-from enum import Enum
-from datetime import datetime
-from functools import wraps
+import asyncio
+import random
 import json
+import logging
+from dataclasses import dataclass, field
+from datetime import datetime
+from typing import List, Optional, Dict
 
-
-class Priority(Enum):
-    """Task priority levels"""
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-    CRITICAL = "critical"
-
-
-class TaskStatus(Enum):
-    """Task status values"""
-    PENDING = "pending"
-    IN_PROGRESS = "in_progress"
-    REVIEW = "review"
-    COMPLETED = "completed"
-    CANCELLED = "cancelled"
-
+# Configuration
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger("GitManager")
 
 @dataclass
-class Task:
-    """Represents a single task in the system"""
+class Commit:
+    hash: str
+    author: str
+    message: str
+    timestamp: datetime = field(default_factory=datetime.now)
+
+    def to_json(self) -> str:
+        return json.dumps(self.__dict__, default=str)
+
+@dataclass
+class Repository:
     id: int
-    title: str
-    description: str
-    priority: Priority = Priority.MEDIUM
-    status: TaskStatus = TaskStatus.PENDING
-    assignee: Optional[str] = None
-    created_at: datetime = field(default_factory=datetime.now)
-    due_date: Optional[datetime] = None
-    tags: Set[str] = field(default_factory=set)
+    name: str
+    url: str
+    is_private: bool = False
+    tags: List[str] = field(default_factory=list)
 
-    def __str__(self) -> str:
-        return f"Task(id={self.id}, title='{self.title}', status={self.status.value})"
+class GitError(Exception):
+    """Custom exception for Git operations"""
+    pass
 
-    def to_dict(self) -> Dict:
-        return {
-            "id": self.id,
-            "title": self.title,
-            "description": self.description,
-            "priority": self.priority.value,
-            "status": self.status.value,
-            "assignee": self.assignee,
-            "created_at": self.created_at.isoformat(),
-            "tags": list(self.tags)
-        }
+def retry(attempts: int = 3):
+    """Decorator to retry async functions"""
+    def decorator(func):
+        async def wrapper(*args, **kwargs):
+            for i in range(attempts):
+                try:
+                    return await func(*args, **kwargs)
+                except Exception as e:
+                    logger.warning(f"Attempt {i+1} failed: {e}")
+                    await asyncio.sleep(0.5)
+            raise GitError(f"Function {func.__name__} failed after {attempts} attempts")
+        return wrapper
+    return decorator
 
+class RepoManager:
+    def __init__(self, storage_path: str):
+        self.storage_path = storage_path
+        self._cache: Dict[int, Repository] = {}
 
-class TaskManager:
-    """Manages a collection of tasks with CRUD operations"""
+    def add_repo(self, repo: Repository):
+        self._cache[repo.id] = repo
+        logger.info(f"Repository added: {repo.name}")
 
-    def __init__(self, name: str = "Default") -> None:
-        self._tasks: Dict[int, Task] = {}
-        self._id_counter: int = 1
-        self._name = name
-        self._observers: List[Callable[[Task, str], None]] = []
+    @retry(attempts=3)
+    async def clone(self, repo_id: int) -> bool:
+        """Simulate a network clone operation"""
+        if repo_id not in self._cache:
+            raise ValueError("Repository ID not found")
+        
+        repo = self._cache[repo_id]
+        logger.info(f"Starting clone for {repo.url}...")
+        
+        # Simulate network delay / uncertainty
+        await asyncio.sleep(random.uniform(0.5, 1.5))
+        
+        if random.random() < 0.2:
+            raise ConnectionError("Network timeout during clone")
+            
+        logger.info(f"Successfully cloned {repo.name}")
+        return True
 
-    def subscribe(self, observer: Callable[[Task, str], None]) -> None:
-        """Subscribe to task change events"""
-        self._observers.append(observer)
+    def get_commit_history(self, repo_id: int, limit: int = 5) -> List[Commit]:
+        """Generator simulation for commits"""
+        commits = []
+        for i in range(limit):
+            commits.append(Commit(
+                hash=f"a{i}b{i}c{i}",
+                author="Alice Dev",
+                message=f"Refactor module {i}"
+            ))
+        return commits
 
-    def _notify(self, task: Task, action: str) -> None:
-        """Notify all observers of a task change"""
-        for observer in self._observers:
-            observer(task, action)
-
-    def create_task(
-        self,
-        title: str,
-        description: str,
-        priority: Priority = Priority.MEDIUM,
-    ) -> Task:
-        """Create a new task and add it to the manager"""
-        task = Task(
-            id=self._id_counter,
-            title=title,
-            description=description,
-            priority=priority,
+async def main():
+    logger.info("Starting Python Git Engine...")
+    
+    manager = RepoManager("/var/data/repos")
+    
+    # Initialize some data
+    repo1 = Repository(1, "fastapi-demo", "https://github.com/tiangolo/fastapi", tags=["python", "web"])
+    repo2 = Repository(2, "react-native", "https://github.com/facebook/react-native", tags=["js", "mobile"])
+    
+    manager.add_repo(repo1)
+    manager.add_repo(repo2)
+    
+    # Run async tasks
+    try:
+        results = await asyncio.gather(
+            manager.clone(1),
+            manager.clone(2)
         )
-        self._tasks[task.id] = task
-        self._id_counter += 1
-        self._notify(task, "created")
-        return task
+        print(f"Clone results: {results}")
+    except GitError as e:
+        logger.error(f"Critical error: {e}")
 
-    def update_task(self, task_id: int, **kwargs) -> Optional[Task]:
-        """Update an existing task"""
-        task = self._tasks.get(task_id)
-        if task is None:
-            return None
-        for key, value in kwargs.items():
-            if hasattr(task, key):
-                setattr(task, key, value)
-        self._notify(task, "updated")
-        return task
+    # Process data
+    print("\n--- Commit History for Repo 1 ---")
+    history = manager.get_commit_history(1)
+    for commit in history:
+        print(f"[{commit.hash}] {commit.message} ({commit.timestamp})")
 
-    def delete_task(self, task_id: int) -> bool:
-        """Delete a task by its ID"""
-        if task_id in self._tasks:
-            del self._tasks[task_id]
-            return True
-        return False
-
-    def get_all_tasks(self) -> List[Task]:
-        """Get all tasks as a list"""
-        return list(self._tasks.values())
-
-    def filter_tasks(
-        self,
-        priority: Optional[Priority] = None,
-        status: Optional[TaskStatus] = None,
-    ) -> List[Task]:
-        """Filter tasks based on criteria"""
-        result = self.get_all_tasks()
-        if priority is not None:
-            result = [t for t in result if t.priority == priority]
-        if status is not None:
-            result = [t for t in result if t.status == status]
-        return result
-
-    def get_statistics(self) -> Dict:
-        """Get task statistics"""
-        by_status: Dict[str, int] = {}
-        by_priority: Dict[str, int] = {}
-
-        for task in self._tasks.values():
-            by_status[task.status.value] = by_status.get(task.status.value, 0) + 1
-            by_priority[task.priority.value] = by_priority.get(task.priority.value, 0) + 1
-
-        return {
-            "total": len(self._tasks),
-            "by_status": by_status,
-            "by_priority": by_priority,
-        }
-
-
-def main() -> None:
-    """Main entry point"""
-    manager = TaskManager("Python Demo")
-
-    task1 = manager.create_task(
-        title="Implement user authentication",
-        description="Add JWT-based authentication system",
-        priority=Priority.HIGH,
-    )
-
-    manager.update_task(task1.id, status=TaskStatus.IN_PROGRESS)
-
-    stats = manager.get_statistics()
-    print(f"Total tasks: {stats['total']}")
-
+    # List Comprehension & Filter
+    web_repos = [r.name for r in manager._cache.values() if "web" in r.tags]
+    print(f"\nWeb Repositories: {web_repos}")
+    
+    # Context Manager example (File I/O)
+    filename = "repo_export.json"
+    with open(filename, "w") as f:
+        data = {id: r.__dict__ for id, r in manager._cache.items()}
+        json.dump(data, f, indent=2, default=str)
+    print(f"\nExported config to {filename}")
 
 if __name__ == "__main__":
-    main()
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("Stopped by user")

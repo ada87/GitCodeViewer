@@ -2,10 +2,10 @@
 
 [English](./README.md) | 简体中文 | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md)
 
+![Feature Graphic](./other/feature-graphic.png)
 
 一款高性能源码阅读工具，助您随时随地查看代码。
 
-您可以在 **GitCode Viewer** App 中，通过 Github 搜索 `GitCodeViewer` 或者 clone `https://github.com/ada87/GitCodeViewer.git` 试用效果。
 
 ## 功能特性
 
@@ -15,38 +15,22 @@
 4. **皮肤样式：** 支持明/暗皮肤，支持 VS Code/JetBrains 皮肤样式。
 5. **GitHub：** 快速发现并下载热门公开项目。
 
+## 🚀 在线演示
 
-## 编程语言
+📱 **正在 App 中查看？** 点击下方文件即可即时预览语法高亮和渲染能力。
 
+> **如何获取此仓库？**
+> 在 App 中搜索Github `GitCodeViewer`，或 **克隆** https://github.com/ada87/GitCodeViewer.git
 
-* [Astro](./code/Astro.astro)
-* [C](./code/C.c)
-* [C++](./code/Cpp.cpp)
-* [CSS](./code/CSS.css)
-* [Dart](./code/Dart.dart)
-* [Go](./code/Go.go)
-* [HTML](./code/HTML.html)
-* [Java](./code/Java.java)
-* [JavaScript](./code/JavaScript.js)
-* [JSON](./code/JSON.json)
-* [Kotlin](./code/Kotlin.kt)
-* [Markdown](./code/Markdown.md)
-* [PHP](./code/PHP.php)
-* [Python](./code/Python.py)
-* [Ruby](./code/Ruby.rb)
-* [Rust](./code/Rust.rs)
-* [Sass (SCSS)](./code/Sass.scss)
-* [Shell](./code/Shell.sh)
-* [SQL](./code/SQL.sql)
-* [Swift](./code/Swift.swift)
-* [TypeScript](./code/TypeScript.ts)
-* [Vue](./code/Vue.vue)
-* [XML](./code/XML.xml)
-* [YAML](./code/YAML.yaml)
+### 1. 编程语言
 
-## 文档示例
+[Astro](./code/Astro.astro) | [C](./code/C.c) | [C++](./code/Cpp.cpp) | [CSS](./code/CSS.css) | [Dart](./code/Dart.dart) | [Go](./code/Go.go)
+[HTML](./code/HTML.html) | [Java](./code/Java.java) | [JavaScript](./code/JavaScript.js) | [JSON](./code/JSON.json) | [Kotlin](./code/Kotlin.kt) | [Markdown](./code/Markdown.md)
+[PHP](./code/PHP.php) | [Python](./code/Python.py) | [Ruby](./code/Ruby.rb) | [Rust](./code/Rust.rs) | [Sass (SCSS)](./code/Sass.scss) | [Shell](./code/Shell.sh)
+[SQL](./code/SQL.sql) | [Swift](./code/Swift.swift) | [TypeScript](./code/TypeScript.ts) | [Vue](./code/Vue.vue) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml)
 
-* [Mermaid 类图](./code-rich/ClassDiagram.mmd)
-* [Mermaid 流程图](./code-rich/FlowChart.mmd)
-* [Jupyter Notebook](./code-rich/Jupyter.ipynb)
-* [Mermaid 时序图](./code-rich/Sequence.mermaid)
+### 2. 富文本与可视化
+
+[Markdown & 公式 (LaTeX)](./code-rich/Markdown-All-In-One.md) | [Jupyter Notebook (.ipynb)](./code-rich/Jupyter.ipynb) | [Mermaid 复杂图表](./code-rich/Complex-Architecture.mmd)
+[流程图](./code-rich/FlowChart.mmd) | [时序图](./code-rich/Sequence.mermaid) | [类图](./code-rich/ClassDiagram.mmd)
+
