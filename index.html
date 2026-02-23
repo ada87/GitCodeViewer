@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitCode Viewer — Offline Git Reader</title>
+  <meta name="description" content="Read Git repositories offline on your phone. Clone from GitHub, GitLab, Bitbucket and browse code with syntax highlighting, Markdown rendering, and more.">
+  <meta name="keywords" content="git, code viewer, offline, github, gitlab, bitbucket, syntax highlighting, mobile, code reader, repository browser">
+  <link rel="icon" type="image/png" href="/favicon.jpg">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #0b0d12;
+      --text-white: #ffffff;
+      --text-neutral-300: #d4d4d4;
+      --text-neutral-400: #a3a3a3;
+      --text-neutral-500: #737373;
+      --text-neutral-600: #525252;
+      --text-neutral-700: #404040;
+      --text-neutral-800: #262626;
+      --text-neutral-900: #171717;
+      --text-amber-300: #fcd34d;
+      --text-amber-400: #fbbf24;
+      --border-white-06: rgba(255, 255, 255, 0.06);
+      --border-white-10: rgba(255, 255, 255, 0.1);
+      --border-amber-30: rgba(245, 158, 11, 0.3);
+      --border-amber-50: rgba(245, 158, 11, 0.5);
+      --bg-white-02: rgba(255, 255, 255, 0.02);
+      --bg-white-04: rgba(255, 255, 255, 0.04);
+      --bg-amber-10: rgba(245, 158, 11, 0.1);
+      --bg-amber-20: rgba(245, 158, 11, 0.2);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .pointer-events-none {
+      pointer-events: none;
+    }
+
+    .fixed {
+      position: fixed;
+    }
+
+    .inset-0 {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .bg-gradient {
+      background: radial-gradient(ellipse at top, rgba(248, 228, 188, 0.08), transparent 58%),
+                  radial-gradient(ellipse at bottom right, rgba(137, 173, 255, 0.07), transparent 62%);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 5rem 1.5rem 4rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 7rem 1.5rem 5rem;
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 56rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(251, 191, 36, 0.8);
+    }
+
+    .hero h1 {
+      margin-top: 1rem;
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    @media (min-width: 640px) {
+      .hero h1 {
+        font-size: 3.75rem;
+      }
+    }
+
+    .hero-subtitle {
+      margin-top: 1rem;
+      font-size: 1.125rem;
+      color: var(--text-neutral-300);
+    }
+
+    @media (min-width: 640px) {
+      .hero-subtitle {
+        font-size: 1.25rem;
+      }
+    }
+
+    .hero-description {
+      margin-top: 1.5rem;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 42rem;
+      font-size: 0.875rem;
+      line-height: 1.625;
+      color: var(--text-neutral-500);
+    }
+
+    /* CTA Buttons */
+    .cta-container {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.875rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      color: var(--text-amber-300);
+      background-color: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--border-amber-30);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--bg-amber-20);
+      border-color: var(--border-amber-50);
+    }
+
+    .btn-secondary {
+      color: var(--text-neutral-500);
+      background-color: var(--bg-white-02);
+      border: 1px solid var(--border-white-06);
+    }
+
+    .btn-secondary .badge {
+      margin-left: 0.25rem;
+      padding: 0.125rem 0.5rem;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background-color: rgba(255, 255, 255, 0.06);
+      border-radius: 9999px;
+      color: var(--text-neutral-600);
+    }
+
+    .btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .cta-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-neutral-600);
+    }
+
+    .cta-meta .divider {
+      width: 1px;
+      height: 0.75rem;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .cta-meta a {
+      color: var(--text-neutral-500);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: color 0.2s;
+    }
+
+    .cta-meta a:hover {
+      color: var(--text-neutral-400);
+    }
+
+    /* Screenshots Section */
+    .screenshots {
+      position: relative;
+      padding: 4rem 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .screenshots {
+        padding: 5rem 1.5rem;
+      }
+    }
+
+    .section-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-white);
+      text-align: center;
+    }
+
+    @media (min-width: 640px) {
+      .section-title {
+        font-size: 1.25rem;
+      }
+    }
+
+    .section-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-neutral-500);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .gallery {
+      position: relative;
+      margin-top: 2rem;
+    }
+
+    /* Gallery Wrapper with Arrows */
+    .gallery-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .gallery-btn {
+      position: absolute;
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      backdrop-filter: blur(8px);
+    }
+
+    .gallery-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .gallery-btn.prev { left: 0; }
+    .gallery-btn.next { right: 0; }
+
+    .gallery-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-btn {
+        display: none;
+      }
+    }
+
+    /* Device Type Tabs */
+    .gallery-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery-tab {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-neutral-500);
+      background: transparent;
+      border: 1px solid var(--border-white-06);
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .gallery-tab:hover {
+      color: var(--text-neutral-300);
+      border-color: var(--border-white-10);
+    }
+
+    .gallery-tab.active {
+      color: var(--text-amber-400);
+      border-color: var(--border-amber-30);
+      background-color: rgba(245, 158, 11, 0.1);
+    }
+
+    /* Gallery Track - Horizontal Scroll */
+    .gallery-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 1rem 0.5rem;
+      scrollbar-width: none;
+    }
+
+    .gallery-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-slide {
+      flex: 0 0 260px;
+      scroll-snap-align: center;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--border-white-06);
+      background-color: var(--bg-white-02);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-slide:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (min-width: 640px) {
+      .gallery-slide {
+        flex: 0 0 300px;
+      }
+    }
+
+    /* Tablet slides larger */
+    #tablet-gallery .gallery-slide {
+      flex: 0 0 400px;
+    }
+
+    @media (min-width: 640px) {
+      #tablet-gallery .gallery-slide {
+        flex: 0 0 500px;
+      }
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Gallery visibility */
+    /* Features Section */
+    .features {
+      position: relative;
+      padding: 4rem 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .features {
+        padding: 5rem 1.5rem;
+      }
+    }
+
+    .features-container {
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      text-align: center;
+    }
+
+    .features-header p {
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--text-neutral-500);
+    }
+
+    .features-grid {
+      margin-top: 3rem;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 640px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .feature-card {
+      height: 100%;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border-white-06);
+      background-color: var(--bg-white-02);
+      transition: all 0.2s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-white-10);
+      background-color: var(--bg-white-04);
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      padding: 0.625rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--text-amber-400);
+    }
+
+    .feature-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .feature-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-white);
+    }
+
+    .feature-description {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: var(--text-neutral-500);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      position: relative;
+      padding: 5rem 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .cta-section {
+        padding: 7rem 1.5rem;
+      }
+    }
+
+    .cta-content {
+      max-width: 42rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    @media (min-width: 640px) {
+      .cta-content h2 {
+        font-size: 1.875rem;
+      }
+    }
+
+    .cta-content p {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      line-height: 1.625;
+      color: var(--text-neutral-500);
+    }
+
+    .cta-content .cta-buttons {
+      margin-top: 2rem;
+    }
+
+    /* About Section */
+    .about {
+      position: relative;
+      padding: 4rem 1.5rem;
+      border-top: 1px solid var(--border-white-06);
+    }
+
+    @media (min-width: 640px) {
+      .about {
+        padding: 5rem 1.5rem;
+      }
+    }
+
+    .about-content {
+      max-width: 48rem;
+      margin: 0 auto;
+      font-size: 0.875rem;
+      line-height: 1.625;
+      color: var(--text-neutral-500);
+    }
+
+    .about h2 {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-neutral-300);
+    }
+
+    .about h3 {
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-neutral-400);
+    }
+
+    .about p {
+      margin-bottom: 1rem;
+    }
+
+    .about strong {
+      color: var(--text-neutral-400);
+    }
+
+    .about a {
+      color: var(--text-neutral-400);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero > * {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .hero > *:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .hero > *:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .hero > *:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="pointer-events-none fixed inset-0 bg-gradient"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-label">Mobile App</p>
+      <h1>Code Viewer</h1>
+      <p class="hero-subtitle">Your IDE's reading mode — in your pocket.</p>
+      <p class="hero-description">
+        Reading commits on the train? Studying source code on a flight?
+        Clone from GitHub, GitLab, or Bitbucket — then read with syntax highlighting,
+        Markdown rendering, and full Git history, completely offline.
+      </p>
+
+      <div class="cta-container">
+        <div class="cta-buttons">
+          <!-- Google Play -->
+          <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
+            </svg>
+            Get on Google Play
+          </a>
+          <!-- App Store -->
+          <span class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
+            </svg>
+            App Store
+            <span class="badge">Soon</span>
+          </span>
+        </div>
+        <div class="cta-meta">
+          <span>Free to Use</span>
+          <span class="divider"></span>
+          <a href="privacy/">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section class="screenshots">
+    <div class="container">
+      <h2 class="section-title">See it in action</h2>
+      <p class="section-subtitle">Swipe to explore</p>
+      <div class="gallery">
+        <!-- Device Tabs -->
+        <div class="gallery-tabs">
+          <button class="gallery-tab active" onclick="switchDevice('phone')">Phone</button>
+          <button class="gallery-tab" onclick="switchDevice('tablet')">Tablet</button>
+        </div>
+
+        <!-- Phone Gallery -->
+        <div class="gallery-wrapper" id="phone-wrapper">
+          <button class="gallery-btn prev" onclick="scrollGallery('phone-gallery', -1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="gallery-track" id="phone-gallery">
+            <div class="gallery-slide">
+              <img src="images/phone-01-codeviewer.jpg" alt="Code Viewer" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/phone-02-features.jpg" alt="Features" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/phone-03-repos.jpg" alt="Repositories" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/phone-04-github.jpg" alt="GitHub" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/phone-05-git.jpg" alt="Git" loading="lazy">
+            </div>
+          </div>
+          <button class="gallery-btn next" onclick="scrollGallery('phone-gallery', 1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- Tablet Gallery -->
+        <div class="gallery-wrapper" id="tablet-wrapper" style="display:none">
+          <button class="gallery-btn prev" onclick="scrollGallery('tablet-gallery', -1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="gallery-track" id="tablet-gallery">
+            <div class="gallery-slide">
+              <img src="images/tablet10-01-codeviewer.jpg" alt="Code Viewer" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/tablet10-02-features.jpg" alt="Features" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/tablet10-03-repos.jpg" alt="Repositories" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/tablet10-04-github.jpg" alt="GitHub" loading="lazy">
+            </div>
+            <div class="gallery-slide">
+              <img src="images/tablet10-05-git.jpg" alt="Git" loading="lazy">
+            </div>
+          </div>
+          <button class="gallery-btn next" onclick="scrollGallery('tablet-gallery', 1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="features-container">
+      <div class="features-header">
+        <h2 class="section-title">Everything you need to read code on the go</h2>
+        <p>No compromises, no subscriptions.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Clone & Read Offline</h3>
+          <p class="feature-description">Clone any repo once, then browse code on the subway, on a plane, or anywhere with zero signal.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Discover & Explore</h3>
+          <p class="feature-description">Search GitHub trending repos, topics, and popular projects right from the app.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Private Repos, Securely</h3>
+          <p class="feature-description">Access private repos from GitHub, GitLab, and Bitbucket. Credentials are encrypted locally.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+            </svg>
+          </div>
+          <h3 class="feature-title">24+ Languages, IDE Themes</h3>
+          <p class="feature-description">Syntax highlighting for all major languages. Switch between VS Code and JetBrains themes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Markdown, Mermaid & Jupyter</h3>
+          <p class="feature-description">Render README files beautifully. Visualize Mermaid diagrams and browse Jupyter notebooks.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Zero Data Collection</h3>
+          <p class="feature-description">No servers, no analytics, no tracking. All network traffic goes directly between your device and your Git provider.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Branches & Git History</h3>
+          <p class="feature-description">Switch branches, browse commit logs, and navigate the full Git tree.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+          </div>
+          <h3 class="feature-title">Tabs & Command Palette</h3>
+          <p class="feature-description">Open multiple files in tabs and jump to any file instantly with the command palette.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Read code anywhere.</h2>
+      <p>Free to use, no account required. Your code never leaves your device.</p>
+      <div class="cta-buttons">
+        <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
+          </svg>
+          Get on Google Play
+        </a>
+        <span class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
+          </svg>
+          App Store
+          <span class="badge">Soon</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <article class="about">
+    <div class="about-content">
+      <h2>About Code Viewer</h2>
+
+      <p>
+        Code Viewer is a mobile Git client designed exclusively for <strong>reading code</strong>.
+        Clone repositories from GitHub, GitLab, or Bitbucket to your phone, then browse source code,
+        read commits, switch branches, and explore file trees — all completely offline.
+      </p>
+
+      <h3>Offline-First Architecture</h3>
+      <p>
+        Once a repository is cloned, every file, every branch, and every commit is available without
+        an internet connection. Read code on the subway, on a plane, or anywhere without signal.
+        Pull updates when you reconnect.
+      </p>
+
+      <h3>Rich Code Rendering</h3>
+      <p>
+        Syntax highlighting for 24+ programming languages including TypeScript, Python, Go, Rust, Java, Kotlin,
+        Swift, C++, and more. Choose between VS Code and JetBrains editor themes with both light and dark modes.
+        Markdown files are rendered with full LaTeX math formula support. Mermaid diagrams (flowcharts, sequence
+        diagrams, class diagrams) are visualized inline. Jupyter Notebooks (.ipynb) are rendered with code cells
+        and outputs.
+      </p>
+
+      <h3>GitHub Discovery</h3>
+      <p>
+        Search GitHub repositories by keyword, language, stars, and topics directly from the app.
+        Browse trending open-source projects and clone them with one tap.
+      </p>
+
+      <h3>Private Repository Access</h3>
+      <p>
+        Access private repositories from GitHub, GitLab, and Bitbucket using Personal Access Tokens.
+        Credentials are encrypted and stored locally on your device. There are no backend servers —
+        all network traffic goes directly between your phone and your Git provider.
+      </p>
+
+      <h3>Developer-Friendly Workspace</h3>
+      <p>
+        Open multiple files in tabs, navigate the file tree, and jump to any file instantly with the
+        command palette. Browse commit history, switch branches, and view repository metadata.
+        Available in 9 languages: English, Chinese, Japanese, Korean, German, Spanish, French,
+        Hindi, and Portuguese.
+      </p>
+
+      <h3>Privacy &amp; Security</h3>
+      <p>
+        Code Viewer collects zero user data. No analytics, no tracking, no telemetry.
+        Your code and credentials never leave your device. Read the full
+        <a href="privacy/">privacy policy</a>.
+      </p>
+    </div>
+  </article>
+
+  <!-- JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Code Viewer - Offline Git Reader",
+    "alternateName": "GitCode Viewer",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Android",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Clone Git repositories to your phone and read code offline with syntax highlighting, Markdown rendering, Mermaid diagrams, and Jupyter notebook support.",
+    "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+    "author": { "@type": "Person", "name": "XiangDa", "email": "ada87@163.com" }
+  }
+  </script>
+
+  <script>
+    function scrollGallery(id, dir) {
+      const el = document.getElementById(id);
+      const slide = el.querySelector('.gallery-slide');
+      const scrollAmount = slide.offsetWidth + 16;
+      el.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    }
+
+    function switchDevice(device) {
+      document.getElementById('phone-wrapper').style.display = device === 'phone' ? 'flex' : 'none';
+      document.getElementById('tablet-wrapper').style.display = device === 'tablet' ? 'flex' : 'none';
+
+      const tabs = document.querySelectorAll('.gallery-tab');
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', (i === 0 && device === 'phone') || (i === 1 && device === 'tablet'));
+      });
+    }
+  </script>
+</body>
+</html>
