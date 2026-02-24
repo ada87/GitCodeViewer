@@ -1,218 +1,151 @@
+<script setup lang="ts">
+import { ref, computed, watch, onMounted } from 'vue'
+
+interface FileItem {
+  id: string
+  name: string
+  language: string
+  size: number
+  modified: Date
+}
+
+const props = defineProps<{
+  files: FileItem[]
+  initialFilter?: string
+}>()
+
+const emit = defineEmits<{
+  select: [file: FileItem]
+  delete: [id: string]
+}>()
+
+const searchQuery = ref(props.initialFilter ?? '')
+const selectedId = ref<string | null>(null)
+const sortKey = ref<keyof FileItem>('name')
+const sortAsc = ref(true)
+
+const filteredFiles = computed(() => {
+  const q = searchQuery.value.toLowerCase()
+  const filtered = props.files.filter(f =>
+    f.name.toLowerCase().includes(q) || f.language.toLowerCase().includes(q)
+  )
+  return filtered.sort((a, b) => {
+    const va = String(a[sortKey.value])
+    const vb = String(b[sortKey.value])
+    return sortAsc.value ? va.localeCompare(vb) : vb.localeCompare(va)
+  })
+})
+
+const totalSize = computed(() =>
+  filteredFiles.value.reduce((sum, f) => sum + f.size, 0)
+)
+
+watch(searchQuery, (val) => {
+  if (val && filteredFiles.value.length === 1) {
+    selectedId.value = filteredFiles.value[0].id
+  }
+})
+
+onMounted(() => {
+  console.log('FileExplorer mounted with ', props.files.length, ' files')
+})
+
+function handleSelect(file: FileItem) {
+  selectedId.value = file.id
+  emit('select', file)
+}
+
+function toggleSort(key: keyof FileItem) {
+  if (sortKey.value === key) {
+    sortAsc.value = !sortAsc.value
+  } else {
+    sortKey.value = key
+    sortAsc.value = true
+  }
+}
+
+function formatSize(bytes: number): string {
+  if (bytes < 1024) return bytes + ' B'
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB'
+  return (bytes / 1048576).toFixed(1) + ' MB'
+}
+</script>
+
 <template>
-  <div class="repo-viewer" :class="{ 'dark-mode': isDarkMode }">
-    <!-- Header Section -->
-    <header class="header">
-      <div class="logo">
-        <svg-icon name="git" width="24" height="24" />
-        <h1>{{ appName }}</h1>
-      </div>
-      
-      <div class="actions">
-        <button @click="toggleTheme" class="btn-icon">
-          {{ isDarkMode ? '☀️' : '🌙' }}
-        </button>
-        <button @click="refreshData" class="btn-primary" :disabled="loading">
-          <span v-if="loading">Syncing...</span>
-          <span v-else>Sync Repos</span>
-        </button>
-      </div>
-    </header>
+  <div class="file-explorer">
+    <div class="toolbar">
+      <input
+        v-model="searchQuery"
+        type="search"
+        placeholder="Filter files..."
+        class="search-input"
+        aria-label="Filter files"
+      />
+      <span class="file-count">{{ filteredFiles.length }} files ({{ formatSize(totalSize) }})</span>
+    </div>
 
-    <!-- Main Content -->
-    <main class="content">
-      <div v-if="error" class="error-banner">
-        {{ error }}
-        <span class="close" @click="error = null">&times;</span>
-      </div>
-
-      <div class="repo-grid">
-        <repo-card 
-          v-for="repo in filteredRepos" 
-          :key="repo.id"
-          :repo="repo"
-          @open="handleOpenRepo"
-          @delete="handleDeleteRepo"
-        />
-      </div>
-
-      <div v-if="repos.length === 0 && !loading" class="empty-state">
-        <p>No repositories found.</p>
-        <button @click="showAddModal = true">Add Your First Repo</button>
-      </div>
-    </main>
-
-    <!-- Modals -->
-    <add-repo-modal 
-      v-if="showAddModal" 
-      @close="showAddModal = false" 
-      @confirm="addRepo" 
-    />
+    <table class="file-table">
+      <thead>
+        <tr>
+          <th @click="toggleSort('name')" class="sortable">Name</th>
+          <th @click="toggleSort('language')" class="sortable">Language</th>
+          <th @click="toggleSort('size')" class="sortable">Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="file in filteredFiles"
+          :key="file.id"
+          :class="{ selected: file.id === selectedId }"
+          @click="handleSelect(file)"
+        >
+          <td>{{ file.name }}</td>
+          <td><span class="lang-badge">{{ file.language }}</span></td>
+          <td>{{ formatSize(file.size) }}</td>
+        </tr>
+        <tr v-if="filteredFiles.length === 0">
+          <td colspan="3" class="empty-state">No files match your filter.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue';
-import RepoCard from './components/RepoCard.vue';
-import AddRepoModal from './components/AddRepoModal.vue';
-import { useRepoStore } from './stores/repo';
-
-interface Repository {
-  id: string;
-  name: string;
-  url: string;
-  stars: number;
-}
-
-export default defineComponent({
-  name: 'RepoViewer',
-  components: {
-    RepoCard,
-    AddRepoModal
-  },
-  props: {
-    initialTheme: {
-      type: String,
-      default: 'system'
-    }
-  },
-  setup(props) {
-    // Reactive State
-    const appName = ref('GitCode Viewer');
-    const isDarkMode = ref(false);
-    const loading = ref(false);
-    const error = ref<string | null>(null);
-    const showAddModal = ref(false);
-    const searchQuery = ref('');
-
-    const repoStore = useRepoStore();
-
-    // Computed Properties
-    const repos = computed(() => repoStore.repositories);
-    
-    const filteredRepos = computed(() => {
-      if (!searchQuery.value) return repos.value;
-      return repos.value.filter(r => 
-        r.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-      );
-    });
-
-    // Lifecycle Hooks
-    onMounted(async () => {
-      console.log('Component Mounted');
-      await refreshData();
-    });
-
-    // Methods
-    const toggleTheme = () => {
-      isDarkMode.value = !isDarkMode.value;
-      document.body.classList.toggle('dark', isDarkMode.value);
-    };
-
-    const refreshData = async () => {
-      loading.value = true;
-      try {
-        await repoStore.fetchRepos();
-      } catch (e) {
-        error.value = 'Failed to fetch repositories.';
-      } finally {
-        loading.value = false;
-      }
-    };
-
-    const handleOpenRepo = (repo: Repository) => {
-      console.log('Opening repo:', repo.name);
-      // Navigate to detail view
-    };
-
-    const handleDeleteRepo = async (id: string) => {
-      if (confirm('Are you sure you want to delete this repo?')) {
-        await repoStore.deleteRepo(id);
-      }
-    };
-
-    const addRepo = async (url: string) => {
-      try {
-        await repoStore.cloneRepo(url);
-        showAddModal.value = false;
-      } catch (e) {
-        error.value = 'Invalid Git URL';
-      }
-    };
-
-    return {
-      appName,
-      isDarkMode,
-      loading,
-      error,
-      showAddModal,
-      repos,
-      filteredRepos,
-      toggleTheme,
-      refreshData,
-      handleOpenRepo,
-      handleDeleteRepo,
-      addRepo
-    };
-  }
-});
-</script>
-
 <style scoped>
-/* Variables */
-:root {
-  --primary: #42b883;
-  --bg-light: #ffffff;
-  --bg-dark: #1a1a1a;
-  --text-light: #2c3e50;
-  --text-dark: #e0e0e0;
-}
-
-.repo-viewer {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  color: var(--text-light);
-  background: var(--bg-light);
-  min-height: 100vh;
-  transition: all 0.3s ease;
-}
-
-.dark-mode {
-  color: var(--text-dark);
-  background: var(--bg-dark);
-}
-
-.header {
+.file-explorer {
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #ddd;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: system-ui, sans-serif;
 }
-
-.repo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
-
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+.search-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 0.375rem;
 }
-
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.file-table {
+  width: 100%;
+  border-collapse: collapse;
 }
-
-/* Transitions */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
+.file-table th, .file-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border, #eee);
 }
-.fade-enter, .fade-leave-to {
-  opacity: 0;
+.sortable { cursor: pointer; user-select: none; }
+.selected { background: var(--color-primary-light, #e8f0fe); }
+.lang-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  background: var(--color-surface-alt, #f0f0f0);
+  font-size: 0.8rem;
 }
+.empty-state { text-align: center; color: var(--color-text-muted, #999); padding: 2rem; }
 </style>

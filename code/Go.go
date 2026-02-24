@@ -4,175 +4,136 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"sync"
+	"syscall"
 	"time"
 )
 
-// Constants
-const (
-	AppName    = "GitCodeViewer-Backend"
-	ApiVersion = "v1.0"
-	Port       = ":8080"
-)
+// Domain types
 
-// Repository struct with JSON tags
-type Repository struct {
-	ID          int       `json:"id"`
-	Name        string    `json:"name"`
-	FullName    string    `json:"full_name"`
-	Description string    `json:"description"`
-	Private     bool      `json:"private"`
-	Stars       int       `json:"stargazers_count"`
-	Language    string    `json:"language"`
-	UpdatedAt   time.Time `json:"updated_at"`
+type User struct {
+	ID        string    \`json:"id"\`
+	Name      string    \`json:"name"\`
+	Email     string    \`json:"email"\`
+	Role      string    \`json:"role"\`
+	CreatedAt time.Time \`json:"created_at"\`
 }
 
-// Service interface
-type RepoService interface {
-	GetRepo(ctx context.Context, owner, repo string) (*Repository, error)
-	ListRepos(ctx context.Context, user string) ([]Repository, error)
+type APIResponse struct {
+	Success bool        \`json:"success"\`
+	Data    interface{} \`json:"data,omitempty"\`
+	Error   string      \`json:"error,omitempty"\`
 }
 
-// GitHubService implementation
-type GitHubService struct {
-	client *http.Client
+// Thread-safe store
+
+type Store struct {
+	mu    sync.RWMutex
+	users map[string]*User
 }
 
-func NewGitHubService() *GitHubService {
-	return &GitHubService{
-		client: &http.Client{Timeout: 10 * time.Second},
-	}
+func NewStore() *Store {
+	return &Store{users: make(map[string]*User)}
 }
 
-func (s *GitHubService) GetRepo(ctx context.Context, owner, name string) (*Repository, error) {
-	url := fmt.Sprintf("https://api.github.com/repos/%s/%s", owner, name)
-	
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, err
-	}
-	
-	resp, err := s.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("API request failed with status: %d", resp.StatusCode)
-	}
-
-	var repo Repository
-	if err := json.NewDecoder(resp.Body).Decode(&repo); err != nil {
-		return nil, err
-	}
-
-	return &repo, nil
+func (s *Store) Get(id string) (*User, bool) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	u, ok := s.users[id]
+	return u, ok
 }
 
-// Worker function for concurrency demo
-func repoWorker(id int, jobs <-chan string, results chan<- string, wg *sync.WaitGroup) {
+func (s *Store) List() []*User {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result := make([]*User, 0, len(s.users))
+	for _, u := range s.users {
+		result = append(result, u)
+	}
+	return result
+}
+
+func (s *Store) Create(u *User) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	u.CreatedAt = time.Now()
+	s.users[u.ID] = u
+}
+
+// Background worker with channels
+
+func startWorker(ctx context.Context, jobs <-chan string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	for repoName := range jobs {
-		// Simulate processing time
-		time.Sleep(time.Millisecond * 500)
-		results <- fmt.Sprintf("Worker %d processed repo: %s", id, repoName)
+	for {
+		select {
+		case <-ctx.Done():
+			log.Println("Worker shutting down")
+			return
+		case job, ok := <-jobs:
+			if !ok {
+				return
+			}
+			log.Printf("Processing job: %s", job)
+			time.Sleep(100 * time.Millisecond)
+		}
 	}
+}
+
+// HTTP handlers
+
+func jsonResponse(w http.ResponseWriter, status int, resp APIResponse) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	json.NewEncoder(w).Encode(resp)
 }
 
 func main() {
-	// Setup logging
-	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("Starting %s %s...\n", AppName, ApiVersion)
+	store := NewStore()
+	store.Create(&User{ID: "1", Name: "Alice", Email: "alice@example.com", Role: "admin"})
+	store.Create(&User{ID: "2", Name: "Bob", Email: "bob@example.com", Role: "user"})
 
-	// Context with timeout
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	svc := NewGitHubService()
-
-	// Example: Fetch generic repo info
-	fmt.Println("Fetching repo info for facebook/react...")
-	repo, err := svc.GetRepo(ctx, "facebook", "react")
-	if err != nil {
-		log.Printf("Error fetching repo: %v\n", err)
-	} else {
-		printRepoInfo(repo)
-	}
-
-	// Concurrency Demo: Processing queue
-	fmt.Println("\n--- Starting Background Processing Queue ---")
-	
-	jobs := make(chan string, 10)
-	results := make(chan string, 10)
+	// Start background workers
+	ctx, cancel := context.WithCancel(context.Background())
+	jobs := make(chan string, 100)
 	var wg sync.WaitGroup
-
-	// Start 3 workers
-	for w := 1; w <= 3; w++ {
+	for i := 0; i < 3; i++ {
 		wg.Add(1)
-		go repoWorker(w, jobs, results, &wg)
+		go startWorker(ctx, jobs, &wg)
 	}
 
-	// Send jobs
-	repoList := []string{"vuejs/vue", "angular/angular", "sveltejs/svelte", "solidjs/solid"}
-	for _, name := range repoList {
-		jobs <- name
-	}
-	close(jobs)
-
-	// Close results channel when all workers are done
-	go func() {
-		wg.Wait()
-		close(results)
-	}()
-
-	// Collect results
-	for res := range results {
-		fmt.Println(res)
-	}
-
-	// Simple HTTP Server
-	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok", "uptime": "100%"})
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /api/users", func(w http.ResponseWriter, r *http.Request) {
+		jsonResponse(w, http.StatusOK, APIResponse{Success: true, Data: store.List()})
+	})
+	mux.HandleFunc("GET /api/users/{id}", func(w http.ResponseWriter, r *http.Request) {
+		user, ok := store.Get(r.PathValue("id"))
+		if !ok {
+			jsonResponse(w, 404, APIResponse{Error: "not found"})
+			return
+		}
+		jsonResponse(w, 200, APIResponse{Success: true, Data: user})
 	})
 
-	log.Printf("Server listening on %s (Demo mode, not actually binding port in this file)", Port)
-	// log.Fatal(http.ListenAndServe(Port, nil))
-}
+	srv := &http.Server{Addr: ":8080", Handler: mux}
 
-func printRepoInfo(r *Repository) {
-	fmt.Println("------------------------------------------------")
-	fmt.Printf("📦 %s (ID: %d)\n", r.FullName, r.ID)
-	fmt.Printf("⭐ Stars: %d | 🗣️ Language: %s\n", r.Stars, r.Language)
-	fmt.Printf("📝 Desc: %s\n", r.Description)
-	fmt.Printf("🔒 Private: %v\n", r.Private)
-	fmt.Println("------------------------------------------------")
-}
+	// Graceful shutdown
+	go func() {
+		sigCh := make(chan os.Signal, 1)
+		signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
+		<-sigCh
+		log.Println("Shutting down...")
+		cancel()
+		close(jobs)
+		wg.Wait()
+		srv.Shutdown(context.Background())
+	}()
 
-// Utility to verify file existence
-func fileExists(filename string) bool {
-	info, err := os.Stat(filename)
-	if os.IsNotExist(err) {
-		return false
+	fmt.Println("Server listening on :8080")
+	if err := srv.ListenAndServe(); err != http.ErrServerClosed {
+		log.Fatal(err)
 	}
-	return !info.IsDir()
-}
-
-// Interfaces and Struct embedding
-type Reader interface {
-	Read(p []byte) (n int, err error)
-}
-
-type Writer interface {
-	Write(p []byte) (n int, err error)
-}
-
-type ReadWriter interface {
-	Reader
-	Writer
 }

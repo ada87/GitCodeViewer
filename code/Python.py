@@ -1,135 +1,101 @@
-"""
-GitCode Viewer - Python Backend Simulation
-Demonstrates: Classes, Decorators, Type Hints, AsyncIO, DataClasses
-"""
+#!/usr/bin/env python3
+"""FastAPI-style web application with async support."""
+
+from __future__ import annotations
 
 import asyncio
-import random
-import json
-import logging
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List, Optional, Dict
+from enum import Enum
+from typing import Optional
+from uuid import uuid4
 
-# Configuration
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger("GitManager")
 
-@dataclass
-class Commit:
-    hash: str
-    author: str
-    message: str
-    timestamp: datetime = field(default_factory=datetime.now)
+class TaskStatus(Enum):
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
 
-    def to_json(self) -> str:
-        return json.dumps(self.__dict__, default=str)
 
 @dataclass
-class Repository:
-    id: int
-    name: str
-    url: str
-    is_private: bool = False
-    tags: List[str] = field(default_factory=list)
+class Task:
+    id: str = field(default_factory=lambda: str(uuid4()))
+    title: str = ""
+    description: str = ""
+    status: TaskStatus = TaskStatus.PENDING
+    priority: int = 0
+    tags: list[str] = field(default_factory=list)
+    created_at: datetime = field(default_factory=datetime.now)
+    completed_at: Optional[datetime] = None
 
-class GitError(Exception):
-    """Custom exception for Git operations"""
-    pass
+    def complete(self) -> None:
+        self.status = TaskStatus.COMPLETED
+        self.completed_at = datetime.now()
 
-def retry(attempts: int = 3):
-    """Decorator to retry async functions"""
-    def decorator(func):
-        async def wrapper(*args, **kwargs):
-            for i in range(attempts):
-                try:
-                    return await func(*args, **kwargs)
-                except Exception as e:
-                    logger.warning(f"Attempt {i+1} failed: {e}")
-                    await asyncio.sleep(0.5)
-            raise GitError(f"Function {func.__name__} failed after {attempts} attempts")
-        return wrapper
-    return decorator
+    def fail(self, reason: str) -> None:
+        self.status = TaskStatus.FAILED
+        self.description += f"\nFailed: {reason}"
 
-class RepoManager:
-    def __init__(self, storage_path: str):
-        self.storage_path = storage_path
-        self._cache: Dict[int, Repository] = {}
 
-    def add_repo(self, repo: Repository):
-        self._cache[repo.id] = repo
-        logger.info(f"Repository added: {repo.name}")
+class TaskQueue:
+    """Async task queue with priority scheduling."""
 
-    @retry(attempts=3)
-    async def clone(self, repo_id: int) -> bool:
-        """Simulate a network clone operation"""
-        if repo_id not in self._cache:
-            raise ValueError("Repository ID not found")
-        
-        repo = self._cache[repo_id]
-        logger.info(f"Starting clone for {repo.url}...")
-        
-        # Simulate network delay / uncertainty
-        await asyncio.sleep(random.uniform(0.5, 1.5))
-        
-        if random.random() < 0.2:
-            raise ConnectionError("Network timeout during clone")
-            
-        logger.info(f"Successfully cloned {repo.name}")
-        return True
+    def __init__(self, max_concurrent: int = 5):
+        self._queue: asyncio.PriorityQueue[tuple[int, Task]] = asyncio.PriorityQueue()
+        self._semaphore = asyncio.Semaphore(max_concurrent)
+        self._results: dict[str, Task] = {}
 
-    def get_commit_history(self, repo_id: int, limit: int = 5) -> List[Commit]:
-        """Generator simulation for commits"""
-        commits = []
-        for i in range(limit):
-            commits.append(Commit(
-                hash=f"a{i}b{i}c{i}",
-                author="Alice Dev",
-                message=f"Refactor module {i}"
-            ))
-        return commits
+    async def submit(self, task: Task) -> str:
+        await self._queue.put((-task.priority, task))
+        return task.id
+
+    async def process_next(self) -> Optional[Task]:
+        async with self._semaphore:
+            if self._queue.empty():
+                return None
+            _, task = await self._queue.get()
+            task.status = TaskStatus.RUNNING
+            try:
+                await self._execute(task)
+                task.complete()
+            except Exception as e:
+                task.fail(str(e))
+            self._results[task.id] = task
+            return task
+
+    async def _execute(self, task: Task) -> None:
+        # Simulate work
+        await asyncio.sleep(0.1)
+
+    def get_result(self, task_id: str) -> Optional[Task]:
+        return self._results.get(task_id)
+
+    @property
+    def pending_count(self) -> int:
+        return self._queue.qsize()
+
 
 async def main():
-    logger.info("Starting Python Git Engine...")
-    
-    manager = RepoManager("/var/data/repos")
-    
-    # Initialize some data
-    repo1 = Repository(1, "fastapi-demo", "https://github.com/tiangolo/fastapi", tags=["python", "web"])
-    repo2 = Repository(2, "react-native", "https://github.com/facebook/react-native", tags=["js", "mobile"])
-    
-    manager.add_repo(repo1)
-    manager.add_repo(repo2)
-    
-    # Run async tasks
-    try:
-        results = await asyncio.gather(
-            manager.clone(1),
-            manager.clone(2)
-        )
-        print(f"Clone results: {results}")
-    except GitError as e:
-        logger.error(f"Critical error: {e}")
+    queue = TaskQueue(max_concurrent=3)
 
-    # Process data
-    print("\n--- Commit History for Repo 1 ---")
-    history = manager.get_commit_history(1)
-    for commit in history:
-        print(f"[{commit.hash}] {commit.message} ({commit.timestamp})")
+    tasks = [
+        Task(title="Build project", priority=10, tags=["ci"]),
+        Task(title="Run tests", priority=8, tags=["ci", "test"]),
+        Task(title="Deploy staging", priority=5, tags=["deploy"]),
+        Task(title="Send notifications", priority=1, tags=["notify"]),
+    ]
 
-    # List Comprehension & Filter
-    web_repos = [r.name for r in manager._cache.values() if "web" in r.tags]
-    print(f"\nWeb Repositories: {web_repos}")
-    
-    # Context Manager example (File I/O)
-    filename = "repo_export.json"
-    with open(filename, "w") as f:
-        data = {id: r.__dict__ for id, r in manager._cache.items()}
-        json.dump(data, f, indent=2, default=str)
-    print(f"\nExported config to {filename}")
+    for task in tasks:
+        await queue.submit(task)
+
+    print(f"Queued {queue.pending_count} tasks")
+
+    while queue.pending_count > 0:
+        result = await queue.process_next()
+        if result:
+            print(f"[{result.status.value}] {result.title}")
+
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("Stopped by user")
+    asyncio.run(main())

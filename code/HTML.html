@@ -1,201 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A demo page for GitCodeViewer HTML highlighting">
-    <meta name="theme-color" content="#0f172a">
-    <title>GitCode Viewer - HTML Demo</title>
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="styles.css" as="style">
-    
-    <style>
-        :root {
-            --primary: #3b82f6;
-            --bg: #0f172a;
-            --text: #e2e8f0;
-        }
-        
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            text-align: center;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid #334155;
-        }
-
-        .code-block {
-            background: #1e293b;
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            border: 1px solid #334155;
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: opacity 0.2s;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 1rem;
-            border-bottom: 1px solid #334155;
-        }
-
-        .badge {
-            background: #059669;
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GitCode Viewer - Browse and read Git repositories with syntax highlighting" />
+  <title>GitCode Viewer</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-            </svg>
-            <h1>GitCode Viewer</h1>
-            <p>The ultimate offline code reading experience.</p>
-            <nav>
-                <a href="#features" style="color: #60a5fa; margin: 0 10px;">Features</a>
-                <a href="#demo" style="color: #60a5fa; margin: 0 10px;">Demo</a>
-                <a href="#contact" style="color: #60a5fa; margin: 0 10px;">Contact</a>
-            </nav>
-        </header>
-
-        <main>
-            <section id="intro">
-                <h2>Why use this app?</h2>
-                <p>
-                    Developers often need to read code on the go. 
-                    <strong>GitCode Viewer</strong> makes this possible by providing a 
-                    <em>native-like</em> experience with powerful search and offline capabilities.
-                </p>
-            </section>
-
-            <section id="features">
-                <h2>Supported Features</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Status</th>
-                            <th>Version</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Syntax Highlighting</td>
-                            <td><span class="badge">Stable</span></td>
-                            <td>v1.0</td>
-                        </tr>
-                        <tr>
-                            <td>Git Clone (HTTPS)</td>
-                            <td><span class="badge">Stable</span></td>
-                            <td>v1.0</td>
-                        </tr>
-                        <tr>
-                            <td>Mermaid Diagrams</td>
-                            <td><span class="badge">New</span></td>
-                            <td>v1.1</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section id="demo">
-                <h2>Interactive Demo</h2>
-                <div class="code-block">
-                    <code>
-                        // Try clicking the button below
-                        function sayHello() {
-                            alert("Hello from the web view!");
-                        }
-                    </code>
-                </div>
-                <button onclick="sayHello()" aria-label="Run Demo">Run Code</button>
-            </section>
-
-            <section id="forms">
-                <h2>Newsletter</h2>
-                <form action="/subscribe" method="POST">
-                    <div style="margin-bottom: 1rem;">
-                        <label for="email">Email Address:</label><br>
-                        <input type="email" id="email" name="email" placeholder="dev@example.com" required 
-                               style="padding: 0.5rem; width: 100%; max-width: 300px; margin-top: 0.5rem;">
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label>Interests:</label><br>
-                        <input type="checkbox" id="react" name="interest" value="react">
-                        <label for="react">React Native</label>
-                        <input type="checkbox" id="git" name="interest" value="git">
-                        <label for="git">Git Internals</label>
-                    </div>
-                    <button type="submit">Subscribe</button>
-                </form>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2024 Code Viewer Team. All rights reserved.</p>
-            <small>Built with HTML5, CSS3, and passion.</small>
-        </footer>
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-brand">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" role="img">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M10 16 L14 20 L22 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-text">GitCode Viewer</span>
     </div>
+    <ul class="navbar-menu">
+      <li><a href="#features" class="nav-link">Features</a></li>
+      <li><a href="#languages" class="nav-link">Languages</a></li>
+      <li><a href="https://github.com/nicepkg/gitcode-viewer" class="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+  </nav>
 
-    <script>
-        function sayHello() {
-            console.log("Demo button clicked");
-            alert("This is a JavaScript alert trigger from HTML!");
-        }
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Read Code, Anywhere</h1>
+      <p class="hero-subtitle">Clone, browse, and read Git repositories on your Android device with full syntax highlighting.</p>
+      <div class="hero-actions">
+        <a href="#download" class="btn btn-primary">Download APK</a>
+        <a href="#features" class="btn btn-secondary">Learn More</a>
+      </div>
+    </section>
 
-        // Observer example
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        });
-        
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+    <section id="features" class="features" aria-labelledby="features-title">
+      <h2 id="features-title">Features</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Git Integration</h3>
+          <p>Clone and pull repositories with authentication support. Manage multiple repos with ease.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Syntax Highlighting</h3>
+          <p>CodeMirror 6 powered viewer with 30+ language grammars and multiple editor themes.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Markdown Preview</h3>
+          <p>Rich Markdown rendering with Mermaid diagrams, math equations, and code blocks.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Offline First</h3>
+          <p>All repositories are stored locally. Browse code without an internet connection.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="languages" class="languages" aria-labelledby="lang-title">
+      <h2 id="lang-title">Supported Languages</h2>
+      <table class="lang-table" role="table">
+        <thead>
+          <tr><th scope="col">Language</th><th scope="col">Extensions</th><th scope="col">Highlighting</th><th scope="col">Folding</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>TypeScript</td><td>.ts, .tsx</td><td>Full</td><td>Yes</td></tr>
+          <tr><td>Python</td><td>.py, .pyi</td><td>Full</td><td>Yes</td></tr>
+          <tr><td>Rust</td><td>.rs</td><td>Full</td><td>Yes</td></tr>
+          <tr><td>Go</td><td>.go</td><td>Full</td><td>Yes</td></tr>
+          <tr><td>Java</td><td>.java</td><td>Full</td><td>Yes</td></tr>
+          <tr><td>Kotlin</td><td>.kt, .kts</td><td>Full</td><td>Yes</td></tr>
+          <tr><td>Swift</td><td>.swift</td><td>Full</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <p>&copy; 2025 GitCode Viewer. Built with React Native &amp; CodeMirror.</p>
+    <nav aria-label="Footer navigation">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </nav>
+  </footer>
+
+  <script type="module" src="/scripts/main.js"></script>
 </body>
 </html>

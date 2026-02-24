@@ -1,172 +1,124 @@
-/* 
- * GitCode Viewer Global Styles
- * Theme: Dark Ocean
- * Author: CodeViewer Team
- */
+/* Modern CSS with layers, nesting, and container queries */
 
-:root {
-  --primary-color: #3b82f6;
-  --secondary-color: #8b5cf6;
-  --bg-color: #0f172a;
-  --surface-color: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --border-radius: 8px;
-  --spacing-unit: 1rem;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-}
+@layer base, components, utilities;
 
-/* Reset & Base */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Layout Containers */
-.app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--spacing-unit);
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 2rem;
-  min-height: 100vh;
-}
-
-/* Sidebar Navigation */
-.sidebar {
-  background-color: var(--surface-color);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  height: calc(100vh - 2rem);
-  position: sticky;
-  top: 1rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  margin-bottom: 0.5rem;
-}
-
-.nav-item:hover, .nav-item.active {
-  background-color: rgba(59, 130, 246, 0.1);
-  color: var(--primary-color);
-}
-
-.nav-item i {
-  margin-right: 0.75rem;
-  font-size: 1.2rem;
-}
-
-/* Code Viewer Area */
-.code-viewer {
-  background-color: #000;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  border: 1px solid #334155;
-}
-
-.code-header {
-  background-color: #1e293b;
-  padding: 0.5rem 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #334155;
-}
-
-.file-info {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.code-content {
-  padding: 1.5rem;
-  overflow-x: auto;
-  font-family: 'Fira Code', 'Consolas', monospace;
-  font-size: 14px;
-}
-
-/* Syntax Highlighting Mockup Classes */
-.token.keyword { color: #c678dd; }
-.token.string { color: #98c379; }
-.token.function { color: #61afef; }
-.token.comment { color: #5c6370; font-style: italic; }
-.token.number { color: #d19a66; }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .app-container {
-    grid-template-columns: 1fr;
+@layer base {
+  :root {
+    --color-primary: oklch(0.65 0.25 260);
+    --color-secondary: oklch(0.55 0.18 150);
+    --color-surface: oklch(0.98 0.005 260);
+    --color-text: oklch(0.2 0.02 260);
+    --color-border: oklch(0.85 0.01 260);
+    --radius-sm: 0.375rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1.5rem;
+    --shadow-sm: 0 1px 3px color-mix(in oklch, var(--color-text) 10%, transparent);
+    --shadow-md: 0 4px 12px color-mix(in oklch, var(--color-text) 15%, transparent);
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .sidebar {
-    height: auto;
-    position: static;
-    margin-bottom: 1rem;
-    display: flex;
-    overflow-x: auto;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
   }
 
-  .nav-item {
-    white-space: nowrap;
-    margin-right: 1rem;
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--color-text);
+    background: var(--color-surface);
+    line-height: 1.6;
   }
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+@layer components {
+  .card-grid {
+    container-type: inline-size;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    & .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-block-end: 0.5rem;
+    }
+
+    & .card-body {
+      color: color-mix(in oklch, var(--color-text) 75%, transparent);
+    }
+
+    &:has(.card-badge) {
+      border-color: var(--color-primary);
+    }
+  }
+
+  @container (max-width: 600px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &.btn-primary {
+      background: var(--color-primary);
+      color: white;
+
+      &:hover { filter: brightness(1.1); }
+    }
+  }
 }
 
-.modal {
-  animation: fadeIn 0.3s ease-out;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--surface-color);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  z-index: 1000;
-  box-shadow: var(--shadow-lg);
+@layer utilities {
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out both;
+  }
+
+  .animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
 }
 
-/* Utilities */
-.text-center { text-align: center; }
-.mt-4 { margin-top: 1rem; }
-.hidden { display: none; }
-
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  background-color: var(--primary-color);
-  color: white;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.btn:hover {
-  background-color: #2563eb;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-surface: oklch(0.15 0.01 260);
+    --color-text: oklch(0.9 0.01 260);
+    --color-border: oklch(0.3 0.01 260);
+  }
 }

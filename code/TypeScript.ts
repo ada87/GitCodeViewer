@@ -1,169 +1,111 @@
-/**
- * GitCode Viewer - TypeScript Core Types & Utils
- * 
- * Demonstrates: Interfaces, Generics, Enums, Type Guards, Decorators, Async/Await
- */
+import express, { Request, Response, NextFunction } from 'express'
 
-// --- Constants & Enums ---
+// ============ Types ============
 
-export enum Theme {
-  Light = 'light',
-  Dark = 'dark',
-  System = 'system'
+interface ApiResponse<T> {
+  success: boolean
+  data?: T
+  error?: string
+  timestamp: number
 }
 
-export enum GitStatus {
-  Clean = 'clean',
-  Modified = 'modified',
-  Detached = 'detached',
-  Conflict = 'conflict'
+interface User {
+  id: string
+  name: string
+  email: string
+  role: 'admin' | 'editor' | 'viewer'
+  createdAt: Date
+  metadata: Record<string, unknown>
 }
 
-// --- Interfaces ---
-
-export interface User {
-  id: string;
-  username: string;
-  avatarUrl?: string;
-  isPro: boolean;
+interface PaginationParams {
+  page: number
+  limit: number
+  sortBy?: keyof User
+  order?: 'asc' | 'desc'
 }
 
-export interface Repository {
-  id: string;
-  name: string;
-  url: string;
-  branch: string;
-  status: GitStatus;
-  lastSyncedAt: Date;
-  // Index signature
-  [key: string]: any;
-}
+// ============ Repository ============
 
-export interface FileNode {
-  path: string;
-  type: 'file' | 'directory';
-  size: number;
-  children?: FileNode[];
-}
+class UserRepository {
+  private users = new Map<string, User>()
 
-// --- Generics ---
-
-export interface ApiResponse<T> {
-  data: T;
-  success: boolean;
-  timestamp: number;
-  error?: string;
-}
-
-// --- Decorators ---
-
-function LogExecutionTime(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value;
-  descriptor.value = async function (...args: any[]) {
-    const start = performance.now();
-    const result = await originalMethod.apply(this, args);
-    const end = performance.now();
-    console.log(`${propertyKey} took ${(end - start).toFixed(2)}ms`);
-    return result;
-  };
-  return descriptor;
-}
-
-// --- Core Class ---
-
-export class RepoManager {
-  private repos: Map<string, Repository> = new Map();
-
-  constructor(private readonly user: User) {
-    console.log(`Initialized manager for user ${user.username}`);
+  async findAll(params: PaginationParams): Promise<{ items: User[]; total: number }> {
+    const all = Array.from(this.users.values())
+    const sorted = params.sortBy
+      ? all.sort((a, b) => {
+          const va = String(a[params.sortBy!])
+          const vb = String(b[params.sortBy!])
+          return params.order === 'desc' ? vb.localeCompare(va) : va.localeCompare(vb)
+        })
+      : all
+    const start = (params.page - 1) * params.limit
+    return { items: sorted.slice(start, start + params.limit), total: all.length }
   }
 
-  @LogExecutionTime
-  public async fetchRepos(): Promise<ApiResponse<Repository[]>> {
-    // Simulate API Fetch
-    await new Promise(resolve => setTimeout(resolve, 800));
-
-    const mockRepos: Repository[] = [
-      {
-        id: '1',
-        name: 'react-native-code-viewer',
-        url: 'https://github.com/ada87/GitCodeViewer',
-        branch: 'main',
-        status: GitStatus.Clean,
-        lastSyncedAt: new Date(),
-        language: 'TypeScript'
-      },
-      {
-        id: '2',
-        name: 'linux',
-        url: 'https://github.com/torvalds/linux',
-        branch: 'master',
-        status: GitStatus.Modified,
-        lastSyncedAt: new Date(Date.now() - 3600000)
-      }
-    ];
-
-    mockRepos.forEach(r => this.repos.set(r.id, r));
-
-    return {
-      data: mockRepos,
-      success: true,
-      timestamp: Date.now()
-    };
+  async findById(id: string): Promise<User | undefined> {
+    return this.users.get(id)
   }
 
-  public getRepo(id: string): Repository | undefined {
-    return this.repos.get(id);
-  }
-
-  // Union Types & Type Guards
-  public processItem(item: Repository | User) {
-    if (this.isRepository(item)) {
-      console.log(`Processing repo: ${item.name}`);
-    } else {
-      console.log(`Processing user: ${item.username}`);
+  async create(data: Omit<User, 'id' | 'createdAt'>): Promise<User> {
+    const user: User = {
+      ...data,
+      id: crypto.randomUUID(),
+      createdAt: new Date(),
     }
+    this.users.set(user.id, user)
+    return user
   }
 
-  private isRepository(item: any): item is Repository {
-    return (item as Repository).url !== undefined;
+  async update(id: string, data: Partial<User>): Promise<User | undefined> {
+    const existing = this.users.get(id)
+    if (!existing) return undefined
+    const updated = { ...existing, ...data }
+    this.users.set(id, updated)
+    return updated
   }
-}
 
-// --- Utility Functions ---
-
-export const formatFileSize = (bytes: number): string => {
-  if (bytes === 0) return '0 B';
-  const k = 1024;
-  const sizes = ['B', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-};
-
-// --- Execution ---
-
-async function main() {
-  const user: User = {
-    id: 'u123',
-    username: 'dev_hero',
-    isPro: true
-  };
-
-  const manager = new RepoManager(user);
-  
-  try {
-    const response = await manager.fetchRepos();
-    if (response.success) {
-      console.log(`Fetched ${response.data.length} repositories.`);
-      
-      const firstRepo = response.data[0];
-      manager.processItem(firstRepo);
-      
-      console.log(`Repo 1 Size: ${formatFileSize(2048576)}`);
-    }
-  } catch (error) {
-    console.error('Error:', error);
+  async delete(id: string): Promise<boolean> {
+    return this.users.delete(id)
   }
 }
 
-main();
+// ============ Middleware ============
+
+function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<void>) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    fn(req, res, next).catch(next)
+  }
+}
+
+function respond<T>(res: Response, data: T, status = 200) {
+  const body: ApiResponse<T> = { success: true, data, timestamp: Date.now() }
+  res.status(status).json(body)
+}
+
+// ============ Routes ============
+
+const app = express()
+const repo = new UserRepository()
+
+app.use(express.json())
+
+app.get('/api/users', asyncHandler(async (req, res) => {
+  const page = Number(req.query.page) || 1
+  const limit = Math.min(Number(req.query.limit) || 20, 100)
+  const result = await repo.findAll({ page, limit })
+  respond(res, result)
+}))
+
+app.post('/api/users', asyncHandler(async (req, res) => {
+  const user = await repo.create(req.body)
+  respond(res, user, 201)
+}))
+
+app.get('/api/users/:id', asyncHandler(async (req, res) => {
+  const user = await repo.findById(req.params.id)
+  if (!user) { res.status(404).json({ success: false, error: 'Not found' }); return }
+  respond(res, user)
+}))
+
+app.listen(3000, () => console.log('Server running on :3000'))

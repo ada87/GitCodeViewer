@@ -1,0 +1,16 @@
+gitGraph
+    commit id: "init"
+    commit id: "add git engine"
+    branch feature/markdown
+    checkout feature/markdown
+    commit id: "add marked"
+    commit id: "add hljs"
+    checkout main
+    branch feature/mermaid
+    checkout feature/mermaid
+    commit id: "add mermaid"
+    commit id: "pan/zoom"
+    checkout main
+    merge feature/markdown id: "merge markdown"
+    merge feature/mermaid id: "merge mermaid"
+    commit id: "release v1.0"

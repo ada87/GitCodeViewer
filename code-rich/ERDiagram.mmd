@@ -1,0 +1,34 @@
+erDiagram
+    REPOSITORY {
+        string id PK
+        string name
+        string url
+        string branch
+        datetime lastSynced
+    }
+    FILE_NODE {
+        string id PK
+        string repoId FK
+        string path
+        string name
+        string type
+        int size
+    }
+    CREDENTIAL {
+        string id PK
+        string host
+        string username
+        string token
+    }
+    SYNC_LOG {
+        string id PK
+        string repoId FK
+        string status
+        datetime startedAt
+        datetime finishedAt
+        string error
+    }
+
+    REPOSITORY ||--o{ FILE_NODE : contains
+    REPOSITORY ||--o{ SYNC_LOG : has
+    REPOSITORY }o--|| CREDENTIAL : uses

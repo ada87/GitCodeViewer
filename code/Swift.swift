@@ -1,184 +1,206 @@
-//
-//  GitCodeViewer.swift
-//  GitCodeViewer
-//
-//  Created by CodeViewer Team on 2024-02-05.
-//  Copyright © 2024 CodeViewer. All rights reserved.
-//
+import SwiftUI
+import Observation
 
-import Foundation
-import UIKit
-import Combine
+// ============ Models ============
 
-// --- Models ---
-
-struct Repository: Identifiable, Codable {
-    let id: UUID
+struct Repository: Identifiable, Hashable {
+    let id: String
     var name: String
-    var url: URL
-    var isPrivate: Bool
+    var url: String
+    var branch: String
     var lastSynced: Date?
-    
-    init(name: String, urlString: String, isPrivate: Bool = false) {
-        self.id = UUID()
-        self.name = name
-        self.url = URL(string: urlString)!
-        self.isPrivate = isPrivate
-        self.lastSynced = nil
+    var fileCount: Int
+
+    var displayName: String {
+        url.split(separator: "/").last.map(String.init) ?? name
     }
 }
 
-enum AppError: Error {
-    case networkError(String)
-    case fileSystemError
-    case unauthorized
+enum SyncStatus: Equatable {
+    case idle
+    case syncing(progress: Double)
+    case completed(filesChanged: Int)
+    case failed(message: String)
+
+    var isActive: Bool {
+        if case .syncing = self { return true }
+        return false
+    }
 }
 
-// --- View Models (MVVM) ---
+// ============ ViewModel ============
 
-class RepoListViewModel: ObservableObject {
-    @Published var repositories: [Repository] = []
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String? = nil
-    
-    private var cancellables = Set<AnyCancellable>()
-    
-    init() {
-        loadMockData()
-    }
-    
-    func loadMockData() {
-        self.repositories = [
-            Repository(name: "swift-algorithms", urlString: "https://github.com/apple/swift-algorithms"),
-            Repository(name: "alamofire", urlString: "https://github.com/Alamofire/Alamofire")
-        ]
-    }
-    
-    func addRepository(url: String) {
-        guard let validUrl = URL(string: url) else {
-            self.errorMessage = "Invalid URL"
-            return
-        }
-        
-        let name = validUrl.lastPathComponent.replacingOccurrences(of: ".git", with: "")
-        let newRepo = Repository(name: name, urlString: url)
-        
-        withAnimation {
-            repositories.append(newRepo)
+@Observable
+class RepoListViewModel {
+    var repositories: [Repository] = []
+    var syncStatuses: [String: SyncStatus] = [:]
+    var searchText: String = ""
+    var showAddSheet: Bool = false
+    var errorMessage: String?
+
+    var filteredRepos: [Repository] {
+        guard !searchText.isEmpty else { return repositories }
+        return repositories.filter {
+            $0.name.localizedCaseInsensitiveContains(searchText) ||
+            $0.url.localizedCaseInsensitiveContains(searchText)
         }
     }
-    
-    func syncRepo(id: UUID) {
-        guard let index = repositories.firstIndex(where: { $0.id == id }) else { return }
-        
-        isLoading = true
-        
-        // Simulate network call with Combine
-        Future<Bool, AppError> { promise in
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1.5) {
-                // Random success/fail
-                if Bool.random() {
-                    promise(.success(true))
-                } else {
-                    promise(.failure(.networkError("Timeout")))
+
+    var activeSyncCount: Int {
+        syncStatuses.values.filter(\.isActive).count
+    }
+
+    func addRepository(name: String, url: String) {
+        let repo = Repository(
+            id: UUID().uuidString,
+            name: name,
+            url: url,
+            branch: "main",
+            lastSynced: nil,
+            fileCount: 0
+        )
+        repositories.append(repo)
+    }
+
+    func syncRepository(_ repo: Repository) async {
+        syncStatuses[repo.id] = .syncing(progress: 0)
+        do {
+            for i in 1...10 {
+                try await Task.sleep(for: .milliseconds(200))
+                syncStatuses[repo.id] = .syncing(progress: Double(i) / 10.0)
+            }
+            let changed = Int.random(in: 1...30)
+            syncStatuses[repo.id] = .completed(filesChanged: changed)
+            if let idx = repositories.firstIndex(where: { $0.id == repo.id }) {
+                repositories[idx].lastSynced = Date()
+                repositories[idx].fileCount += changed
+            }
+        } catch {
+            syncStatuses[repo.id] = .failed(message: error.localizedDescription)
+        }
+    }
+
+    func deleteRepository(_ repo: Repository) {
+        repositories.removeAll { $0.id == repo.id }
+        syncStatuses.removeValue(forKey: repo.id)
+    }
+}
+
+// ============ Views ============
+
+struct RepoListView: View {
+    @State private var viewModel = RepoListViewModel()
+
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(viewModel.filteredRepos) { repo in
+                    RepoRowView(repo: repo, status: viewModel.syncStatuses[repo.id] ?? .idle)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                viewModel.deleteRepository(repo)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
+                        .swipeActions(edge: .leading) {
+                            Button {
+                                Task { await viewModel.syncRepository(repo) }
+                            } label: {
+                                Label("Sync", systemImage: "arrow.triangle.2.circlepath")
+                            }
+                            .tint(.blue)
+                        }
+                }
+            }
+            .searchable(text: $viewModel.searchText, prompt: "Search repositories")
+            .navigationTitle("Repositories")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button { viewModel.showAddSheet = true } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+                ToolbarItem(placement: .status) {
+                    if viewModel.activeSyncCount > 0 {
+                        Text("Syncing \(viewModel.activeSyncCount)...")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .sheet(isPresented: $viewModel.showAddSheet) {
+                AddRepoView { name, url in
+                    viewModel.addRepository(name: name, url: url)
                 }
             }
         }
-        .receive(on: RunLoop.main)
-        .sink(receiveCompletion: { completion in
-            self.isLoading = false
-            switch completion {
-            case .finished:
-                break
-            case .failure(let error):
-                print("Sync failed: \(error)")
-                self.errorMessage = "Sync failed. Please try again."
-            }
-        }, receiveValue: { success in
-            self.repositories[index].lastSynced = Date()
-            print("Sync successful for \(self.repositories[index].name)")
-        })
-        .store(in: &cancellables)
     }
 }
 
-// --- Protocols and Extensions ---
-
-protocol Themeable {
-    var primaryColor: UIColor { get }
-    func applyTheme()
-}
-
-extension UIColor {
-    static let gitBrand = UIColor(red: 0.94, green: 0.31, blue: 0.20, alpha: 1.0)
-    static let darkBackground = UIColor(red: 0.1, green: 0.1, blue: 0.12, alpha: 1.0)
-}
-
-// --- Utility Classes ---
-
-class GitManager {
-    static let shared = GitManager()
-    
-    private init() {}
-    
-    func clone(repo: Repository) async throws -> URL {
-        print("Cloning \(repo.url)...")
-        
-        // Simulate async await work
-        try await Task.sleep(nanoseconds: 1_000_000_000)
-        
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let path = documents.appendingPathComponent(repo.name)
-        
-        // Mock file creation
-        let readme = "This is a README for \(repo.name)"
-        try readme.write(to: path.appendingPathComponent("README.md"), atomically: true, encoding: .utf8)
-        
-        return path
-    }
-}
-
-// --- SwiftUI Views Mockup ---
-
-struct RepoRow: View {
+struct RepoRowView: View {
     let repo: Repository
-    
+    let status: SyncStatus
+
     var body: some View {
-        HStack {
-            Image(systemName: "book.closed")
-                .foregroundColor(.blue)
-            
-            VStack(alignment: .leading) {
-                Text(repo.name)
-                    .font(.headline)
-                Text(repo.url.absoluteString)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
-            
-            Spacer()
-            
-            if let date = repo.lastSynced {
-                Text(date, style: .time)
+        VStack(alignment: .leading, spacing: 4) {
+            Text(repo.displayName)
+                .font(.headline)
+            Text(repo.url)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+            HStack {
+                Label("\(repo.fileCount)", systemImage: "doc")
                     .font(.caption2)
-            } else {
-                Text("Never")
-                    .font(.caption2)
-                    .foregroundColor(.red)
+                if let date = repo.lastSynced {
+                    Text("Synced \(date, style: .relative) ago")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                switch status {
+                case .syncing(let progress):
+                    ProgressView(value: progress)
+                        .frame(width: 60)
+                case .failed(let msg):
+                    Text(msg).font(.caption2).foregroundStyle(.red)
+                default:
+                    EmptyView()
+                }
             }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 2)
     }
 }
 
-// Main entry point logic (if this were a real app)
-/*
- @main
- struct GitCodeViewerApp: App {
-     var body: some Scene {
-         WindowGroup {
-             ContentView()
-         }
-     }
- }
- */
+struct AddRepoView: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var name = ""
+    @State private var url = ""
+    var onAdd: (String, String) -> Void
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                TextField("Repository name", text: $name)
+                TextField("Git URL", text: $url)
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.URL)
+            }
+            .navigationTitle("Add Repository")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Add") {
+                        onAdd(name, url)
+                        dismiss()
+                    }
+                    .disabled(name.isEmpty || url.isEmpty)
+                }
+            }
+        }
+    }
+}

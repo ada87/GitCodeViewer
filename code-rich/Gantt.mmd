@@ -1,0 +1,15 @@
+gantt
+    title GitCode Viewer Development
+    dateFormat YYYY-MM-DD
+    section Core
+        Git clone/pull       :done, git, 2024-01-01, 30d
+        File tree browser    :done, tree, after git, 20d
+        CodeMirror viewer    :done, cm, after tree, 25d
+    section Features
+        Markdown renderer    :done, md, 2024-03-01, 15d
+        Mermaid diagrams     :done, mmd, after md, 10d
+        Notebook viewer      :done, nb, after mmd, 15d
+    section Polish
+        Dark/light themes    :done, theme, 2024-04-01, 10d
+        IAP integration      :active, iap, after theme, 20d
+        GitHub search        :iap, 2024-05-01, 15d

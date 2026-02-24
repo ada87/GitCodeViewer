@@ -1,0 +1,17 @@
+architecture-beta
+    group app(cloud)[Mobile App]
+    group backend(server)[Core Services]
+    group storage(disk)[Storage]
+
+    service rn(server)[React Native] in app
+    service webview(server)[WebView] in app
+    service git(server)[Git Engine] in backend
+    service state(server)[State Mgmt] in backend
+    service repos(database)[Repositories] in storage
+    service settings(database)[Settings] in storage
+
+    rn:R --> L:webview
+    rn:B --> T:git
+    rn:B --> T:state
+    git:B --> T:repos
+    state:B --> T:settings

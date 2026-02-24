@@ -1,135 +1,136 @@
--- ==============================================================================
--- GitCode Viewer - Database Schema Mockup
--- Database: PostgreSQL / SQLite Compatible
--- ==============================================================================
+-- PostgreSQL schema and queries for GitCode Viewer
 
--- Create Tables
+-- ============ Schema ============
 
-CREATE TABLE IF NOT EXISTS users (
-    user_id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_login TIMESTAMP,
-    is_premium BOOLEAN DEFAULT FALSE
+CREATE TABLE users (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username    VARCHAR(64) NOT NULL UNIQUE,
+    email       VARCHAR(255) NOT NULL UNIQUE,
+    display_name VARCHAR(128),
+    avatar_url  TEXT,
+    role        VARCHAR(20) NOT NULL DEFAULT 'viewer',
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    CONSTRAINT valid_role CHECK (role IN ('admin', 'editor', 'viewer'))
 );
 
-CREATE TABLE IF NOT EXISTS repositories (
-    repo_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
-    remote_url VARCHAR(255) NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    local_path VARCHAR(255),
-    is_private BOOLEAN DEFAULT FALSE,
-    sync_status VARCHAR(20) DEFAULT 'synced', -- synced, pending, error
-    last_synced_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT unique_user_repo UNIQUE (user_id, remote_url)
+CREATE TABLE repositories (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    owner_id    UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    name        VARCHAR(255) NOT NULL,
+    url         TEXT NOT NULL,
+    branch      VARCHAR(128) NOT NULL DEFAULT 'main',
+    size_bytes  BIGINT NOT NULL DEFAULT 0,
+    file_count  INTEGER NOT NULL DEFAULT 0,
+    last_synced TIMESTAMPTZ,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (owner_id, name)
 );
 
-CREATE TABLE IF NOT EXISTS settings (
-    setting_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
-    theme_preference VARCHAR(20) DEFAULT 'system', -- light, dark, system
-    font_size INTEGER DEFAULT 14,
-    show_line_numbers BOOLEAN DEFAULT TRUE,
-    auto_fetch BOOLEAN DEFAULT TRUE,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE files (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    repo_id     UUID NOT NULL REFERENCES repositories(id) ON DELETE CASCADE,
+    path        TEXT NOT NULL,
+    language    VARCHAR(64),
+    size_bytes  INTEGER NOT NULL DEFAULT 0,
+    line_count  INTEGER,
+    sha256      CHAR(64),
+    indexed_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (repo_id, path)
 );
 
-CREATE TABLE IF NOT EXISTS search_history (
-    history_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(user_id),
-    query VARCHAR(255) NOT NULL,
-    searched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+CREATE INDEX idx_files_repo_lang ON files (repo_id, language);
+CREATE INDEX idx_files_path_trgm ON files USING gin (path gin_trgm_ops);
+CREATE INDEX idx_repos_owner ON repositories (owner_id);
 
--- Create Indexes for Performance
-CREATE INDEX idx_repo_user ON repositories(user_id);
-CREATE INDEX idx_repo_name ON repositories(name);
-CREATE INDEX idx_search_query ON search_history(query);
+-- ============ Queries with CTEs and Window Functions ============
 
--- Insert Dummy Data (Seed)
+-- Top languages per repository with ranking
+WITH language_stats AS (
+    SELECT
+        r.id AS repo_id,
+        r.name AS repo_name,
+        f.language,
+        COUNT(*) AS file_count,
+        SUM(f.size_bytes) AS total_bytes,
+        SUM(f.line_count) AS total_lines
+    FROM repositories r
+    JOIN files f ON f.repo_id = r.id
+    WHERE f.language IS NOT NULL
+    GROUP BY r.id, r.name, f.language
+),
+ranked AS (
+    SELECT
+        *,
+        ROW_NUMBER() OVER (PARTITION BY repo_id ORDER BY file_count DESC) AS rank,
+        LAG(file_count) OVER (PARTITION BY repo_id ORDER BY file_count DESC) AS prev_count,
+        ROUND(100.0 * file_count / SUM(file_count) OVER (PARTITION BY repo_id), 1) AS pct
+    FROM language_stats
+)
+SELECT repo_name, language, file_count, total_lines, pct
+FROM ranked
+WHERE rank <= 5
+ORDER BY repo_name, rank;
 
-BEGIN;
+-- ============ Materialized View ============
 
-INSERT INTO users (username, email, password_hash, is_premium) VALUES 
-('alice_dev', 'alice@example.com', 'hashed_secret_123', TRUE),
-('bob_coder', 'bob@example.com', 'hashed_secret_456', FALSE),
-('charlie_new', 'charlie@example.com', 'hashed_secret_789', FALSE);
-
--- Alice's Repos
-INSERT INTO repositories (user_id, remote_url, name, is_private, last_synced_at) VALUES
-((SELECT user_id FROM users WHERE username = 'alice_dev'), 'https://github.com/facebook/react.git', 'react', FALSE, NOW()),
-((SELECT user_id FROM users WHERE username = 'alice_dev'), 'https://github.com/company/secret-project.git', 'secret-project', TRUE, NOW() - INTERVAL '1 hour');
-
--- Bob's Repos
-INSERT INTO repositories (user_id, remote_url, name, is_private) VALUES
-((SELECT user_id FROM users WHERE username = 'bob_coder'), 'https://github.com/golang/go.git', 'go', FALSE);
-
--- Settings
-INSERT INTO settings (user_id, theme_preference, font_size) VALUES
-((SELECT user_id FROM users WHERE username = 'alice_dev'), 'dark', 16),
-((SELECT user_id FROM users WHERE username = 'bob_coder'), 'light', 12);
-
-COMMIT;
-
--- Queries for Application Logic
-
--- 1. Get all repositories for a specific user
-SELECT r.name, r.remote_url, r.last_synced_at 
+CREATE MATERIALIZED VIEW mv_repo_summary AS
+SELECT
+    r.id,
+    r.name,
+    u.username AS owner,
+    r.size_bytes,
+    r.file_count,
+    COUNT(DISTINCT f.language) AS language_count,
+    MAX(f.indexed_at) AS last_indexed,
+    r.last_synced
 FROM repositories r
-JOIN users u ON r.user_id = u.user_id
-WHERE u.username = 'alice_dev'
-ORDER BY r.last_synced_at DESC;
+JOIN users u ON u.id = r.owner_id
+LEFT JOIN files f ON f.repo_id = r.id
+GROUP BY r.id, r.name, u.username, r.size_bytes, r.file_count, r.last_synced
+WITH DATA;
 
--- 2. Check if a user is premium
-SELECT is_premium FROM users WHERE email = 'alice@example.com';
+CREATE UNIQUE INDEX idx_mv_repo_summary_id ON mv_repo_summary (id);
 
--- 3. Update sync status
-UPDATE repositories 
-SET sync_status = 'error', last_synced_at = NOW() 
-WHERE repo_id = 1;
+-- ============ Trigger Function ============
 
--- 4. Analytics: Count repos per user
-SELECT u.username, COUNT(r.repo_id) as repo_count
+CREATE OR REPLACE FUNCTION update_repo_file_count()
+RETURNS TRIGGER AS 1430
+BEGIN
+    UPDATE repositories
+    SET file_count = (
+        SELECT COUNT(*) FROM files WHERE repo_id = COALESCE(NEW.repo_id, OLD.repo_id)
+    ),
+    updated_at = now()
+    WHERE id = COALESCE(NEW.repo_id, OLD.repo_id);
+    RETURN COALESCE(NEW, OLD);
+END;
+1430 LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_files_count
+AFTER INSERT OR DELETE ON files
+FOR EACH ROW EXECUTE FUNCTION update_repo_file_count();
+
+-- ============ Upsert ============
+
+INSERT INTO users (username, email, display_name, role)
+VALUES ('alice', 'alice@example.com', 'Alice Chen', 'admin')
+ON CONFLICT (username) DO UPDATE SET
+    email = EXCLUDED.email,
+    display_name = EXCLUDED.display_name,
+    updated_at = now();
+
+-- ============ Complex Query ============
+
+SELECT
+    u.username,
+    COUNT(DISTINCT r.id) AS repo_count,
+    SUM(r.file_count) AS total_files,
+    pg_size_pretty(SUM(r.size_bytes)) AS total_size,
+    ARRAY_AGG(DISTINCT r.name ORDER BY r.name) FILTER (WHERE r.last_synced > now() - INTERVAL '7 days') AS recently_synced
 FROM users u
-LEFT JOIN repositories r ON u.user_id = r.user_id
+JOIN repositories r ON r.owner_id = u.id
 GROUP BY u.username
-HAVING COUNT(r.repo_id) > 0;
-
--- 5. Stored Procedure (Example)
--- Function to register a new repo search
-CREATE OR REPLACE FUNCTION log_search(u_id INT, search_term VARCHAR) 
-RETURNS VOID AS $$
-BEGIN
-    INSERT INTO search_history (user_id, query) 
-    VALUES (u_id, search_term);
-    
-    -- Keep only last 100 entries per user
-    DELETE FROM search_history 
-    WHERE history_id NOT IN (
-        SELECT history_id FROM search_history 
-        WHERE user_id = u_id 
-        ORDER BY searched_at DESC 
-        LIMIT 100
-    );
-END;
-$$ LANGUAGE plpgsql;
-
--- Trigger: Update timestamp on settings change
-CREATE OR REPLACE FUNCTION update_timestamp()
-RETURNS TRIGGER AS $$
-BEGIN
-   NEW.updated_at = NOW();
-   RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON settings
-FOR EACH ROW
-EXECUTE PROCEDURE update_timestamp();
-
--- End of Schema
+HAVING COUNT(DISTINCT r.id) >= 2
+ORDER BY total_files DESC
+LIMIT 20;

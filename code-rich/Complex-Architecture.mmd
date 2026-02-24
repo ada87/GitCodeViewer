@@ -22,9 +22,9 @@ graph TB
     Git -->|Read/Write| FS
     FS -->|I/O| RepoDir
     
-    Git -->|Clone/Pull (HTTPS)| GitHub
-    Git -->|Clone/Pull (HTTPS)| GitLab
-    Git -->|Clone/Pull (HTTPS)| Others
+    Git -->|Clone/Pull HTTPS| GitHub
+    Git -->|Clone/Pull HTTPS| GitLab
+    Git -->|Clone/Pull HTTPS| Others
 
     classDef box fill:#fff,stroke:#333,stroke-width:2px;
     class UI,Store,Git,FS box;
