@@ -22,14 +22,13 @@
 > アプリ内で `GitCodeViewer` を検索するか、**+** -> **クローン** をタップして入力してください：
 > `https://github.com/ada87/GitCodeViewer.git`
 
-### 1. プログラミング言語
+## コードサンプル
 
-[Astro](./code/Astro.astro) | [C](./code/C.c) | [C++](./code/Cpp.cpp) | [CSS](./code/CSS.css) | [Dart](./code/Dart.dart) | [Go](./code/Go.go)
-[HTML](./code/HTML.html) | [Java](./code/Java.java) | [JavaScript](./code/JavaScript.js) | [JSON](./code/JSON.json) | [Kotlin](./code/Kotlin.kt) | [Markdown](./code/Markdown.md)
-[PHP](./code/PHP.php) | [Python](./code/Python.py) | [Ruby](./code/Ruby.rb) | [Rust](./code/Rust.rs) | [Sass (SCSS)](./code/Sass.scss) | [Shell](./code/Shell.sh)
-[SQL](./code/SQL.sql) | [Swift](./code/Swift.swift) | [TypeScript](./code/TypeScript.ts) | [Vue](./code/Vue.vue) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml)
-
-### 2. リッチテキストと視覚化
-
-[Markdown & 数式 (LaTeX)](./code-rich/Markdown-All-In-One.md) | [Jupyter Notebook (.ipynb)](./code-rich/Jupyter.ipynb) | [Mermaid 複雑な図](./code-rich/Complex-Architecture.mmd)
-[フローチャート](./code-rich/FlowChart.mmd) | [シーケンス図](./code-rich/Sequence.mermaid) | [クラス図](./code-rich/ClassDiagram.mmd)
+* 人気: [Python](./code/Python.py) | [TypeScript](./code/TypeScript.ts) | [Rust](./code/Rust.rs) | [Golang](./code/Golang.go) | [C](./code/C.c)
+* その他の言語: [Java](./code/Java.java) | [C++](./code/Cpp.cpp) | [C#](./code/CSharp.cs) | [Kotlin](./code/Kotlin.kt) | [Scala](./code/Scala.scala) | [Swift](./code/Swift.swift) | [Dart](./code/Dart.dart) | [Ruby](./code/Ruby.rb) | [PHP](./code/PHP.php)
+* フロントエンド: [HTML](./code/HTML.html) | [JavaScript](./code/JavaScript.js) | [CSS](./code/CSS.css) | [SCSS](./code/Sass.scss) | [Less](./code/Less.less) | [Vue](./code/Vue.vue) | [JSX](./code/JSX.jsx) | [TSX](./code/TSX.tsx) | [Astro](./code/Astro.astro)
+* テンプレートエンジン: [Jinja](./code/Jinja.jinja) | [Liquid](./code/Liquid.liquid)
+* スクリプトとデータ: [Shell](./code/Shell.sh) | [PowerShell](./code/PowerShell.ps1) | [SQL](./code/SQL.sql) | [JSON](./code/JSON.json) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml) | [WebAssembly](./code/WebAssembly.wat)
+* Markdown: [Basic](./code-rich/Markdown-Basic.md) | [Code](./code-rich/Markdown-Code.md)
+* Mermaid: [フローチャート](./code-rich/FlowChart.mmd) | [シーケンス](./code-rich/Sequence.mermaid) | [クラス図](./code-rich/ClassDiagram.mmd) | [ER図](./code-rich/ERDiagram.mmd) | [アーキテクチャ](./code-rich/Architecture.mmd) | [複雑なアーキテクチャ](./code-rich/Complex-Architecture.mmd) | [ガント](./code-rich/Gantt.mmd) | [Gitグラフ](./code-rich/GitGraph.mmd) | [マインドマップ](./code-rich/Mindmap.mmd) | [円グラフ](./code-rich/Pie.mmd) | [タイムライン](./code-rich/Timeline.mmd) | [XYチャート](./code-rich/XYChart.mmd)
+* Jupyter: [Notebook](./code-rich/Jupyter.ipynb)

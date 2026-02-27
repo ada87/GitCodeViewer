@@ -1,0 +1,79 @@
+{# GitCode Viewer - Repository List Template #}
+
+{%- set theme = settings.theme | default("dark") -%}
+{%- set max_display = settings.max_repos | default(20) -%}
+
+<!DOCTYPE html>
+<html lang="{{ lang | default('en') }}" data-theme="{{ theme }}">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ page_title | default("Repositories") }} — GitCode</title>
+</head>
+<body>
+
+{# ============ Header ============ #}
+<header class="app-header">
+  <h1>{{ user.display_name | default(user.login) }}'s Repositories</h1>
+  <span class="repo-count">{{ repos | length }} repos</span>
+</header>
+
+{# ============ Filter Bar ============ #}
+<div class="filter-bar">
+  {% for lang in repos | map(attribute='language') | unique | sort %}
+    <button class="lang-tag" data-lang="{{ lang }}">{{ lang }}</button>
+  {% endfor %}
+</div>
+
+{# ============ Repository List ============ #}
+<ul class="repo-list">
+  {% for repo in repos | sort(attribute='updated_at', reverse=true) | slice(max_display) | first %}
+
+    {%- set is_forked = repo.fork | default(false) -%}
+    {%- set size_label -%}
+      {%- if repo.size < 1024 -%}{{ repo.size }} KB
+      {%- elif repo.size < 1048576 -%}{{ (repo.size / 1024) | round(1) }} MB
+      {%- else -%}{{ (repo.size / 1048576) | round(2) }} GB
+      {%- endif -%}
+    {%- endset -%}
+
+    <li class="repo-item {% if is_forked %}is-fork{% endif %}">
+      <div class="repo-name">
+        <a href="{{ repo.html_url }}">{{ repo.full_name }}</a>
+        {% if is_forked %}<span class="badge">Fork</span>{% endif %}
+        {% if repo.private %}<span class="badge private">Private</span>{% endif %}
+      </div>
+
+      {% if repo.description %}
+        <p class="repo-desc">{{ repo.description | truncate(120) }}</p>
+      {% endif %}
+
+      <div class="repo-meta">
+        {% if repo.language %}
+          <span class="lang">{{ repo.language }}</span>
+        {% endif %}
+        <span class="stars">★ {{ repo.stargazers_count | default(0) }}</span>
+        <span class="size">{{ size_label }}</span>
+        <span class="updated">{{ repo.updated_at | datetimeformat("%b %d, %Y") }}</span>
+      </div>
+    </li>
+
+  {% else %}
+    <li class="empty">No repositories found.</li>
+  {% endfor %}
+</ul>
+
+{# ============ Pagination ============ #}
+{% if repos | length > max_display %}
+  <div class="pagination">
+    {% if page > 1 %}
+      <a href="?page={{ page - 1 }}">← Prev</a>
+    {% endif %}
+    <span>Page {{ page }} of {{ (repos | length / max_display) | ceil }}</span>
+    {% if page * max_display < repos | length %}
+      <a href="?page={{ page + 1 }}">Next →</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+</body>
+</html>

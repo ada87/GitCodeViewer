@@ -22,14 +22,13 @@
 > ऐप में `GitCodeViewer` खोजें, या **+** -> **क्लोन** पर टैप करें और दर्ज करें:
 > `https://github.com/ada87/GitCodeViewer.git`
 
-### 1. प्रोग्रामिंग भाषाएँ
+## कोड नमूने
 
-[Astro](./code/Astro.astro) | [C](./code/C.c) | [C++](./code/Cpp.cpp) | [CSS](./code/CSS.css) | [Dart](./code/Dart.dart) | [Go](./code/Go.go)
-[HTML](./code/HTML.html) | [Java](./code/Java.java) | [JavaScript](./code/JavaScript.js) | [JSON](./code/JSON.json) | [Kotlin](./code/Kotlin.kt) | [Markdown](./code/Markdown.md)
-[PHP](./code/PHP.php) | [Python](./code/Python.py) | [Ruby](./code/Ruby.rb) | [Rust](./code/Rust.rs) | [Sass (SCSS)](./code/Sass.scss) | [Shell](./code/Shell.sh)
-[SQL](./code/SQL.sql) | [Swift](./code/Swift.swift) | [TypeScript](./code/TypeScript.ts) | [Vue](./code/Vue.vue) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml)
-
-### 2. समृद्ध दस्तावेज़ और विज़ुअलाइज़ेशन
-
-[Markdown और गणित (LaTeX)](./code-rich/Markdown-All-In-One.md) | [Jupyter Notebook (.ipynb)](./code-rich/Jupyter.ipynb) | [Mermaid जटिल आरेख](./code-rich/Complex-Architecture.mmd)
-[फ्लोचार्ट](./code-rich/FlowChart.mmd) | [सीक्वेंस डायग्राम](./code-rich/Sequence.mermaid) | [क्लास डायग्राम](./code-rich/ClassDiagram.mmd)
+* सबसे लोकप्रिय: [Python](./code/Python.py) | [TypeScript](./code/TypeScript.ts) | [Rust](./code/Rust.rs) | [Golang](./code/Golang.go) | [C](./code/C.c)
+* अन्य भाषाएँ: [Java](./code/Java.java) | [C++](./code/Cpp.cpp) | [C#](./code/CSharp.cs) | [Kotlin](./code/Kotlin.kt) | [Scala](./code/Scala.scala) | [Swift](./code/Swift.swift) | [Dart](./code/Dart.dart) | [Ruby](./code/Ruby.rb) | [PHP](./code/PHP.php)
+* फ्रंटएंड: [HTML](./code/HTML.html) | [JavaScript](./code/JavaScript.js) | [CSS](./code/CSS.css) | [SCSS](./code/Sass.scss) | [Less](./code/Less.less) | [Vue](./code/Vue.vue) | [JSX](./code/JSX.jsx) | [TSX](./code/TSX.tsx) | [Astro](./code/Astro.astro)
+* टेम्पलेट इंजन: [Jinja](./code/Jinja.jinja) | [Liquid](./code/Liquid.liquid)
+* स्क्रिप्ट और डेटा: [Shell](./code/Shell.sh) | [PowerShell](./code/PowerShell.ps1) | [SQL](./code/SQL.sql) | [JSON](./code/JSON.json) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml) | [WebAssembly](./code/WebAssembly.wat)
+* Markdown: [Basic](./code-rich/Markdown-Basic.md) | [Code](./code-rich/Markdown-Code.md)
+* Mermaid: [फ्लोचार्ट](./code-rich/FlowChart.mmd) | [सीक्वेंस](./code-rich/Sequence.mermaid) | [क्लास डायग्राम](./code-rich/ClassDiagram.mmd) | [ER डायग्राम](./code-rich/ERDiagram.mmd) | [आर्किटेक्चर](./code-rich/Architecture.mmd) | [जटिल आर्किटेक्चर](./code-rich/Complex-Architecture.mmd) | [गैंट](./code-rich/Gantt.mmd) | [Git ग्राफ](./code-rich/GitGraph.mmd) | [माइंडमैप](./code-rich/Mindmap.mmd) | [पाई चार्ट](./code-rich/Pie.mmd) | [टाइमलाइन](./code-rich/Timeline.mmd) | [XY चार्ट](./code-rich/XYChart.mmd)
+* Jupyter: [Notebook](./code-rich/Jupyter.ipynb)

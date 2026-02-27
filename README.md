@@ -26,14 +26,13 @@ English | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español
 > Search for `GitCodeViewer` in the app, or tap **+** -> **Clone** and enter:
 > `https://github.com/ada87/GitCodeViewer.git`
 
-### 1. Programming Languages
+## Code Samples
 
-[Astro](./code/Astro.astro) | [C](./code/C.c) | [C++](./code/Cpp.cpp) | [CSS](./code/CSS.css) | [Dart](./code/Dart.dart) | [Go](./code/Go.go)
-[HTML](./code/HTML.html) | [Java](./code/Java.java) | [JavaScript](./code/JavaScript.js) | [JSON](./code/JSON.json) | [Kotlin](./code/Kotlin.kt) | [Markdown](./code/Markdown.md)
-[PHP](./code/PHP.php) | [Python](./code/Python.py) | [Ruby](./code/Ruby.rb) | [Rust](./code/Rust.rs) | [Sass (SCSS)](./code/Sass.scss) | [Shell](./code/Shell.sh)
-[SQL](./code/SQL.sql) | [Swift](./code/Swift.swift) | [TypeScript](./code/TypeScript.ts) | [Vue](./code/Vue.vue) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml)
-
-### 2. Rich Documents & Visualizations
-
-[Markdown & Math (LaTeX)](./code-rich/Markdown-All-In-One.md) | [Jupyter Notebook (.ipynb)](./code-rich/Jupyter.ipynb) | [Mermaid Complex Diagram](./code-rich/Complex-Architecture.mmd)
-[Flow Chart](./code-rich/FlowChart.mmd) | [Sequence Diagram](./code-rich/Sequence.mermaid) | [Class Diagram](./code-rich/ClassDiagram.mmd)
+* Most Popular: [Python](./code/Python.py) | [TypeScript](./code/TypeScript.ts) | [Rust](./code/Rust.rs) | [Golang](./code/Golang.go) | [C](./code/C.c)
+* Other Languages: [Java](./code/Java.java) | [C++](./code/Cpp.cpp) | [C#](./code/CSharp.cs) | [Kotlin](./code/Kotlin.kt) | [Scala](./code/Scala.scala) | [Swift](./code/Swift.swift) | [Dart](./code/Dart.dart) | [Ruby](./code/Ruby.rb) | [PHP](./code/PHP.php)
+* Frontend: [HTML](./code/HTML.html) | [JavaScript](./code/JavaScript.js) | [CSS](./code/CSS.css) | [SCSS](./code/Sass.scss) | [Less](./code/Less.less) | [Vue](./code/Vue.vue) | [JSX](./code/JSX.jsx) | [TSX](./code/TSX.tsx) | [Astro](./code/Astro.astro)
+* Template Engines: [Jinja](./code/Jinja.jinja) | [Liquid](./code/Liquid.liquid)
+* Scripts & Data: [Shell](./code/Shell.sh) | [PowerShell](./code/PowerShell.ps1) | [SQL](./code/SQL.sql) | [JSON](./code/JSON.json) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml) | [WebAssembly](./code/WebAssembly.wat)
+* Markdown: [Basic](./code-rich/Markdown-Basic.md) | [Code](./code-rich/Markdown-Code.md)
+* Mermaid: [Flow Chart](./code-rich/FlowChart.mmd) | [Sequence](./code-rich/Sequence.mermaid) | [Class Diagram](./code-rich/ClassDiagram.mmd) | [ER Diagram](./code-rich/ERDiagram.mmd) | [Architecture](./code-rich/Architecture.mmd) | [Complex Architecture](./code-rich/Complex-Architecture.mmd) | [Gantt](./code-rich/Gantt.mmd) | [Git Graph](./code-rich/GitGraph.mmd) | [Mindmap](./code-rich/Mindmap.mmd) | [Pie Chart](./code-rich/Pie.mmd) | [Timeline](./code-rich/Timeline.mmd) | [XY Chart](./code-rich/XYChart.mmd)
+* Jupyter: [Notebook](./code-rich/Jupyter.ipynb)

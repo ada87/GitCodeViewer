@@ -1,0 +1,85 @@
+{%- comment -%} GitCode Viewer - Repository Card Template {%- endcomment -%}
+
+{%- assign theme = settings.theme | default: "dark" -%}
+{%- assign max_repos = settings.max_repos | default: 20 -%}
+{%- assign sorted_repos = repos | sort: "updated_at" | reverse -%}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="{{ theme }}">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ page.title | default: "Repositories" }} — GitCode</title>
+</head>
+<body>
+
+<!-- ============ Header ============ -->
+<header>
+  <h1>
+    {%- if user.display_name != blank -%}
+      {{ user.display_name }}
+    {%- else -%}
+      {{ user.login }}
+    {%- endif -%}
+  </h1>
+  <p>{{ repos | size }} repositories</p>
+</header>
+
+<!-- ============ Repository Grid ============ -->
+<div class="repo-grid">
+  {%- for repo in sorted_repos limit: max_repos -%}
+
+    {%- assign size_kb = repo.size -%}
+    {%- if size_kb < 1024 -%}
+      {%- assign size_label = size_kb | append: " KB" -%}
+    {%- elsif size_kb < 1048576 -%}
+      {%- assign size_mb = size_kb | divided_by: 1024.0 | round: 1 -%}
+      {%- assign size_label = size_mb | append: " MB" -%}
+    {%- else -%}
+      {%- assign size_gb = size_kb | divided_by: 1048576.0 | round: 2 -%}
+      {%- assign size_label = size_gb | append: " GB" -%}
+    {%- endif -%}
+
+    <div class="repo-card{% if repo.fork %} is-fork{% endif %}">
+      <div class="repo-header">
+        <a class="repo-name" href="{{ repo.html_url }}">{{ repo.full_name }}</a>
+        {%- if repo.fork -%}
+          <span class="badge">Fork</span>
+        {%- endif -%}
+        {%- if repo.private -%}
+          <span class="badge badge--private">Private</span>
+        {%- endif -%}
+      </div>
+
+      {%- if repo.description != blank -%}
+        <p class="repo-desc">{{ repo.description | truncate: 120 }}</p>
+      {%- endif -%}
+
+      <div class="repo-meta">
+        {%- if repo.language != blank -%}
+          <span class="lang-dot" data-lang="{{ repo.language }}"></span>
+          <span class="lang-name">{{ repo.language }}</span>
+        {%- endif -%}
+        <span class="stars">★ {{ repo.stargazers_count | default: 0 }}</span>
+        <span class="size">{{ size_label }}</span>
+        <time class="updated" datetime="{{ repo.updated_at }}">
+          {{ repo.updated_at | date: "%b %d, %Y" }}
+        </time>
+      </div>
+    </div>
+
+  {%- else -%}
+    <p class="empty-state">No repositories found.</p>
+  {%- endfor -%}
+</div>
+
+<!-- ============ Load More ============ -->
+{%- if repos | size > max_repos -%}
+  <div class="load-more">
+    <button data-remaining="{{ repos | size | minus: max_repos }}">
+      Load more ({{ repos | size | minus: max_repos }} remaining)
+    </button>
+  </div>
+{%- endif -%}
+
+</body>
+</html>

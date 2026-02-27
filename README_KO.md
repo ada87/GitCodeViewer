@@ -22,14 +22,13 @@
 > 앱에서 `GitCodeViewer`를 검색하거나, **+** -> **복제(Clone)**를 탭하고 다음을 입력하세요:
 > `https://github.com/ada87/GitCodeViewer.git`
 
-### 1. 프로그래밍 언어
+## 코드 샘플
 
-[Astro](./code/Astro.astro) | [C](./code/C.c) | [C++](./code/Cpp.cpp) | [CSS](./code/CSS.css) | [Dart](./code/Dart.dart) | [Go](./code/Go.go)
-[HTML](./code/HTML.html) | [Java](./code/Java.java) | [JavaScript](./code/JavaScript.js) | [JSON](./code/JSON.json) | [Kotlin](./code/Kotlin.kt) | [Markdown](./code/Markdown.md)
-[PHP](./code/PHP.php) | [Python](./code/Python.py) | [Ruby](./code/Ruby.rb) | [Rust](./code/Rust.rs) | [Sass (SCSS)](./code/Sass.scss) | [Shell](./code/Shell.sh)
-[SQL](./code/SQL.sql) | [Swift](./code/Swift.swift) | [TypeScript](./code/TypeScript.ts) | [Vue](./code/Vue.vue) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml)
-
-### 2. 서식 있는 텍스트 및 시각화
-
-[Markdown 및 수식 (LaTeX)](./code-rich/Markdown-All-In-One.md) | [Jupyter Notebook (.ipynb)](./code-rich/Jupyter.ipynb) | [Mermaid 복잡한 다이어그램](./code-rich/Complex-Architecture.mmd)
-[플로우차트](./code-rich/FlowChart.mmd) | [시퀀스 다이어그램](./code-rich/Sequence.mermaid) | [클래스 다이어그램](./code-rich/ClassDiagram.mmd)
+* 인기: [Python](./code/Python.py) | [TypeScript](./code/TypeScript.ts) | [Rust](./code/Rust.rs) | [Golang](./code/Golang.go) | [C](./code/C.c)
+* 기타 언어: [Java](./code/Java.java) | [C++](./code/Cpp.cpp) | [C#](./code/CSharp.cs) | [Kotlin](./code/Kotlin.kt) | [Scala](./code/Scala.scala) | [Swift](./code/Swift.swift) | [Dart](./code/Dart.dart) | [Ruby](./code/Ruby.rb) | [PHP](./code/PHP.php)
+* 프론트엔드: [HTML](./code/HTML.html) | [JavaScript](./code/JavaScript.js) | [CSS](./code/CSS.css) | [SCSS](./code/Sass.scss) | [Less](./code/Less.less) | [Vue](./code/Vue.vue) | [JSX](./code/JSX.jsx) | [TSX](./code/TSX.tsx) | [Astro](./code/Astro.astro)
+* 템플릿 엔진: [Jinja](./code/Jinja.jinja) | [Liquid](./code/Liquid.liquid)
+* 스크립트 및 데이터: [Shell](./code/Shell.sh) | [PowerShell](./code/PowerShell.ps1) | [SQL](./code/SQL.sql) | [JSON](./code/JSON.json) | [XML](./code/XML.xml) | [YAML](./code/YAML.yaml) | [WebAssembly](./code/WebAssembly.wat)
+* Markdown: [Basic](./code-rich/Markdown-Basic.md) | [Code](./code-rich/Markdown-Code.md)
+* Mermaid: [플로우차트](./code-rich/FlowChart.mmd) | [시퀀스](./code-rich/Sequence.mermaid) | [클래스 다이어그램](./code-rich/ClassDiagram.mmd) | [ER 다이어그램](./code-rich/ERDiagram.mmd) | [아키텍처](./code-rich/Architecture.mmd) | [복잡한 아키텍처](./code-rich/Complex-Architecture.mmd) | [간트](./code-rich/Gantt.mmd) | [Git 그래프](./code-rich/GitGraph.mmd) | [마인드맵](./code-rich/Mindmap.mmd) | [파이 차트](./code-rich/Pie.mmd) | [타임라인](./code-rich/Timeline.mmd) | [XY 차트](./code-rich/XYChart.mmd)
+* Jupyter: [Notebook](./code-rich/Jupyter.ipynb)
