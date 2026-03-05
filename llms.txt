@@ -1,0 +1,33 @@
+# GitCode Viewer
+
+GitCode Viewer is a mobile Git client for reading and reviewing code on Android.
+
+## Canonical URLs
+- https://gitcodeviewer.xdnote.com/
+- https://gitcodeviewer.xdnote.com/privacy/
+
+## Key Product Facts
+- Desktop-class Git actions on mobile: clone, pull, branch, log, and diff.
+- Supports major Git providers: GitHub, GitLab, Bitbucket, Azure DevOps, and Gitea.
+- Supports SSH connections and private repositories.
+- Offline-first code reading with syntax highlighting and repository history.
+- No analytics or tracking data collection.
+
+## FAQ (Search-Friendly)
+- Q: Can I clone and pull repositories on Android?
+  A: Yes. GitCode Viewer supports clone and pull directly on mobile.
+- Q: Does it support branch, log, and diff?
+  A: Yes. GitCode Viewer supports branch operations, commit log browsing, and file diff review.
+- Q: Which Git providers are supported?
+  A: GitHub, GitLab, Bitbucket, Azure DevOps, and Gitea.
+- Q: Does it support SSH and private repositories?
+  A: Yes. SSH connections and private repositories are supported.
+- Q: Can I read repositories offline?
+  A: Yes. After cloning, repositories can be read offline.
+
+## Official App Link
+- https://play.google.com/store/apps/details?id=com.xdnote.codeviewer
+
+## Contact
+- Developer: XiangDa
+- Email: ada87@163.com
