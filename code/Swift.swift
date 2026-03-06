@@ -1,8 +1,6 @@
 import SwiftUI
 import Observation
 
-// ============ Models ============
-
 struct Repository: Identifiable, Hashable {
     let id: String
     var name: String
@@ -27,8 +25,6 @@ enum SyncStatus: Equatable {
         return false
     }
 }
-
-// ============ ViewModel ============
 
 @Observable
 class RepoListViewModel {
@@ -85,8 +81,6 @@ class RepoListViewModel {
         syncStatuses.removeValue(forKey: repo.id)
     }
 }
-
-// ============ Views ============
 
 struct RepoListView: View {
     @State private var viewModel = RepoListViewModel()

@@ -1,0 +1,110 @@
+% LaTeX sample fixture for syntax highlighting tests
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\geometry{margin=2.2cm}
+
+\title{GitCodeViewer Language Fixture: LaTeX}
+\author{Dev Team}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document is a test fixture for language highlighting and structure rendering.
+It intentionally includes sections, equations, lists, and a long table.
+\end{abstract}
+
+\section{Overview}
+GitCodeViewer supports multiple language grammars through CodeMirror.
+The mapping flow is extension $\rightarrow$ language ID $\rightarrow$ parser.
+When one stage is missing, highlighting falls back to plain text.
+
+\section{Design Rules}
+\begin{itemize}
+  \item Keep extension mappings explicit and deterministic.
+  \item Add sample files for manual visual verification.
+  \item Keep sample file size in a practical range.
+  \item Avoid enabling unsupported UI affordances by default.
+\end{itemize}
+
+\section{Formula}
+Given file score values $s_i$ with weights $w_i$:
+\begin{equation}
+S = \sum_{i=1}^{n} w_i \cdot s_i
+\end{equation}
+and normalized score:
+\begin{equation}
+S' = \frac{S - \min(S)}{\max(S) - \min(S)}
+\end{equation}
+
+\section{Language Table}
+\begin{longtable}{lrr}
+\toprule
+Language & Files & Score \\
+\midrule
+TypeScript & 42 & 91 \\
+Python & 31 & 84 \\
+Rust & 18 & 79 \\
+Kotlin & 15 & 74 \\
+Clojure & 10 & 70 \\
+Julia & 8 & 67 \\
+R & 7 & 65 \\
+SPARQL & 5 & 60 \\
+\bottomrule
+\end{longtable}
+
+\section{Checklist}
+\begin{enumerate}
+  \item Update extension map.
+  \item Update CodeMirror resolver switch.
+  \item Add or refresh dev sample list.
+  \item Keep fixtures between 80 and 200 lines.
+\end{enumerate}
+
+\section{Case Notes}
+\subsection{Case 1}
+Add concise and stable mappings.
+
+\subsection{Case 2}
+Route syntax IDs to maintained parser modules.
+
+\subsection{Case 3}
+Keep naming consistent: file extension, label, and language key.
+
+\subsection{Case 4}
+Prefer low-risk additions first.
+
+\subsection{Case 5}
+Track unsupported editor features per language.
+
+\subsection{Case 6}
+Avoid false-positive binary detections for text formats.
+
+\subsection{Case 7}
+Keep README and dev tools aligned to avoid confusion.
+
+\subsection{Case 8}
+Use deterministic demo content for regression checks.
+
+\subsection{Case 9}
+Confirm generated asset builds after syntax changes.
+
+\subsection{Case 10}
+Validate on device with real file opening flow.
+
+\section{Reference}
+Project page: \url{https://codemirror.net/docs/community/#language}
+
+\section{Conclusion}
+This fixture should stay readable and representative while covering common
+LaTeX constructs used in technical documentation.
+
+\end{document}
+

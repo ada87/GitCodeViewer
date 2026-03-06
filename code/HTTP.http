@@ -1,0 +1,123 @@
+### HTTP sample fixture for language highlighting
+@baseUrl = https://api.gitcodeviewer.dev/v1
+@token = demo-token-123
+@repoId = 42
+
+### Health check
+GET {{baseUrl}}/health
+Accept: application/json
+
+### Version info
+GET {{baseUrl}}/version
+Accept: application/json
+
+### List repositories
+GET {{baseUrl}}/repos?sort=updated&order=desc&page=1&pageSize=20
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### List repositories by language
+GET {{baseUrl}}/repos?language=clojure&page=1&pageSize=10
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Get repository detail
+GET {{baseUrl}}/repos/{{repoId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Create repository
+POST {{baseUrl}}/repos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "demo-repo",
+  "provider": "github",
+  "url": "https://github.com/example/demo-repo.git"
+}
+
+### Update repository
+PATCH {{baseUrl}}/repos/{{repoId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "demo-repo-renamed",
+  "autoSync": true
+}
+
+### Trigger sync
+POST {{baseUrl}}/repos/{{repoId}}/sync
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Get sync logs
+GET {{baseUrl}}/repos/{{repoId}}/sync/logs?limit=50
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Search files
+GET {{baseUrl}}/repos/{{repoId}}/search?q=language%20mapping&limit=25
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Open file by path
+GET {{baseUrl}}/repos/{{repoId}}/files?path=src%2Futils%2Fstring.ts
+Authorization: Bearer {{token}}
+Accept: text/plain
+
+### Create branch
+POST {{baseUrl}}/repos/{{repoId}}/branches
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "feature/new-language-support",
+  "from": "main"
+}
+
+### Create commit
+POST {{baseUrl}}/repos/{{repoId}}/commits
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "message": "feat: add community language fixtures",
+  "author": {
+    "name": "Dev Bot",
+    "email": "devbot@example.com"
+  }
+}
+
+### Compare branches
+GET {{baseUrl}}/repos/{{repoId}}/compare?base=main&head=feature/new-language-support
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Create pull request
+POST {{baseUrl}}/repos/{{repoId}}/pull-requests
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Add language fixtures",
+  "base": "main",
+  "head": "feature/new-language-support",
+  "body": "Adds clojure/http/julia/latex/r/sparql examples."
+}
+
+### Get repository stats for last 7 days
+GET {{baseUrl}}/repos/{{repoId}}/stats?window=7d
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Get repository stats for last 30 days
+GET {{baseUrl}}/repos/{{repoId}}/stats?window=30d
+Authorization: Bearer {{token}}
+Accept: application/json
+
+### Delete repository
+DELETE {{baseUrl}}/repos/{{repoId}}
+Authorization: Bearer {{token}}
+

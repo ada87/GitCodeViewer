@@ -1,0 +1,99 @@
+# SPARQL sample fixture for language highlighting
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX dc:   <http://purl.org/dc/terms/>
+PREFIX ex:   <https://example.org/schema#>
+PREFIX repo: <https://example.org/repo/>
+
+# Query 1: top repositories
+SELECT ?repo ?name ?language ?stars
+WHERE {
+  ?repo a ex:Repository ;
+        ex:name ?name ;
+        ex:language ?language ;
+        ex:stars ?stars .
+  FILTER (?stars > 200)
+}
+ORDER BY DESC(?stars)
+LIMIT 20
+
+# Query 2: construct score triples
+CONSTRUCT {
+  ?repo ex:score ?score .
+}
+WHERE {
+  ?repo ex:stars ?stars ;
+        ex:contributors ?contributors .
+  BIND ((?stars * 0.7 + ?contributors * 8) AS ?score)
+}
+
+# Query 3: ask if any SPARQL repos exist
+ASK {
+  ?repo a ex:Repository ;
+        ex:language "sparql" .
+}
+
+# Query 4: describe repository resources
+DESCRIBE ?repo
+WHERE {
+  ?repo ex:name ?name .
+  FILTER(CONTAINS(LCASE(?name), "viewer"))
+}
+
+# Query 5: stale repositories
+SELECT ?repo ?updated
+WHERE {
+  ?repo a ex:Repository ;
+        ex:updated ?updated .
+  FILTER (?updated < "2026-02-28"^^xsd:date)
+}
+ORDER BY ASC(?updated)
+
+# Query 6: aggregate by language
+SELECT ?language (COUNT(?repo) AS ?count) (SUM(?stars) AS ?totalStars)
+WHERE {
+  ?repo a ex:Repository ;
+        ex:language ?language ;
+        ex:stars ?stars .
+}
+GROUP BY ?language
+ORDER BY DESC(?totalStars)
+
+# Query 7: named graph example
+SELECT ?repo ?name
+FROM NAMED <https://example.org/graph/repos>
+WHERE {
+  GRAPH <https://example.org/graph/repos> {
+    ?repo ex:name ?name .
+  }
+}
+
+# Query 8: optional metadata
+SELECT ?repo ?name ?license ?homepage
+WHERE {
+  ?repo a ex:Repository ;
+        ex:name ?name .
+  OPTIONAL { ?repo ex:license ?license . }
+  OPTIONAL { ?repo ex:homepage ?homepage . }
+}
+LIMIT 30
+
+# Query 9: bind and filter
+SELECT ?repo ?stars ?rank
+WHERE {
+  ?repo ex:stars ?stars .
+  BIND(IF(?stars > 1000, "A", IF(?stars > 500, "B", "C")) AS ?rank)
+  FILTER(?rank != "C")
+}
+ORDER BY ?rank DESC(?stars)
+
+# Query 10: values clause
+SELECT ?repo ?language
+WHERE {
+  ?repo a ex:Repository ;
+        ex:language ?language .
+  VALUES ?language { "sparql" "r" "julia" "clojure" }
+}
+LIMIT 50
+

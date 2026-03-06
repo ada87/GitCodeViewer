@@ -9,15 +9,21 @@
   ],
   "scripts": {
     "dev": "vite",
+    "dev:web": "cd web && vite",
+    "dev:android": "react-native run-android",
     "build": "tsc && vite build",
+    "build:web": "cd web && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint:web": "cd web && eslint . --ext .ts",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\"",
+    "format:web": "prettier --write \"web/**/*.{ts,css,html}\"",
     "typecheck": "tsc --noEmit",
+    "typecheck:web": "cd web && tsc --noEmit",
     "clean": "rm -rf dist node_modules/.cache",
     "prepare": "husky install",
     "postinstall": "patch-package && pnpm web:build",
@@ -57,5 +63,17 @@
     "type": "git",
     "url": "https://github.com/nicepkg/gitcode-viewer.git"
   },
+  "keywords": [
+    "codemirror",
+    "react-native",
+    "syntax-highlight",
+    "repository-viewer",
+    "offline-viewer"
+  ],
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Edge versions",
+    "last 2 Firefox versions"
+  ],
   "license": "MIT"
 }
