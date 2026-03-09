@@ -46,7 +46,24 @@ function setActiveLocaleLink() {
   const currentLocale = getCurrentLocaleSlug();
   const links = document.querySelectorAll(".i18n-link[data-locale]");
   links.forEach((link) => {
-    link.classList.toggle("active", link.getAttribute("data-locale") === currentLocale);
+    const isCurrent = link.getAttribute("data-locale") === currentLocale;
+    const originalHref = link.dataset.href || link.getAttribute("href") || "";
+
+    if (!link.dataset.href && originalHref) {
+      link.dataset.href = originalHref;
+    }
+
+    link.classList.toggle("active", isCurrent);
+
+    if (isCurrent) {
+      link.removeAttribute("href");
+      link.setAttribute("aria-current", "page");
+    } else {
+      if (link.dataset.href) {
+        link.setAttribute("href", link.dataset.href);
+      }
+      link.removeAttribute("aria-current");
+    }
   });
 }
 

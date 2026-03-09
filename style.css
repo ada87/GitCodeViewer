@@ -566,6 +566,14 @@
       text-align: center;
     }
 
+    .i18n-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
     .i18n-title {
       font-size: 0.75rem;
       letter-spacing: 0.12em;
@@ -598,6 +606,33 @@
 
     .i18n-link.active {
       color: var(--text-neutral-300);
+      cursor: default;
+      text-decoration: none;
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-neutral-500);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: normal;
+      text-transform: none;
+      transition: color 0.2s ease;
+    }
+
+    .github-link:hover {
+      color: var(--text-neutral-300);
+    }
+
+    .github-link svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+      flex: none;
     }
 
     /* Animations */
