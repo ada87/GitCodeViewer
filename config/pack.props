@@ -1,0 +1,83 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <LangVersion>preview</LangVersion>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+    <RepositoryUrl>https://example.com/xdnote/gitcodeviewer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Company>xdnote</Company>
+    <Authors>xdnote</Authors>
+    <Product>GitCodeViewer</Product>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DefineConstants>$(DefineConstants);DEBUG_TRACE</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>embedded</DebugType>
+    <TieredPGO>true</TieredPGO>
+    <RunAOTCompilation>false</RunAOTCompilation>
+    <IncludeSymbols>false</IncludeSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+    <IsPackable>false</IsPackable>
+    <GenerateProgramFile>false</GenerateProgramFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsPackable)' == 'true'">
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
+    <PackageVersion Include="CommandLineParser" Version="2.9.1" />
+    <PackageVersion Include="FluentAssertions" Version="6.12.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+    <PackageVersion Include="Spectre.Console" Version="0.49.1" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageVersion Include="xunit" Version="2.7.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\docs\coding-guidelines.md" />
+    <AdditionalFiles Include="..\docs\sample-file-policy.md" Condition="Exists('..\docs\sample-file-policy.md')" />
+    <None Include="..\LICENSE" Link="LICENSE" Condition="Exists('..\LICENSE')" />
+    <None Include="..\README.md" Link="README.md" Condition="Exists('..\README.md')" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <Compile>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <WarningLevel>9999</WarningLevel>
+    </Compile>
+  </ItemDefinitionGroup>
+
+  <Target Name="EmitRepositoryMetadata" BeforeTargets="CoreCompile">
+    <Message Importance="low" Text="Building $(MSBuildProjectName) from $(RepositoryUrl)" />
+  </Target>
+
+  <Target Name="StampBuildEnvironment" BeforeTargets="GenerateAssemblyInfo">
+    <Message Importance="low" Text="Configuration=$(Configuration); CI=$(CI); TF=$(TargetFramework)" />
+  </Target>
+</Project>

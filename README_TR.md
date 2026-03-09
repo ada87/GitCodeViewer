@@ -1,6 +1,6 @@
-# GitCode Viewer
+# Git Kod Görüntüleyici
 
-English | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md) | [Bahasa Indonesia](./README_ID.md) | [Türkçe](./README_TR.md)
+[English](./README.md) | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md) | [Bahasa Indonesia](./README_ID.md) | Türkçe
 
 ![Feature Graphic](./other/feature-graphic.png)
 
@@ -8,29 +8,29 @@ English | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español
   <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/>
 </a>
 
-**Code Viewer** is a high-performance Git client and code reader for Android. It is designed for developers who need to read code, review PRs, and study open-source projects offline.
+**Code Viewer**, Android için yüksek performanslı bir Git istemcisi ve kod okuyucusudur. Kod okumak, PR incelemek ve açık kaynak projeleri çevrimdışı çalışmak için tasarlanmıştır.
 
-## Features
+## Özellikler
 
-1. **Offline Git:** Clone once, read anywhere. Supports branch, log, and other Git operations, including private repositories.
-2. **Syntax Highlight:** Supports mainstream languages such as HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML, and more.
-3. **Document Reading:** Supports Markdown (`.md`, `.markdown`) and MDX (`.mdx`, rendered as Markdown for reading), Mermaid (`.mmd`, `.mermaid`), Jupyter (`.ipynb`), Draw.io, and other structured formats.
-4. **Themes:** Supports Light/Dark modes and VS Code/JetBrains theme styles.
-5. **GitHub:** Quickly discover and download popular public projects.
+1. **Çevrimdışı Git:** Bir kez klonlayın, her yerde okuyun. Branch, log ve diğer Git işlemlerini, özel depolar dahil, destekler.
+2. **Sözdizimi Renklendirme:** HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML ve daha birçok yaygın dili destekler.
+3. **Doküman Okuma:** Markdown (`.md`, `.markdown`) ve MDX (`.mdx`, okuma için Markdown olarak görüntülenir), Mermaid (`.mmd`, `.mermaid`), Jupyter (`.ipynb`), Draw.io ve diğer yapılandırılmış formatları destekler.
+4. **Temalar:** Açık/Koyu mod ve VS Code/JetBrains tema stillerini destekler.
+5. **GitHub:** Popüler herkese açık projeleri hızlıca keşfetmeyi ve indirmeyi sağlar.
 
-## Live Demo
+## Canlı Demo
 
-Viewing inside the app? Tap the files below to preview syntax highlighting and rendering.
+Uygulama içinde görüntülüyor musunuz? Sözdizimi renklendirme ve render önizlemesi için aşağıdaki dosyalara dokunun.
 
-> How to get this repo?
-> Search for `GitCodeViewer` in the app, or tap **+** -> **Clone** and enter:
+> Bu repoyu nasıl alırım?
+> Uygulamada `GitCodeViewer` aratın veya **+** -> **Clone** ile şu adresi girin:
 > `https://github.com/ada87/GitCodeViewer.git`
 
-## Demo Library
+## Demo Kütüphanesi
 
-The demo folders now live at the repository root and are grouped by usage instead of a flat language list.
+Demo klasörleri artık depo kökünde bulunur ve düz dil listesinden ziyade kullanım senaryosuna göre gruplandırılır.
 
-Featured entries are maintained in [`./_meta/popular.json`](./_meta/popular.json).
+Öne çıkan girdiler [`./_meta/popular.json`](./_meta/popular.json) dosyasında tutulur.
 
 ### Popular
 
@@ -45,5 +45,3 @@ Featured entries are maintained in [`./_meta/popular.json`](./_meta/popular.json
 - document: [arch.drawio](./document/arch.drawio) | [architecture.mmd](./document/architecture.mmd) | [audit.ipynb](./document/audit.ipynb) | [classdiagram.mmd](./document/classdiagram.mmd) | [complex-architecture.mmd](./document/complex-architecture.mmd) | [draft.latex](./document/draft.latex) | [draft.mdx](./document/draft.mdx) | [erdiagram.mmd](./document/erdiagram.mmd) | [flow.mermaid](./document/flow.mermaid) | [flowchart.mmd](./document/flowchart.mmd) | [gantt.mmd](./document/gantt.mmd) | [gitgraph.mmd](./document/gitgraph.mmd) | [guide.markdown](./document/guide.markdown) | [help.xhtml](./document/help.xhtml) | [jupyter.ipynb](./document/jupyter.ipynb) | [markdown-basic.md](./document/markdown-basic.md) | [markdown-code.md](./document/markdown-code.md) | [math.tex](./document/math.tex) | [mindmap.mmd](./document/mindmap.mmd) | [notes.md](./document/notes.md) | [pie.mmd](./document/pie.mmd) | [sequence.mermaid](./document/sequence.mermaid) | [timeline.mmd](./document/timeline.mmd) | [trace.mmd](./document/trace.mmd) | [xychart.mmd](./document/xychart.mmd)
 - template: [guide.njk](./template/guide.njk) | [mail.jinja2](./template/mail.jinja2) | [page.jinja](./template/page.jinja) | [panel.j2](./template/panel.j2) | [panel.phtml](./template/panel.phtml) | [theme.liquid](./template/theme.liquid)
 - system: [cache.cc](./system/cache.cc) | [core.c](./system/core.c) | [core.h](./system/core.h) | [core.wat](./system/core.wat) | [engine.cpp](./system/engine.cpp) | [index.hpp](./system/index.hpp) | [login.bash](./system/login.bash) | [main.c++](./system/main.c++) | [path.h++](./system/path.h++) | [path.inl](./system/path.inl) | [profile.zsh](./system/profile.zsh) | [render.hxx](./system/render.hxx) | [report.cxx](./system/report.cxx) | [ring.ipp](./system/ring.ipp) | [scan.hh](./system/scan.hh) | [shell.ps1](./system/shell.ps1) | [shell.sh](./system/shell.sh) | [stats.tcc](./system/stats.tcc) | [sync.psm1](./system/sync.psm1) | [telemetry.jsm](./system/telemetry.jsm) | [text.wast](./system/text.wast)
-
-

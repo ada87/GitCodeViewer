@@ -1,0 +1,127 @@
+$bg: #f4f7fb
+$panel: #ffffff
+$text: #1f2937
+$muted: #6b7280
+$accent: #2a7a5c
+$accent-soft: #e9f4ef
+$warn: #8a5a24
+$warn-soft: #fff4db
+
+=surface
+  background: $panel
+  border-radius: 16px
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08)
+
+=label
+  font-size: 12px
+  letter-spacing: 0.06em
+  text-transform: uppercase
+  color: $muted
+
+body
+  margin: 0
+  background: linear-gradient(180deg, #eef3fb 0%, $bg 100%)
+  color: $text
+  font-family: "IBM Plex Sans", sans-serif
+
+.workspace-shell
+  min-height: 100vh
+  display: grid
+  grid-template-columns: 280px 1fr
+
+.sidebar
+  padding: 24px 20px
+  background: #102235
+  color: #f8fafc
+
+.sidebar__title
+  font-size: 22px
+  font-weight: 600
+  margin-bottom: 8px
+
+.sidebar__caption
+  color: rgba(248, 250, 252, 0.68)
+  margin-bottom: 20px
+
+.sidebar__item
+  display: block
+  padding: 10px 12px
+  margin-bottom: 8px
+  border-radius: 10px
+  color: inherit
+  text-decoration: none
+
+.sidebar__item--active
+  background: rgba(255, 255, 255, 0.12)
+
+.main
+  padding: 24px
+
+.header
+  +surface
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 18px 20px
+  margin-bottom: 18px
+
+.header__meta
+  +label
+
+.header__title
+  font-size: 26px
+  font-weight: 700
+  margin: 6px 0 0
+
+.header__status
+  padding: 6px 10px
+  border-radius: 999px
+  background: $accent-soft
+  color: $accent
+  font-size: 12px
+
+.grid
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 18px
+
+.card
+  +surface
+  padding: 18px
+
+.card__eyebrow
+  +label
+
+.card__title
+  font-size: 18px
+  font-weight: 600
+  margin: 8px 0 10px
+
+.card__body
+  color: $muted
+  line-height: 1.6
+
+.card--warning
+  border: 1px solid #f1d39a
+
+.card--warning .card__tag
+  display: inline-block
+  padding: 4px 8px
+  border-radius: 999px
+  background: $warn-soft
+  color: $warn
+
+@media (max-width: 900px)
+  .workspace-shell
+    grid-template-columns: 1fr
+
+  .sidebar
+    padding-bottom: 12px
+
+  .grid
+    grid-template-columns: 1fr
+
+  .header
+    align-items: flex-start
+    flex-direction: column
+    gap: 12px

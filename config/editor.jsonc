@@ -1,0 +1,82 @@
+{
+  // VS Code settings used while validating syntax samples
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/dist": true,
+    "**/coverage": true,
+    "**/android/app/build": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/android/.gradle": true,
+    "**/ios/Pods": true
+  },
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.renderWhitespace": "selection",
+  "editor.guides.bracketPairs": true,
+  "editor.minimap.enabled": false,
+  "editor.inlineSuggest.enabled": true,
+  "workbench.editor.enablePreview": false,
+  "workbench.tree.indent": 16,
+  "workbench.startupEditor": "none",
+  "explorer.sortOrder": "type",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#172b32",
+    "titleBar.activeForeground": "#f5f2e8",
+    "statusBar.background": "#10333a",
+    "statusBar.foreground": "#e9f1ef",
+    "activityBar.background": "#13282d",
+    "sideBar.background": "#15292e"
+  },
+  "files.associations": {
+    "*.ets": "typescript",
+    "*.mts": "typescript",
+    "*.cts": "typescript",
+    "*.json5": "json",
+    "*.jsonc": "json",
+    "*.jinja2": "jinja-html",
+    "*.liquid": "html"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "on"
+    }
+  },
+  "notebook.lineNumbers": "on",
+  "notebook.compactView": false,
+  "notebook.globalToolbar": true,
+  "git.openRepositoryInParentFolders": "always",
+  "git.confirmSync": false,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.env.windows": {
+    "CODE_READER_WORKSPACE": "D:/xdnote/code-reader",
+    "GITCODE_VIEWER_FIXTURES": "D:/xdnote/GitCodeViewer"
+  },
+  "cSpell.words": [
+    "codemirror",
+    "drawio",
+    "GitCodeViewer",
+    "isomorphic",
+    "jinja",
+    "mermaid",
+    "notebook",
+    "sparql",
+    "webview"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.updateImportsOnFileMove.enabled": "always"
+}
+

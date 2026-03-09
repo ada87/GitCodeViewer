@@ -1,0 +1,89 @@
+sequenceDiagram
+  autonumber
+  actor User as User
+  participant App as Mobile App
+  participant Store as Workspace Store
+  participant Repo as Repo Service
+  participant Net as Remote Origin
+  participant Resolver as Language Resolver
+  participant Editor as CodeMirror View
+  participant Prefs as Settings
+
+  User->>App: Launch app
+  App->>Store: loadRecentWorkspaces()
+  Store-->>App: workspace summaries
+  App-->>User: Render workspace list
+
+  User->>App: Tap workspace title
+  App->>Prefs: readTitleAffordanceMode()
+  Prefs-->>App: mobile accent enabled
+  App-->>User: Show subtle underline on phone
+
+  App->>Store: openWorkspace(workspaceId)
+  Store-->>App: repo path + cached tree version
+  App->>Repo: hydrate(repoPath)
+  Repo-->>App: metadata and branch
+
+  alt wifi and stale repo
+    App->>Repo: scheduleBackgroundPull()
+    Repo->>Net: git fetch --prune
+    Net-->>Repo: refs and pack data
+    Repo->>Net: git pull --ff-only
+    Net-->>Repo: updated branch head
+    Repo-->>App: tree invalidated
+    App->>Store: saveLastSyncAt()
+  else offline or manual mode
+    Repo-->>App: keep cached snapshot
+  end
+
+  App-->>User: Render tree and header
+  User->>App: Open src/utils/string.ts
+  App->>Repo: readFile(blobId)
+  Repo-->>App: utf8 content
+  App->>Resolver: resolveByExtension("ts")
+  Resolver-->>App: typescript mode + fold support
+  App->>Editor: createView(doc, extensions)
+  Editor-->>User: highlighted source with folding
+
+  User->>App: Open Sample_typescript_ets.ets
+  App->>Repo: readFile(blobId)
+  Repo-->>App: utf8 content
+  App->>Resolver: resolveByExtension("ets")
+  Resolver-->>App: alias to typescript
+  App->>Editor: updateLanguage(typescript)
+  Editor-->>User: highlighted alias sample
+
+  User->>App: Open a legacy language sample
+  App->>Resolver: resolveByExtension("jinja")
+  Resolver-->>App: legacy mode without fold service
+  App->>Editor: hideFoldGutter()
+  Editor-->>User: full-width code without empty gutter
+
+  opt file is unsupported
+    App->>Resolver: resolveByExtension("unknown")
+    Resolver-->>App: no exact match
+    App->>Editor: keep plain text mode
+    App-->>User: show lightweight unsupported notice
+  end
+
+  User->>App: Return to workspace list
+  App->>Store: saveLastOpenedFile()
+  Store-->>App: ok
+  App-->>User: preserve scroll position
+
+  Note over App,Editor: The viewer should favor believable fixture data because manual QA decisions are based on what reviewers actually read.
+
+  User->>App: Trigger screenshot capture
+  App->>Editor: waitForLayoutStable()
+  Editor-->>App: stable
+  App-->>User: capture ready
+
+  User->>App: Open release notes from docs
+  App->>Repo: readFile(readmeBlobId)
+  Repo-->>App: markdown text
+  App->>Resolver: resolveByExtension("md")
+  Resolver-->>App: markdown mode
+  App->>Editor: swapDocument(markdownDoc)
+  Editor-->>User: rendered markdown source preview
+
+  Note over Store,Prefs: Workspace metadata and UI preferences should survive app restarts.

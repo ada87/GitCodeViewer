@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net" modified="2026-03-09T10:12:00.000Z" agent="Mozilla/5.0" version="24.7.5" type="device">
+  <diagram id="workspace-flow" name="Workspace Flow">
+    <mxGraphModel dx="1280" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Workspace List" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef3fb;strokeColor=#456fa3;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="Tap Title" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4db;strokeColor=#b8860b;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="250" y="80" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="Load Workspace" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f4ef;strokeColor=#2a7a5c;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="430" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Restore Tree" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f4ef;strokeColor=#2a7a5c;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="640" y="80" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="Resolve Extension" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef3fb;strokeColor=#456fa3;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="860" y="80" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="Legacy Mode?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4db;strokeColor=#b8860b;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="74" width="130" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="Hide Fold Gutter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf2f8;strokeColor=#c02670;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="30" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="Render Editor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef3fb;strokeColor=#456fa3;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="130" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="Mobile Header Hint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4db;strokeColor=#b8860b;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="250" y="220" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="Tablet Neutral Title" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="470" y="220" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="Background Pull" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f4ef;strokeColor=#2a7a5c;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="690" y="220" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="Sync Policy" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4db;strokeColor=#b8860b;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="900" y="214" width="130" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="Use Cache Only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="220" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="15" value="Plain Text Fallback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf2f8;strokeColor=#c02670;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="860" y="340" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="4" target="5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="5" target="6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="6" target="7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="no fold service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#c02670;fontSize=12;" edge="1" parent="1" source="7" target="8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="22" value="modern mode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#456fa3;fontSize=12;" edge="1" parent="1" source="7" target="9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="3" target="10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="10" target="11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="4" target="12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="12" target="13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="27" value="offline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#94a3b8;fontSize=12;" edge="1" parent="1" source="13" target="14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28" value="unsupported" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#c02670;fontSize=12;" edge="1" parent="1" source="6" target="15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="8" target="9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="14" target="9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="15" target="9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

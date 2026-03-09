@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="https://example.com/workspace-sync"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="https://example.com/workspace-sync"
+  name="WorkspaceSyncService">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://example.com/workspace-sync">
+      <xsd:element name="GetWorkspaceRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="workspaceId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetWorkspaceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" />
+            <xsd:element name="branch" type="xsd:string" />
+            <xsd:element name="lastSyncAt" type="xsd:dateTime" minOccurs="0" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TriggerSyncRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="workspaceId" type="xsd:string" />
+            <xsd:element name="mode" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="TriggerSyncResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="accepted" type="xsd:boolean" />
+            <xsd:element name="message" type="xsd:string" minOccurs="0" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+
+  <wsdl:message name="GetWorkspaceInput">
+    <wsdl:part name="parameters" element="tns:GetWorkspaceRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetWorkspaceOutput">
+    <wsdl:part name="parameters" element="tns:GetWorkspaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="TriggerSyncInput">
+    <wsdl:part name="parameters" element="tns:TriggerSyncRequest" />
+  </wsdl:message>
+  <wsdl:message name="TriggerSyncOutput">
+    <wsdl:part name="parameters" element="tns:TriggerSyncResponse" />
+  </wsdl:message>
+
+  <wsdl:portType name="WorkspaceSyncPortType">
+    <wsdl:operation name="GetWorkspace">
+      <wsdl:input message="tns:GetWorkspaceInput" />
+      <wsdl:output message="tns:GetWorkspaceOutput" />
+    </wsdl:operation>
+    <wsdl:operation name="TriggerSync">
+      <wsdl:input message="tns:TriggerSyncInput" />
+      <wsdl:output message="tns:TriggerSyncOutput" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="WorkspaceSyncSoapBinding" type="tns:WorkspaceSyncPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="GetWorkspace">
+      <soap:operation soapAction="https://example.com/workspace-sync/GetWorkspace" />
+      <wsdl:input><soap:body use="literal" /></wsdl:input>
+      <wsdl:output><soap:body use="literal" /></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TriggerSync">
+      <soap:operation soapAction="https://example.com/workspace-sync/TriggerSync" />
+      <wsdl:input><soap:body use="literal" /></wsdl:input>
+      <wsdl:output><soap:body use="literal" /></wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="WorkspaceSyncService">
+    <wsdl:port name="WorkspaceSyncSoapPort" binding="tns:WorkspaceSyncSoapBinding">
+      <soap:address location="https://api.example.com/workspace-sync" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

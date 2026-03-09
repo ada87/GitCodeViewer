@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workspace Dashboard</title>
+  <style>
+    body { margin: 0; font: 14px/1.5 "Segoe UI", sans-serif; background: #f4f7fb; color: #1f2937; }
+    header { background: #0f172a; color: #fff; padding: 18px 24px; }
+    nav a { color: #cbd5e1; margin-right: 16px; text-decoration: none; }
+    main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08); }
+    .card strong { display: block; font-size: 24px; margin-top: 6px; }
+    .layout { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+    th { background: #f8fafc; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    .tag.ok { background: #dcfce7; color: #166534; }
+    .tag.warn { background: #fef3c7; color: #92400e; }
+    .stack { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08); }
+    .stack h3 { margin-top: 0; }
+    .stack li { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Workspace Dashboard</h1>
+    <nav>
+      <a href="/workspaces">Workspaces</a>
+      <a href="/recent">Recent Files</a>
+      <a href="/fixtures">Fixtures</a>
+      <a href="/settings">Settings</a>
+    </nav>
+  </header>
+  <main>
+    <section class="summary">
+      <div class="card">
+        <span>Tracked Repositories</span>
+        <strong>42</strong>
+        <small>7 updated in the last hour</small>
+      </div>
+      <div class="card">
+        <span>Alias Extensions</span>
+        <strong>11</strong>
+        <small>`ets`, `mts`, `json5`, and more</small>
+      </div>
+      <div class="card">
+        <span>Legacy Modes Without Fold</span>
+        <strong>6</strong>
+        <small>Fold gutter hidden automatically</small>
+      </div>
+    </section>
+    <section class="layout">
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Workspace</th>
+              <th>Branch</th>
+              <th>Owner</th>
+              <th>Last Sync</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CodeReader</td>
+              <td>main</td>
+              <td>ada</td>
+              <td>3 min ago</td>
+              <td><span class="tag ok">Healthy</span></td>
+            </tr>
+            <tr>
+              <td>SyntaxFixtures</td>
+              <td>refresh/samples</td>
+              <td>mo</td>
+              <td>14 min ago</td>
+              <td><span class="tag ok">Healthy</span></td>
+            </tr>
+            <tr>
+              <td>WorkspaceMobile</td>
+              <td>feature/mobile-title</td>
+              <td>lin</td>
+              <td>31 min ago</td>
+              <td><span class="tag warn">Review</span></td>
+            </tr>
+            <tr>
+              <td>DocsSite</td>
+              <td>content/runbook</td>
+              <td>yan</td>
+              <td>1 h ago</td>
+              <td><span class="tag ok">Healthy</span></td>
+            </tr>
+            <tr>
+              <td>AndroidShell</td>
+              <td>fix/safe-area</td>
+              <td>qi</td>
+              <td>yesterday</td>
+              <td><span class="tag warn">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="stack">
+        <h3>Release Checklist</h3>
+        <ul>
+          <li>Confirm phone header title is centered after mobile-specific styling.</li>
+          <li>Open at least one alias sample for `ets`, `mts`, and `json5`.</li>
+          <li>Verify unsupported legacy modes do not reserve fold-gutter width.</li>
+          <li>Capture one screenshot from a phone viewport and one from a tablet viewport.</li>
+          <li>Check that all sample files still stay within the target line range.</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

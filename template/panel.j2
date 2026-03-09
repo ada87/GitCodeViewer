@@ -1,0 +1,84 @@
+{% extends "layouts/admin.html" %}
+
+{% macro stat_card(label, value, hint, tone="neutral") -%}
+<div class="stat-card stat-card--{{ tone }}">
+  <span class="stat-card__label">{{ label }}</span>
+  <strong class="stat-card__value">{{ value }}</strong>
+  <small class="stat-card__hint">{{ hint }}</small>
+</div>
+{%- endmacro %}
+
+{% block title %}Workspace Overview{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Workspace Overview</h1>
+  <p>Use this page to review recent repositories, sync state, and the mobile title affordance rollout.</p>
+</section>
+
+<section class="stats-grid">
+  {{ stat_card("Tracked repos", workspaces|length, "Pinned and recent items mixed together", "accent") }}
+  {{ stat_card("Alias suffixes", alias_count, "ets, mts, json5 and related mappings", "neutral") }}
+  {{ stat_card("Legacy no-fold", legacy_without_fold, "Fold gutter hidden automatically", "warning") }}
+</section>
+
+<section class="panel">
+  <header class="panel__header">
+    <h2>Recent workspaces</h2>
+    <a href="{{ url_for('settings.workspaces') }}">Manage settings</a>
+  </header>
+  <table class="repo-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Owner</th>
+        <th>Branch</th>
+        <th>Last sync</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for repo in workspaces %}
+      <tr>
+        <td>
+          <a href="{{ url_for('workspaces.detail', workspace_id=repo.id) }}">{{ repo.name }}</a>
+          {% if repo.favorite %}
+          <span class="tag tag--accent">Pinned</span>
+          {% endif %}
+        </td>
+        <td>{{ repo.owner }}</td>
+        <td><code>{{ repo.branch }}</code></td>
+        <td>{{ repo.last_sync_label }}</td>
+        <td>
+          {% if repo.status == 'healthy' %}
+          <span class="tag tag--success">Healthy</span>
+          {% elif repo.status == 'review' %}
+          <span class="tag tag--warning">Review</span>
+          {% else %}
+          <span class="tag tag--muted">Pending</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">No workspaces found for the current filter.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="panel">
+  <header class="panel__header">
+    <h2>Release checklist</h2>
+  </header>
+  <ul class="checklist">
+    {% for item in release_checklist %}
+    <li class="checklist__item{% if item.done %} checklist__item--done{% endif %}">
+      <span>{{ item.label }}</span>
+      {% if item.note %}<small>{{ item.note }}</small>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

@@ -1,0 +1,112 @@
+### REST fixture
+@baseUrl = https://api.example.dev/v1
+
+### request 1
+GET {{baseUrl}}/items/1
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 2
+GET {{baseUrl}}/items/2
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 3
+GET {{baseUrl}}/items/3
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 4
+GET {{baseUrl}}/items/4
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 5
+GET {{baseUrl}}/items/5
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 6
+GET {{baseUrl}}/items/6
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 7
+GET {{baseUrl}}/items/7
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 8
+GET {{baseUrl}}/items/8
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 9
+GET {{baseUrl}}/items/9
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 10
+GET {{baseUrl}}/items/10
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 11
+GET {{baseUrl}}/items/11
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 12
+GET {{baseUrl}}/items/12
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 13
+GET {{baseUrl}}/items/13
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 14
+GET {{baseUrl}}/items/14
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 15
+GET {{baseUrl}}/items/15
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 16
+GET {{baseUrl}}/items/16
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 17
+GET {{baseUrl}}/items/17
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 18
+GET {{baseUrl}}/items/18
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 19
+GET {{baseUrl}}/items/19
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 20
+GET {{baseUrl}}/items/20
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 21
+GET {{baseUrl}}/items/21
+Accept: application/json
+Authorization: Bearer demo-token
+
+### request 22
+GET {{baseUrl}}/items/22
+Accept: application/json
+Authorization: Bearer demo-token

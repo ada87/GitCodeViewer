@@ -1,0 +1,82 @@
+[package]
+name = "gitcode-viewer-cli"
+version = "0.3.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/example/gitcode-viewer-cli"
+description = "CLI helpers for fixture generation and repository previews"
+readme = "README.md"
+keywords = ["git", "viewer", "fixtures", "offline"]
+categories = ["command-line-utilities", "development-tools"]
+
+[workspace]
+members = ["crates/viewer-core", "crates/viewer-fixtures", "crates/viewer-sync"]
+default-members = ["crates/viewer-core"]
+resolver = "2"
+
+[features]
+default = ["sqlite", "git", "telemetry"]
+sqlite = ["dep:rusqlite"]
+git = ["dep:gix"]
+telemetry = ["dep:tracing", "dep:tracing-subscriber"]
+bench = []
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive", "env"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+camino = "1.1"
+ignore = "0.4"
+tokio = { version = "1.43", features = ["macros", "rt-multi-thread", "fs"] }
+tracing = "0.1"
+walkdir = "2.5"
+time = "0.3"
+gix = { version = "0.69", optional = true }
+rusqlite = { version = "0.33", optional = true, features = ["bundled"] }
+tracing-subscriber = { version = "0.3", optional = true, features = ["fmt", "env-filter"] }
+
+[dev-dependencies]
+assert_fs = "1.1"
+insta = { version = "1.42", features = ["yaml"] }
+pretty_assertions = "1.4"
+tempfile = "3.15"
+
+[profile.release]
+lto = "thin"
+opt-level = 3
+codegen-units = 1
+strip = "symbols"
+panic = "abort"
+
+[profile.dev.package.insta]
+opt-level = 3
+
+[package.metadata.release]
+tag-name = "viewer-cli-v{{version}}"
+pre-release-commit-message = "release: viewer-cli {{version}}"
+sign-commit = false
+
+[package.metadata.samples]
+fixture_dir = "D:/xdnote/GitCodeViewer"
+workspace_dir = "D:/xdnote/code-reader"
+default_preview_language = "typescript"
+report_format = "markdown"
+
+[package.metadata.docs]
+site_title = "Viewer CLI"
+base_url = "https://example.com/viewer-cli"
+search = true
+
+[[bin]]
+name = "viewer-sync"
+path = "src/bin/viewer_sync.rs"
+
+[[bin]]
+name = "fixture-check"
+path = "src/bin/fixture_check.rs"
+
+[[bin]]
+name = "sample-report"
+path = "src/bin/sample_report.rs"
+

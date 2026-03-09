@@ -1,0 +1,81 @@
+---
+layout: layouts/docs.njk
+title: Fixture Realism Checklist
+section: quality
+---
+
+{% from "partials/tag.njk" import tag %}
+
+{% set completed = items | selectattr("done") | list | length %}
+
+<section class="hero">
+  <p class="eyebrow">Quality pass</p>
+  <h1>{{ title }}</h1>
+  <p>Keep sample files believable enough that manual UI review is based on realistic code and docs.</p>
+  <p>{{ completed }} of {{ items | length }} checklist items completed.</p>
+</section>
+
+<section class="content-grid">
+  <article>
+    <h2>Review focus</h2>
+    <ul class="bullet-list">
+      {% for focus in review_focus %}
+      <li>{{ focus }}</li>
+      {% endfor %}
+    </ul>
+
+    <h2>Checklist</h2>
+    <ol class="checklist">
+      {% for item in items %}
+      <li class="checklist__item">
+        {{ tag(item.done and "done" or "pending") }}
+        <strong>{{ item.label }}</strong>
+        {% if item.detail %}<p>{{ item.detail }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+
+    <h2>Useful commands</h2>
+    <pre><code>pnpm --dir web exec tsc --noEmit
+pnpm -s web:build
+rg -n "metric[0-9]{2}|entry_[0-9]{3}" D:/xdnote/GitCodeViewer</code></pre>
+
+    <h2>Editorial rule</h2>
+    <p>If a file reads like generated filler, rewrite it around a concrete artifact such as a config, guide, diagram, report, or build file.</p>
+  </article>
+
+  <aside>
+    <div class="panel">
+      <h3>Alias coverage</h3>
+      <ul>
+        {% for alias in aliases %}
+        <li><code>.{{ alias.ext }}</code> -> {{ alias.language }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h3>Current blockers</h3>
+      {% if blockers.length %}
+      <ul>
+        {% for blocker in blockers %}
+        <li>{{ blocker }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No active blockers.</p>
+      {% endif %}
+    </div>
+
+    <div class="panel">
+      <h3>Why this matters</h3>
+      <p>Reviewers make layout decisions from these samples, so unrealistic content leads to unrealistic UI judgments.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Notes</h3>
+      <p>Legacy modes without fold support should render full-width code blocks.</p>
+      <p>Phone title affordance should remain subtle and should not leak into tablet layouts.</p>
+    </div>
+  </aside>
+</section>

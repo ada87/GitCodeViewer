@@ -1,0 +1,99 @@
+flowchart LR
+  %% Workspace open pipeline for the mobile code viewer
+  subgraph Mobile[Mobile Shell]
+    Launch[Launch app]
+    Home[Workspace list]
+    Search[Search and sort]
+    TapWorkspace[Tap workspace title]
+    RepoScreen[Repository screen]
+    SettingsLink[Open workspace settings]
+  end
+
+  subgraph Repo[Repository Runtime]
+    LoadRepo[Load repo metadata]
+    RestoreTree[Restore cached file tree]
+    FetchStatus[Read git status]
+    SyncPolicy{Auto sync allowed}
+    QueuePull[Queue background pull]
+    SkipPull[Skip pull and keep local state]
+    RefreshTree[Refresh tree nodes]
+    RememberFile[Restore last opened file]
+  end
+
+  subgraph Viewer[Code Viewer Session]
+    ResolveExt[Resolve extension]
+    PickMode[Pick language package]
+    LegacyCheck{Legacy mode}
+    FoldingCheck{Has fold service}
+    HideFold[Hide fold gutter]
+    ShowFold[Show fold gutter]
+    LoadDoc[Load file content]
+    RenderDoc[Render highlighted document]
+    ShowToast[Show unsupported hint]
+  end
+
+  subgraph UX[Small Screen UX]
+    PhoneCheck{Phone width}
+    AccentTitle[Use softer accent title]
+    UnderlineHint[Show thin underline]
+    TabletTitle[Keep tablet title neutral]
+  end
+
+  subgraph Storage[Local Data]
+    RepoDb[(workspace db)]
+    FileCache[(blob cache)]
+    Prefs[(user prefs)]
+  end
+
+  Launch --> Home
+  Home --> Search
+  Home --> TapWorkspace
+  TapWorkspace --> LoadRepo
+  TapWorkspace --> PhoneCheck
+  TapWorkspace --> SettingsLink
+  SettingsLink --> Prefs
+
+  PhoneCheck -->|yes| AccentTitle
+  AccentTitle --> UnderlineHint
+  PhoneCheck -->|no| TabletTitle
+
+  LoadRepo --> RepoDb
+  LoadRepo --> RestoreTree
+  RestoreTree --> FileCache
+  LoadRepo --> FetchStatus
+  FetchStatus --> SyncPolicy
+  SyncPolicy -->|wifi and stale| QueuePull
+  SyncPolicy -->|manual or offline| SkipPull
+  QueuePull --> RefreshTree
+  SkipPull --> RefreshTree
+  RefreshTree --> RememberFile
+  RememberFile --> LoadDoc
+
+  LoadDoc --> ResolveExt
+  ResolveExt --> PickMode
+  PickMode --> LegacyCheck
+  LegacyCheck -->|yes| FoldingCheck
+  LegacyCheck -->|no| ShowFold
+  FoldingCheck -->|yes| ShowFold
+  FoldingCheck -->|no| HideFold
+  HideFold --> RenderDoc
+  ShowFold --> RenderDoc
+
+  PickMode -->|no mapping| ShowToast
+  ShowToast --> RenderDoc
+
+  RepoDb -.metadata.-> LoadRepo
+  FileCache -.content.-> LoadDoc
+  Prefs -.policy.-> SyncPolicy
+
+  classDef shell fill:#f7f1e8,stroke:#8a5a24,color:#3d2a14
+  classDef runtime fill:#e9f4ef,stroke:#2a7a5c,color:#173a2b
+  classDef viewer fill:#eef3fb,stroke:#456fa3,color:#19324d
+  classDef ux fill:#fff4db,stroke:#b8860b,color:#5a4400
+  classDef storage fill:#f1eefc,stroke:#6f5aa6,color:#33204d
+
+  class Launch,Home,Search,TapWorkspace,RepoScreen,SettingsLink shell
+  class LoadRepo,RestoreTree,FetchStatus,SyncPolicy,QueuePull,SkipPull,RefreshTree,RememberFile runtime
+  class ResolveExt,PickMode,LegacyCheck,FoldingCheck,HideFold,ShowFold,LoadDoc,RenderDoc,ShowToast viewer
+  class PhoneCheck,AccentTitle,UnderlineHint,TabletTitle ux
+  class RepoDb,FileCache,Prefs storage

@@ -1,0 +1,95 @@
+# Workspace Reader Rollout
+
+This page ships as `draft.mdx`, but it is intentionally written in plain Markdown.
+The current mobile viewer treats `.mdx` the same way it treats `.md`, so the safest authoring rule is to stay inside the Markdown subset unless an MDX-aware renderer is introduced later.
+
+## Why keep an MDX sample
+
+The repository already contains release notes, runbooks, and architecture notes in regular Markdown.
+A separate `.mdx` sample is still useful because many documentation sites store long-form content under that extension even when the page itself is mostly text, lists, tables, and fenced code blocks.
+
+In practice this lets the app answer a simple product question:
+can a user tap an `.mdx` file in a cloned repo and still read something coherent without falling back to raw source mode?
+
+## Authoring rule
+
+Treat the extension as an alias, not as a promise that embedded JSX will execute.
+That gives us a stable baseline today and leaves room for a richer renderer later.
+
+### Prefer content like this
+
+- headings and nested sections
+- paragraphs with normal prose
+- fenced code blocks with language labels
+- tables used for rollout tracking
+- blockquotes for notes and cautions
+- ordered and unordered lists
+
+### Avoid content like this for now
+
+- component imports at the top of the file
+- exported metadata objects
+- JSX callout blocks
+- inline expressions wrapped in braces
+- custom layout wrappers that depend on a site generator
+
+## Rollout checklist
+
+1. Open the file from the explorer on Android.
+2. Confirm it enters the Markdown viewer instead of the code viewer.
+3. Verify headings, links, tables, and code blocks render as expected.
+4. Confirm relative links still resolve when the document lives inside `docs/`.
+5. Check that dark and light themes both keep enough contrast.
+
+## What changed in the reader
+
+| Area | Previous behavior | Current behavior |
+| --- | --- | --- |
+| Extension detection | `.md` only in user expectations | `.mdx` is mapped to Markdown at open time |
+| Viewer route | uncertain for `.mdx` | sent to the Markdown viewer |
+| Demo coverage | no clear Markdown dev sample | dedicated `.mdx` sample button |
+| Fixture quality | mixed realism | sample reads like a project note |
+
+## Example snippet
+
+```ts
+const markdownAliases: Record<string, 'markdown'> = {
+  md: 'markdown',
+  mdx: 'markdown',
+  markdown: 'markdown',
+}
+
+export function detectDocumentType(ext: string) {
+  return markdownAliases[ext] ?? 'code'
+}
+```
+
+## Review notes
+
+> If the file contains only Markdown-safe syntax, the current implementation is already good enough for daily reading.
+> If the file depends on MDX runtime features, the app should continue to show the source text rather than pretending those components are supported.
+
+## QA prompts
+
+- Does the page title remain readable on a narrow device?
+- Does the table preserve borders and spacing in both themes?
+- Does the code block show its language label and copy button?
+- Does the scroll position restore after switching tabs?
+- Does opening an internal link still respect the configured link policy?
+
+## Follow-up ideas
+
+A future MDX-specific pass could add smarter handling for frontmatter and import lines.
+That would still not require executing React components inside the mobile viewer.
+A lighter first step would be to hide obvious MDX-only preamble lines when they appear before the first heading.
+
+For now, treating `.mdx` as Markdown keeps the behavior easy to reason about.
+It also matches the main goal of the app: reliable offline reading, not site-generation parity.
+
+## Acceptance
+
+- `.mdx` opens in the Markdown viewer.
+- The dev page exposes an `.mdx` sample.
+- The sample renders naturally as a document.
+- No extra parser or runtime dependency is required.
+- Existing `.md` behavior stays unchanged.

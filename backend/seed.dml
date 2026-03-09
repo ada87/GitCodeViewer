@@ -1,0 +1,85 @@
+BEGIN TRANSACTION;
+
+DELETE FROM sync_log WHERE workspace_id IN ('workspace-core', 'mobile-ui');
+DELETE FROM recent_files WHERE workspace_id IN ('workspace-core', 'mobile-ui');
+DELETE FROM workspace_settings WHERE workspace_id IN ('workspace-core', 'mobile-ui');
+DELETE FROM workspaces WHERE id IN ('workspace-core', 'mobile-ui');
+
+INSERT INTO workspaces (id, name, remote_url, default_branch, owner, created_at)
+VALUES
+  ('workspace-core', 'CodeReader', 'https://example.com/ada/code-reader.git', 'main', 'ada', '2026-03-01T08:10:00Z'),
+  ('mobile-ui', 'WorkspaceMobile', 'https://example.com/lin/workspace-mobile.git', 'feature/mobile-title', 'lin', '2026-03-03T09:20:00Z'),
+  ('syntax-lab', 'SyntaxFixtures', 'https://example.com/mo/syntax-fixtures.git', 'refresh/samples', 'mo', '2026-03-04T10:45:00Z');
+
+INSERT INTO workspace_settings (workspace_id, auto_sync, wifi_only, open_readme_on_launch, sort_order, accent_mode)
+VALUES
+  ('workspace-core', 1, 1, 1, 'recent', 'mobile-soft'),
+  ('mobile-ui', 0, 1, 0, 'name', 'mobile-soft'),
+  ('syntax-lab', 0, 0, 0, 'updated', 'neutral');
+
+INSERT INTO recent_files (workspace_id, path, language, opened_at)
+VALUES
+  ('workspace-core', 'src/utils/string.ts', 'typescript', '2026-03-09T09:02:00Z'),
+  ('workspace-core', 'web/codemirror/core.ts', 'typescript', '2026-03-09T09:06:00Z'),
+  ('workspace-core', 'docs/LanguageSupport.md', 'markdown', '2026-03-09T09:08:00Z'),
+  ('mobile-ui', 'src/screens/WorkspaceScreen.tsx', 'tsx', '2026-03-09T09:12:00Z'),
+  ('mobile-ui', 'src/components/HeaderTitle.tsx', 'tsx', '2026-03-09T09:13:00Z'),
+  ('syntax-lab', 'Sample_typescript_ets.ets', 'typescript', '2026-03-09T09:18:00Z'),
+  ('syntax-lab', 'Sample_json_json5.json5', 'json', '2026-03-09T09:19:00Z'),
+  ('syntax-lab', 'Sample_mermaid_mmd.mmd', 'mermaid', '2026-03-09T09:20:00Z');
+
+INSERT INTO sync_log (workspace_id, sync_type, status, started_at, finished_at, message)
+VALUES
+  ('workspace-core', 'pull', 'success', '2026-03-09T08:58:00Z', '2026-03-09T08:58:11Z', 'Fast-forwarded main by 2 commits'),
+  ('mobile-ui', 'status', 'warning', '2026-03-09T09:09:00Z', '2026-03-09T09:09:03Z', 'Uncommitted changes in header title styles'),
+  ('syntax-lab', 'scan', 'success', '2026-03-09T09:17:00Z', '2026-03-09T09:17:09Z', 'Extension coverage verified for 100 files');
+
+UPDATE workspace_settings
+SET open_readme_on_launch = 1,
+    sort_order = 'updated'
+WHERE workspace_id = 'workspace-core';
+
+UPDATE workspace_settings
+SET accent_mode = 'neutral'
+WHERE workspace_id = 'syntax-lab';
+
+INSERT INTO recent_files (workspace_id, path, language, opened_at)
+SELECT 'workspace-core', 'README.md', 'markdown', '2026-03-09T09:25:00Z'
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM recent_files
+  WHERE workspace_id = 'workspace-core'
+    AND path = 'README.md'
+);
+
+WITH ranked_files AS (
+  SELECT
+    workspace_id,
+    path,
+    opened_at,
+    ROW_NUMBER() OVER (PARTITION BY workspace_id ORDER BY opened_at DESC) AS rn
+  FROM recent_files
+)
+DELETE FROM recent_files
+WHERE (workspace_id, path, opened_at) IN (
+  SELECT workspace_id, path, opened_at
+  FROM ranked_files
+  WHERE rn > 6
+);
+
+INSERT INTO sync_log (workspace_id, sync_type, status, started_at, finished_at, message)
+VALUES
+  ('workspace-core', 'index', 'success', '2026-03-09T09:26:00Z', '2026-03-09T09:26:04Z', 'Rebuilt search index after sample refresh'),
+  ('syntax-lab', 'lint', 'success', '2026-03-09T09:27:00Z', '2026-03-09T09:27:05Z', 'No line-count violations in sample corpus');
+
+UPDATE workspaces
+SET default_branch = 'main'
+WHERE id = 'workspace-core'
+  AND default_branch <> 'main';
+
+DELETE FROM sync_log
+WHERE status = 'success'
+  AND sync_type = 'status'
+  AND finished_at < '2026-03-01T00:00:00Z';
+
+COMMIT;

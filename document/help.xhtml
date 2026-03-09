@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Workspace Help</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style type="text/css">
+    body { margin: 0; padding: 24px; font: 14px/1.6 Georgia, serif; background: #fcfcfb; color: #222; }
+    h1, h2 { color: #7c3f00; }
+    .note { padding: 10px 12px; background: #fff6e8; border: 1px solid #e7c796; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { border: 1px solid #d8d8d8; padding: 10px; vertical-align: top; }
+    th { background: #f5f5f5; text-align: left; }
+    code { font-family: Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <div class="note">
+    <strong>Note:</strong> This page is shipped as a strict XHTML sample for syntax and formatting checks.
+  </div>
+  <h1>Workspace Navigation Help</h1>
+  <p>
+    The mobile reader supports local browsing, syntax highlighting, and a small set of affordances that change with viewport size.
+    The title in the header is intentionally more interactive on phones than on tablets.
+  </p>
+  <h2>When to use the title link</h2>
+  <ul>
+    <li>Return to the workspace root without reopening the list page.</li>
+    <li>Jump from a nested file path back to the repository overview.</li>
+    <li>Expose a lightweight affordance on narrow screens where the navigation bar is compact.</li>
+  </ul>
+  <h2>Visual rules</h2>
+  <table summary="Viewport-specific title behavior">
+    <thead>
+      <tr>
+        <th>Viewport</th>
+        <th>Title treatment</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Phone</td>
+        <td>Use a softer accent and a thin underline.</td>
+        <td>The touch target needs a visible hint without overpowering the header.</td>
+      </tr>
+      <tr>
+        <td>Tablet</td>
+        <td>Keep the title neutral.</td>
+        <td>The layout already has enough room and the interaction is less ambiguous.</td>
+      </tr>
+      <tr>
+        <td>Desktop preview</td>
+        <td>Match the tablet treatment unless there is another navigation pattern.</td>
+        <td>Consistency matters more than emphasis on large viewports.</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Troubleshooting</h2>
+  <ol>
+    <li>If the title appears left-shifted on a phone, inspect the header flex container and any reserved gutter width.</li>
+    <li>If a file cannot fold, hide the fold gutter instead of leaving empty space.</li>
+    <li>If a new suffix renders as plain text, confirm the extension map and dev sample list were updated together.</li>
+    <li>If a sample looks fake, replace it with a build file, config, guide, or diagram before taking screenshots.</li>
+  </ol>
+  <h2>Common questions</h2>
+  <p><strong>Why not underline the title on tablet?</strong> The extra space already signals hierarchy, so an interaction hint is less necessary.</p>
+  <p><strong>Why hide the fold gutter?</strong> Empty reserved space is more distracting than a missing fold icon when the mode cannot support folding.</p>
+  <p><strong>Why maintain realistic sample files?</strong> Reviewers judge typography and density from sample content, so placeholder text gives misleading feedback.</p>
+  <h2>Quick gestures</h2>
+  <ul>
+    <li>Tap the header title to return to the workspace overview.</li>
+    <li>Long press a file to open context actions.</li>
+    <li>Swipe back from the left edge to close the current file.</li>
+  </ul>
+  <p>
+    Example language aliases include <code>.ets</code> for TypeScript-style rendering,
+    <code>.json5</code> for JSON-like settings files, and <code>.liquid</code> for template markup.
+  </p>
+</body>
+</html>

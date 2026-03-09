@@ -1,0 +1,80 @@
+<Project>
+  <UsingTask TaskName="ReadLinesFromFile" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" />
+
+  <PropertyGroup>
+    <FixtureRoot>$(MSBuildThisFileDirectory)..\Fixtures</FixtureRoot>
+    <GeneratedManifest>$(IntermediateOutputPath)fixture-manifest.txt</GeneratedManifest>
+    <FixtureLineFloor>80</FixtureLineFloor>
+    <FixtureLineCeiling>200</FixtureLineCeiling>
+  </PropertyGroup>
+
+  <Target Name="CollectFixtureFiles">
+    <ItemGroup>
+      <FixtureFiles Include="$(FixtureRoot)\**\*.*" />
+    </ItemGroup>
+    <Message Importance="high" Text="Collected @(FixtureFiles->Count()) fixture files from $(FixtureRoot)." />
+  </Target>
+
+  <Target Name="WriteFixtureManifest" DependsOnTargets="CollectFixtureFiles">
+    <WriteLinesToFile
+      File="$(GeneratedManifest)"
+      Lines="@(FixtureFiles->'%(Filename)%(Extension)')"
+      Overwrite="true" />
+    <Message Importance="low" Text="Fixture manifest written to $(GeneratedManifest)." />
+  </Target>
+
+  <Target Name="EnsureFixtureManifestExists" BeforeTargets="Build" DependsOnTargets="WriteFixtureManifest">
+    <Error Condition="!Exists('$(GeneratedManifest)')" Text="Fixture manifest was not created." />
+  </Target>
+
+  <Target Name="CopyFixtureManifest" AfterTargets="Build" DependsOnTargets="WriteFixtureManifest">
+    <Copy
+      SourceFiles="$(GeneratedManifest)"
+      DestinationFolder="$(OutDir)Fixtures"
+      SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="ReportFixtureBounds" DependsOnTargets="CollectFixtureFiles">
+    <Message Importance="low" Text="Expected fixture line range: $(FixtureLineFloor)-$(FixtureLineCeiling)." />
+  </Target>
+
+  <Target Name="WarnWhenFixtureRootMissing" BeforeTargets="CollectFixtureFiles">
+    <Warning Condition="!Exists('$(FixtureRoot)')" Text="Fixture root does not exist: $(FixtureRoot)" />
+  </Target>
+
+  <Target Name="ValidateFixtureManifestContent" DependsOnTargets="WriteFixtureManifest">
+    <ReadLinesFromFile File="$(GeneratedManifest)">
+      <Output TaskParameter="Lines" ItemName="ManifestLines" />
+    </ReadLinesFromFile>
+    <Message Importance="low" Text="Manifest contains @(ManifestLines->Count()) entries." />
+    <Error Condition="@(ManifestLines->Count()) == 0" Text="Fixture manifest is empty." />
+  </Target>
+
+  <Target Name="DeleteStalePublishFixtures" BeforeTargets="PackageFixtureArtifacts">
+    <ItemGroup>
+      <StaleFixtureFiles Include="$(PublishDir)Fixtures\*.*" Condition="Exists('$(PublishDir)Fixtures')" />
+    </ItemGroup>
+    <Delete Files="@(StaleFixtureFiles)" Condition="@(StaleFixtureFiles->Count()) &gt; 0" />
+  </Target>
+
+  <Target Name="PackageFixtureArtifacts" AfterTargets="Publish" DependsOnTargets="WriteFixtureManifest;ValidateFixtureManifestContent;DeleteStalePublishFixtures">
+    <ItemGroup>
+      <PackageFiles Include="$(GeneratedManifest)" />
+      <PackageFiles Include="$(FixtureRoot)\manifest.json" Condition="Exists('$(FixtureRoot)\manifest.json')" />
+      <PackageFiles Include="$(FixtureRoot)\README.md" Condition="Exists('$(FixtureRoot)\README.md')" />
+      <PackageFiles Include="$(FixtureRoot)\Schemas\workspace-export.xsd" Condition="Exists('$(FixtureRoot)\Schemas\workspace-export.xsd')" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(PackageFiles)"
+      DestinationFolder="$(PublishDir)Fixtures"
+      SkipUnchangedFiles="true" />
+    <Message Importance="high" Text="Packaged @(PackageFiles->Count()) fixture artifact(s) for publish output." />
+  </Target>
+
+  <!-- Summary emitted for local publish verification. -->
+
+  <Target Name="PrintFixtureSummary" AfterTargets="PackageFixtureArtifacts">
+    <Message Importance="high" Text="Fixture manifest: $(GeneratedManifest)" />
+    <Message Importance="high" Text="Publish fixture directory: $(PublishDir)Fixtures" />
+  </Target>
+</Project>

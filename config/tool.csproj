@@ -1,0 +1,88 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RootNamespace>GitCodeViewer.Tools</RootNamespace>
+    <AssemblyName>GitCodeViewer.Tools</AssemblyName>
+    <LangVersion>preview</LangVersion>
+    <Version>1.3.2</Version>
+    <Authors>xdnote</Authors>
+    <Company>xdnote</Company>
+    <RepositoryUrl>https://example.com/xdnote/gitcodeviewer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Deterministic>true</Deterministic>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>embedded</DebugType>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishSingleFile>false</PublishSingleFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TieredPGO>true</TieredPGO>
+    <ReadyToRun>false</ReadyToRun>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GitCodeViewer.Core\GitCodeViewer.Core.csproj" />
+    <ProjectReference Include="..\GitCodeViewer.Storage\GitCodeViewer.Storage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="appsettings.Development.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('appsettings.Development.json')" />
+    <Content Include="Fixtures\**\*.*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Schemas\workspace-export.xsd" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Templates\ReportHeader.txt" />
+    <EmbeddedResource Include="Templates\ReportFooter.txt" />
+    <EmbeddedResource Include="Templates\EmptyState.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="GitCodeViewer.Tools.Tests" />
+  </ItemGroup>
+
+  <Target Name="VerifyFixtureCount" BeforeTargets="Build">
+    <ItemGroup>
+      <FixtureFiles Include="Fixtures\**\*.*" />
+    </ItemGroup>
+    <Message Importance="high" Text="Found @(FixtureFiles->Count()) fixture files before build." />
+    <Error Condition="@(FixtureFiles->Count()) &lt; 50" Text="Fixture corpus is unexpectedly small." />
+  </Target>
+
+  <Target Name="WriteBuildStamp" BeforeTargets="CoreCompile">
+    <WriteLinesToFile
+      File="$(IntermediateOutputPath)build-stamp.txt"
+      Lines="Configuration=$(Configuration);Version=$(Version);Generated=$([System.DateTime]::UtcNow.ToString('O'))"
+      Overwrite="true" />
+  </Target>
+
+  <Target Name="CopySampleManifest" AfterTargets="Build">
+    <Copy
+      SourceFiles="$(ProjectDir)Fixtures\manifest.json"
+      DestinationFolder="$(OutDir)Fixtures"
+      SkipUnchangedFiles="true"
+      Condition="Exists('$(ProjectDir)Fixtures\manifest.json')" />
+  </Target>
+</Project>

@@ -1,0 +1,73 @@
+[
+  {
+    "path": "frontend/repo.ts",
+    "label": "Repo Index",
+    "group": "frontend"
+  },
+  {
+    "path": "frontend/tree.tsx",
+    "label": "File Tree",
+    "group": "frontend"
+  },
+  {
+    "path": "frontend/preview.js",
+    "label": "Code Preview",
+    "group": "frontend"
+  },
+  {
+    "path": "frontend/viewer.vue",
+    "label": "Viewer Shell",
+    "group": "frontend"
+  },
+  {
+    "path": "backend/repo.py",
+    "label": "Repo Service",
+    "group": "backend"
+  },
+  {
+    "path": "backend/sync.rs",
+    "label": "Sync Engine",
+    "group": "backend"
+  },
+  {
+    "path": "backend/api.java",
+    "label": "API Client",
+    "group": "backend"
+  },
+  {
+    "path": "mobile/repos.dart",
+    "label": "Repo List",
+    "group": "mobile"
+  },
+  {
+    "path": "mobile/reader.ets",
+    "label": "Reader Page",
+    "group": "mobile"
+  },
+  {
+    "path": "config/app.json",
+    "label": "App Config",
+    "group": "config"
+  },
+  {
+    "path": "config/build.yml",
+    "label": "Build Flow",
+    "group": "config"
+  },
+  {
+    "path": "config/cargo.toml",
+    "label": "Cargo Config",
+    "group": "config"
+  },
+  {
+    "path": "document/notes.md",
+    "label": "Release Notes",
+    "group": "document"
+  },
+  {
+    "path": "document/flow.mermaid",
+    "label": "App Flow",
+    "group": "document"
+  }
+]
+

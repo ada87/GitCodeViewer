@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://example.com/workspace-export"
+           xmlns="https://example.com/workspace-export"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+  <!-- Schema for exported workspace metadata and recent activity. -->
+  <xs:simpleType name="sync-status-type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="success" />
+      <xs:enumeration value="warning" />
+      <xs:enumeration value="error" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="workspace-type">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="owner" type="xs:string" />
+      <xs:element name="branch" type="xs:string" />
+      <xs:element name="remote-url" type="xs:anyURI" />
+      <xs:element name="last-sync-at" type="xs:dateTime" minOccurs="0" />
+      <xs:element name="settings" type="settings-type" />
+      <xs:element name="recent-files" type="recent-files-type" minOccurs="0" />
+      <xs:element name="sync-events" type="sync-events-type" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required" />
+    <xs:attribute name="favorite" type="xs:boolean" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="settings-type">
+    <xs:sequence>
+      <xs:element name="wifi-only" type="xs:boolean" />
+      <xs:element name="auto-sync" type="xs:boolean" />
+      <xs:element name="open-readme-on-launch" type="xs:boolean" />
+      <xs:element name="sort-order" type="xs:string" />
+      <xs:element name="title-affordance" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="recent-file-type">
+    <xs:sequence>
+      <xs:element name="path" type="xs:string" />
+      <xs:element name="language" type="xs:string" />
+      <xs:element name="opened-at" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="recent-files-type">
+    <xs:sequence>
+      <xs:element name="file" type="recent-file-type" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sync-event-type">
+    <xs:sequence>
+      <xs:element name="type" type="xs:string" />
+      <xs:element name="started-at" type="xs:dateTime" />
+      <xs:element name="finished-at" type="xs:dateTime" minOccurs="0" />
+      <xs:element name="message" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+    <xs:attribute name="status" type="sync-status-type" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="sync-events-type">
+    <xs:sequence>
+      <xs:element name="event" type="sync-event-type" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="workspace-export">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="generated-at" type="xs:dateTime" />
+        <xs:element name="workspace" type="workspace-type" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
