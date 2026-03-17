@@ -1,95 +1,190 @@
-# ADR-014: Keep Sample Files Human-Looking
+---
+title: Markdown All Features
+description: Comprehensive preview sample for headings, wiki semantics, media, math, mermaid, code fences, and reader affordances.
+tags: [markdown, preview, feature-test]
+---
 
-- Status: accepted
-- Date: 2026-03-09
-- Decision makers: mobile viewer maintainers
-- Related issue: fixture realism follow-up
+# Markdown All Features
 
-## Context
+This file is the broad regression sample for the new markdown reader.
+Use it to verify typography, hierarchy, block spacing, media layout, TOC behavior, copy affordances, and repo-aware links in one pass.
 
-The app renders local source files as part of the browsing experience.
-If the bundled samples look artificial, it becomes harder to judge typography, wrapping, fold gutter behavior, and scrolling density.
-This became obvious after the extension list expanded from a few dozen formats to roughly one hundred suffixes.
+## Quick Navigation
 
-Several files were technically valid but visually misleading:
+- [Jump to callouts](#callouts)
+- [Jump to media blocks](#media-blocks)
+- [Jump to code fence meta](#code-fence-meta)
+- [Jump to repeated heading](#repeated-heading)
 
-- markdown files were long lists of identical bullets
-- mermaid files were just chained numbered nodes
-- notebook files alternated the same markdown and code pattern
-- alias extensions reused the same content with only the filename changed
+Standard links:
 
-## Decision
+- [Repo README](../README.md)
+- [Basic markdown sample](./markdown-basic.md)
+- [Code showcase](./markdown-code.md)
+- [MDX sample](./draft.mdx)
 
-We will treat the sample corpus as UI fixture data, not as disposable placeholders.
-Each file should resemble an artifact a developer would plausibly commit.
+Wiki links:
 
-### Required properties
+- [[../README|Repo README via wiki]]
+- [[./markdown-basic|Basic sample via wiki]]
+- [[./markdown-code.md|Code sample via wiki]]
+- [[#media-blocks|Jump to media section]]
 
-1. The file must parse or at least look correct for its language family.
-2. The file must contain recognizable domain vocabulary.
-3. The file must include a realistic mix of short and long lines.
-4. The file must stay between 80 and 200 physical lines.
-5. Alias suffixes may share themes, but they should not be byte-for-byte clones.
+![[../README.md|Repo README document card]]
 
-### Preferred sources of structure
+## Reading Rhythm
 
-- package manifests
-- build scripts
-- project configuration
-- migration notes
-- documentation pages
-- diagrams and analysis notebooks
+Markdown preview should stay readable when a document keeps changing shape: paragraph, table, quote, task list, code, image, then back to prose.
 
-## Consequences
+Inline styles should stay calm: **bold**, *italic*, ~~strikethrough~~, and `inline code`.
 
-### Positive
+> This is a normal blockquote.
+> It should feel distinct from callouts and keep comfortable contrast.
 
-- Visual regression checks become more trustworthy.
-- Syntax highlighting is easier to judge at a glance.
-- Search, wrapping, and folding behaviors are exercised by real patterns.
-- Demo screenshots stop looking like internal test data.
+<details>
+<summary>Expandable HTML block</summary>
+This checks that lightweight inline HTML still renders after sanitization.
+</details>
 
-### Negative
+## Callouts
 
-- Fixture maintenance now takes longer.
-- Adding a new extension means creating a believable sample, not just a stub.
-- Reviewers need to notice when a sample quietly regresses into filler.
+> [!note] Note Callout
+> Good reader chrome should make semantic emphasis obvious without breaking the flow.
 
-## Implementation Notes
+> [!tip] Tip Callout
+> Keep block-level structure stable so future AI overlays can target semantic blocks instead of transient DOM positions.
 
-Use short rewrite passes instead of giant scripted generation.
-On this machine, small targeted writes are more reliable than one oversized command.
-For content-heavy formats, it is acceptable to favor readability over strict executable completeness as long as the file still looks authentic.
+> [!warning] Warning Callout
+> Test callout spacing in both light and dark themes.
 
-## Rejected Alternatives
+> [!danger] Danger Callout
+> Dense documents become hard to trust if strong warning content is visually flattened.
 
-### Keep auto-generated fixtures and hide them in screenshots
+## Task Lists
 
-Rejected because the problem is not only screenshots.
-Developers use the sample corpus during manual checks, and synthetic content biases those checks.
+- [x] Task list items render with disabled checkboxes
+- [x] Nested tasks keep alignment
+- [ ] Future AI actions are intentionally not wired yet
+  - [x] Extension points stay reserved
+  - [ ] No overlay UI in this build
 
-### Use external open-source files verbatim
+## Tables And Footnotes
 
-Rejected because the set would be harder to curate, license provenance would need review, and many upstream files are either too short or too long.
+| Surface | What to inspect | Expected outcome |
+| --- | --- | --- |
+| Headings | hierarchy and anchor affordance | clear resets and stable anchor copy affordance |
+| TOC | active state and max depth | quick navigation without visual noise |
+| Media | caption and alignment parsing | clean float/wide behavior |
+| Code | toolbar, wrap, copy, collapse | practical reader controls |
+| Footnotes | reference and back-link styling | readable long-form annotation flow |
 
-### Minify the files to reduce maintenance cost
+Reader polish should favor stable semantics over DOM tricks.[^semantics]
+Lightbox and media captions should feel like preview affordances, not blog chrome.[^media]
 
-Rejected because dense or minified examples are poor fixtures for a reading-oriented UI.
+## Math
 
-## Rollout Plan
+Inline math should work inside prose: $E = mc^2$, $a^2 + b^2 = c^2$, and $\int_0^1 x^2 dx = \frac{1}{3}$.
 
-1. Rewrite the most obviously fake formats first.
-2. Re-run extension coverage checks after each batch.
-3. Keep a simple scan for repeated placeholder patterns.
-4. Fix line-count violations before touching the next group.
+$$
+latency\_budget = dns + tls + api + render
+$$
 
-## Validation
+$$
+\text{readerScore} = 0.35 \cdot \text{hierarchy} + 0.30 \cdot \text{spacing} + 0.20 \cdot \text{contrast} + 0.15 \cdot \text{affordance}
+$$
 
-A sample passes review when a teammate can open it cold and infer what kind of repository it belongs to.
-If the only visible purpose is "this file was generated to hit 80 lines", it fails.
+## Media Blocks
 
-## Future Work
+![Feature graphic](../other/feature-graphic.png "Feature graphic caption | align=wide")
 
-- Add lightweight linting for a few structured formats.
-- Keep a short note in dev docs explaining how sample files are maintained.
-- Consider rotating a subset of samples when new language packages are added.
+This paragraph should sit below a wide image block and recover into the standard reading width afterward.
+
+![Animated gears](../other/github_dark_gears.gif "Animated local asset | align=left")
+
+This paragraph should flow beside a left-aligned local media block on wider layouts.
+
+[![Linked preview](../other/feature-graphic.png "Linked image card | align=right")](../README.md)
+
+This paragraph checks that a linked standalone image is upgraded into a media figure and still opens its link when tapped.
+
+![Remote markdown logo](https://raw.githubusercontent.com/github/explore/main/topics/markdown/markdown.png "Remote image via cache resolver | align=center")
+
+![[../other/feature-graphic.png|Embedded wiki image | align=wide]]
+
+## Code Fence Meta
+
+The next fences check explicit languages, file metadata, line highlighting, wrapping, collapsing, and plain-fence auto detection.
+
+```ts title="src/reader/render.ts" {2,4-6} wrap collapse
+export function buildReaderTitle(name: string) {
+  const normalized = name.trim();
+  if (!normalized) return "Untitled";
+  const suffix = normalized.length > 24 ? "preview" : "doc";
+  return `${normalized} · ${suffix}`;
+}
+```
+
+```json filename="config/markdown.json"
+{
+  "tocPosition": "float",
+  "tocMaxLevel": 3,
+  "codeLineNumbers": true,
+  "readerWidth": "comfortable"
+}
+```
+
+```sql file="sql/fetch_recent_docs.sql" {1,3}
+SELECT id, title, updated_at
+FROM documents
+WHERE is_archived = 0
+ORDER BY updated_at DESC;
+```
+
+```
+export async function openDocument(docId) {
+  const response = await fetch(`/documents/${docId}`);
+  if (!response.ok) throw new Error("load failed");
+  return response.json();
+}
+```
+
+```mermaid title="Markdown reader flow" collapse
+flowchart LR
+  A[Markdown Source] --> B[Frontmatter + Extensions]
+  B --> C[Semantic Blocks]
+  C --> D[Preview HTML]
+  C --> E[Future AI Overlay Slot]
+```
+
+## Repeated Heading
+
+This section exists to verify anchor generation on repeated slugs.
+
+### Repeated Heading
+
+The first repeated heading should get the base slug.
+
+### Repeated Heading
+
+The second repeated heading should get a deduplicated slug.
+
+## Embeds And Attachments
+
+![[../other/sample-3.pdf|Sample PDF attachment]]
+
+![[../README.md#features|README anchor card]]
+
+## Horizontal Rule
+
+---
+
+## Final Checklist
+
+1. Toggle theme and confirm code, callouts, and tables remain readable.
+2. Toggle line numbers and confirm highlighted rows stay visually distinct.
+3. Click a heading anchor and verify the copied hash looks correct.
+4. Open the wiki links and standard links to verify relative path resolution.
+5. Tap images to confirm the lightbox opens with the parsed caption.
+
+[^semantics]: Stable block structure matters because later translation or extraction features should attach to semantic blocks, not pixel coordinates.
+[^media]: Markdown readers usually contain mixed asset types, so local and remote image handling needs to feel consistent.
