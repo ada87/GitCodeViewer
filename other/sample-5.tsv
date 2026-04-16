@@ -1,0 +1,4 @@
+Name	Region	Score	Notes
+Ada	Shanghai	98	Tab-separated preview sample
+Linus	Shenzhen	87	Contains unicode: 你好
+Grace	Hangzhou	91	Last column should stay visible
