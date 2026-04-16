@@ -65,7 +65,7 @@
     "group": "document"
   },
   {
-    "path": "document/flow.mermaid",
+    "path": "diagram/flow.mermaid",
     "label": "App Flow",
     "group": "document"
   }

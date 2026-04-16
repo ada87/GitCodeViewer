@@ -170,7 +170,7 @@ The second repeated heading should get a deduplicated slug.
 
 ## Embeds And Attachments
 
-![[../other/sample-3.pdf|Sample PDF attachment]]
+![[../office/sample-3.pdf|Sample PDF attachment]]
 
 ![[../README.md#features|README anchor card]]
 

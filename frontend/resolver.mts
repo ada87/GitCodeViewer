@@ -20,13 +20,15 @@ const EXTENSION_ALIASES: Record<string, string> = {
 }
 
 const GROUP_LABELS = new Map<string, string>([
-  ['backend', 'Backend'],
-  ['config', 'Config'],
-  ['doc', 'Docs'],
-  ['frontend', 'Frontend'],
-  ['mobile', 'Mobile'],
-  ['system', 'System'],
-  ['template', 'Template'],
+  ['code', 'Code'],
+  ['document', 'Document'],
+])
+
+const CODE_GROUPS = new Set(['backend', 'config', 'frontend', 'mobile', 'system', 'template'])
+const DOCUMENT_GROUPS = new Set(['office', 'document', 'diagram'])
+const GROUP_ORDER = new Map<string, number>([
+  ['code', 0],
+  ['document', 1],
 ])
 
 export interface PreviewEntry {
@@ -44,6 +46,12 @@ export interface SidebarGroup {
 
 function splitPath(filePath: string): { group: string; fileName: string } {
   const [group = 'misc', fileName = filePath] = filePath.split('/')
+  if (CODE_GROUPS.has(group)) {
+    return { group: 'code', fileName }
+  }
+  if (DOCUMENT_GROUPS.has(group)) {
+    return { group: 'document', fileName }
+  }
   return { group, fileName }
 }
 
@@ -109,7 +117,14 @@ export function buildSidebar(entries: PreviewEntry[]): SidebarGroup[] {
     groups.set(group, bucket)
   }
 
-  return [...groups.values()]
+  return [...groups.values()].sort((left, right) => {
+    const leftOrder = GROUP_ORDER.get(left.key) ?? Number.MAX_SAFE_INTEGER
+    const rightOrder = GROUP_ORDER.get(right.key) ?? Number.MAX_SAFE_INTEGER
+    if (leftOrder !== rightOrder) {
+      return leftOrder - rightOrder
+    }
+    return left.label.localeCompare(right.label)
+  })
 }
 
 export function resolveDemoUrl(baseUrl: string | URL, filePath: string): string {

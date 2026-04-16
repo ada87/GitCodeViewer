@@ -31,7 +31,7 @@ When you open it, check spacing, typography, tables, math, code blocks, and smal
 
 - [Longer renderer notes](./guide.markdown)
 - [MDX treated as Markdown](./draft.mdx)
-- [Mermaid source sample](./flow.mermaid)
+- [Mermaid source sample](../diagram/flow.mermaid)
 
 ## Feature matrix
 
