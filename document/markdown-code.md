@@ -112,3 +112,40 @@ pub fn format_bytes(bytes: u64) -> String {
 
 Markdown is often where users first judge the product.
 If code fences look cramped, misaligned, or low-contrast, the viewer feels unfinished even when the parser is technically correct.
+
+---
+
+## Mermaid Demo 1: Flowchart (with subgraph)
+
+```mermaid
+flowchart LR
+    A[打开仓库] --> B{文件类型}
+    B -->|Markdown| C[Markdown 预览]
+    B -->|代码| D[CodeMirror 查看器]
+    B -->|.mmd| E[Mermaid 预览]
+
+    subgraph 渲染层
+        C --> F[WebView 注入主题变量]
+        D --> F
+        E --> F
+    end
+
+    F --> G[跟随 App 预设配色]
+```
+
+## Mermaid Demo 2: Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant App as RN 应用
+    participant WV as WebView
+    participant M as Mermaid
+
+    U->>App: 切换主题预设 (emerald)
+    App->>WV: postMessage: setTheme(payload)
+    WV->>WV: 注入 --app-* CSS 变量
+    WV->>M: initialize(base + themeVariables)
+    M-->>WV: 重绘 SVG (绿系节点)
+    WV-->>U: 图表与 App 同色系
+```
