@@ -1,451 +1,120 @@
 <!DOCTYPE html>
-<html lang="hi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitCode Viewer - मोबाइल पर डेस्कटॉप-स्तरीय Git</title>
-  <meta name="description" content="मोबाइल पर डेस्कटॉप-स्तरीय गिट: क्लोन, पुल, ब्रांच, लॉग और डिफ़। प्रमुख Git प्रदाताओं के साथ काम करता है, SSH का समर्थन करता है, और निजी रिपॉजिटरी का समर्थन करता है।">
-  <meta name="keywords" content="git, mobile git client, clone, pull, branch, log, diff, github, gitlab, bitbucket, azure devops, gitea, ssh, private repos">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="author" content="XiangDa">
-  <meta name="theme-color" content="#0b0d12">
-  <link rel="canonical" href="https://gitcodeviewer.xdnote.com/hi/">
-  <link rel="alternate" hreflang="x-default" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="en" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/">
-  <link rel="alternate" hreflang="es" href="https://gitcodeviewer.xdnote.com/es/">
-  <link rel="alternate" hreflang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/">
-  <link rel="alternate" hreflang="hi" href="https://gitcodeviewer.xdnote.com/hi/">
-  <link rel="alternate" hreflang="ja" href="https://gitcodeviewer.xdnote.com/ja/">
-  <link rel="alternate" hreflang="de" href="https://gitcodeviewer.xdnote.com/de/">
-  <link rel="alternate" hreflang="fr" href="https://gitcodeviewer.xdnote.com/fr/">
-  <link rel="alternate" hreflang="ko" href="https://gitcodeviewer.xdnote.com/ko/">
-  <link rel="alternate" hreflang="id" href="https://gitcodeviewer.xdnote.com/id/">
-  <link rel="alternate" hreflang="tr" href="https://gitcodeviewer.xdnote.com/tr/">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="GitCode Viewer">
-  <meta property="og:title" content="GitCode Viewer - मोबाइल पर डेस्कटॉप-स्तरीय Git">
-  <meta property="og:description" content="मोबाइल पर डेस्कटॉप-स्तरीय गिट: क्लोन, पुल, ब्रांच, लॉग और डिफ़। प्रमुख Git प्रदाताओं के साथ काम करता है, SSH और निजी रिपॉजिटरी का समर्थन करता है।">
-  <meta property="og:url" content="https://gitcodeviewer.xdnote.com/hi/">
-  <meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-  <meta property="og:image:alt" content="GitCode Viewer mobile screenshot with code reading interface">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GitCode Viewer - मोबाइल पर डेस्कटॉप-स्तरीय Git">
-  <meta name="twitter:description" content="SSH और निजी रिपॉजिटरी सपोर्ट के साथ मोबाइल पर क्लोन, पुल, ब्रांच, लॉग और डिफ़ करें।">
-  <meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <div class="pointer-events-none fixed inset-0 bg-gradient"></div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-label">मोबाइल ऐप</p>
-      <h1>Code Viewer</h1>
-      <p class="hero-subtitle">आपका आईडीई (IDE) रीडिंग मोड - आपकी जेब में है।</p>
-      <p class="hero-description">
-        ट्रेन में पढ़ना कमिट करता है? फ़्लाइट में सोर्स कोड का अध्ययन कर रहे हैं? GitHub से क्लोन करें,
-        GitLab, या Bitbucket - फिर वाक्यविन्यास हाइलाइटिंग, मार्कडाउन रेंडरिंग और
-        पूर्ण Git इतिहास, पूरी तरह से ऑफ़लाइन। आपको डेस्कटॉप-स्तरीय गिट एक्शन भी तब मिलते हैं जब
-        आवश्यक: क्लोन, पुल, ब्रांच, लॉग और डिफ।
-      </p>
-
-      <div class="cta-container">
-        <div class="cta-buttons">
-          <!-- Google Play -->
-          <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-            </svg>
-            Google Play से इसे इंस्टॉल करें.
-          </a>
-          <!-- App Store -->
-          <span class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-            </svg>
-            App Store
-            <span class="badge">Soon</span>
-          </span>
-        </div>
-        <div class="cta-meta">
-          <span>इस्तेमाल के लिए मुफ़्त</span>
-          <span class="divider"></span>
-          <a href="/privacy/">गोपनियता नीति</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Section -->
-  <section class="screenshots">
-    <div class="container">
-      <h2 class="section-title">इसे कार्रवाई में देखें</h2>
-      <p class="section-subtitle">एक्सप्लोर करने के लिए स्वाइप करें</p>
-      <div class="gallery">
-        <!-- Device Tabs -->
-        <div class="gallery-tabs">
-          <button class="gallery-tab active" onclick="switchDevice('phone')">फ़ोन</button>
-          <button class="gallery-tab" onclick="switchDevice('tablet')">टैबलेट</button>
-        </div>
-
-        <!-- Phone Gallery -->
-        <div class="gallery-wrapper" id="phone-wrapper">
-          <button class="gallery-btn prev" onclick="scrollGallery('phone-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="phone-gallery">
-            <div class="gallery-slide">
-              <img src="/images/phone-01-codeviewer.jpg" alt="Fullscreen code reading with syntax highlighting on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-02-features.jpg" alt="Markdown, diagram, and notebook documentation reading on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-03-repos.jpg" alt="Repository browser for personal, private, and public projects" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-04-github.jpg" alt="GitHub search and trending repository discovery on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-05-git.jpg" alt="Desktop-class Git actions on mobile including branch, log, and diff" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-06-themes.jpg" alt="Theme customization options for mobile code reading" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('phone-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-
-        <!-- Tablet Gallery -->
-        <div class="gallery-wrapper" id="tablet-wrapper" style="display:none">
-          <button class="gallery-btn prev" onclick="scrollGallery('tablet-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="tablet-gallery">
-            <div class="gallery-slide">
-              <img src="/images/tablet10-01-codeviewer.jpg" alt="Tablet code reading layout with syntax highlighting" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-02-features.jpg" alt="Tablet documentation reading with markdown and diagrams" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-04-github.jpg" alt="Tablet repository discovery with GitHub trending and search" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-05-git.jpg" alt="Tablet Git workflow for pull, branch, log, and diff review" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('tablet-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-    <div class="features-container">
-      <div class="features-header">
-        <h2 class="section-title">डेस्कटॉप-स्तरीय गिट, मोबाइल के लिए बनाया गया</h2>
-        <p>अपनी उम्मीद की गति और स्पष्टता के साथ क्लोन करें, पुल करें, ब्रांच करें, लॉग करें और डिफ़ करें।</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">मोबाइल पर डेस्कटॉप-स्तरीय गिट</h3>
-          <p class="feature-description">फ़ोन और टैबलेट पर एक पूर्ण Git वर्कफ़्लो का उपयोग करें: क्लोन, पुल, ब्रांच, लॉग और डिफ़।</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">सभी प्रमुख Git providers</h3>
-          <p class="feature-description">एक ऐप से GitHub, GitLab, Bitbucket, Azure DevOps और Gitea से कनेक्ट करें।</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">SSH + प्राइवेट रिपॉजिटरीज़</h3>
-          <p class="feature-description">SSH कनेक्शन का उपयोग करें और वास्तविक प्रोजेक्ट कार्य के लिए निजी रिपॉजिटरी को सुरक्षित रूप से एक्सेस करें।</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">कम घर्षण वाले डॉक्स पढ़ें</h3>
-          <p class="feature-description">स्पष्ट, फ़ोकस वाले रीडिंग फ़्लो में README फ़ाइलें, विज़ुअल डायग्राम और नोटबुक कंटेंट खोलें।</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">कभी भी महत्वपूर्ण अपडेट न चूकें</h3>
-          <p class="feature-description">नए ऐप अपडेट उपलब्ध होने पर समय पर रिमाइंडर पाएँ।</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">भरोसे के साथ स्टोरेज मैनेज करें</h3>
-          <p class="feature-description">देखें कि भंडारण एक समस्या बनने से पहले क्या जगह लेता है और रिपॉजिटरी को साफ करता है।</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">आत्मविश्वास के साथ बदलावों का पालन करें</h3>
-          <p class="feature-description">शाखाओं को स्विच करें, कमिट लॉग का निरीक्षण करें, और अपने मोबाइल वर्कस्पेस को छोड़े बिना अलग - अलग समीक्षा करें।</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">निजता सबसे पहले, हमेशा</h3>
-          <p class="feature-description">कोई एनालिटिक्स और कोई ट्रैकिंग नहीं। ट्रैफ़िक सीधे आपके डिवाइस और आपके Git प्रोवाइडर के बीच जाता है।</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>मोबाइल पर कोड पढ़ना शुरू करें</h2>
-      <p>इस्तेमाल करने के लिए मुफ़्त, अकाउंट की ज़रूरत नहीं है और फ़ोन और टैबलेट दोनों के लिए ऑप्टिमाइज़ किया गया है।</p>
-      <div class="cta-buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-          </svg>
-          Google Play से इसे इंस्टॉल करें.
-        </a>
-        <span class="btn btn-secondary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-          </svg>
-          App Store
-          <span class="badge">Soon</span>
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <article class="about">
-    <div class="about-content">
-      <h2>GitCode व्यूअर के बारे में</h2>
-
-      <p>
-        GitCode Viewer एक mobile Git client है जो <strong>गंभीर code reading</strong> के लिए बनाया गया है
-        और असली Git ऑपरेशंस। यह मोबाइल पर डेस्कटॉप-स्तरीय वर्कफ़्लो लाता है: क्लोन, पुल,
-        एक केंद्रित ऐप में शाखा, लॉग और डिफ।
-      </p>
-
-      <h3>मोबाइल पर डेस्कटॉप-स्तरीय गिट</h3>
-      <p>
-        रोज़मर्रा के काम के लिए बनाया गया है, न कि सिर्फ़ झटपट पूर्वावलोकन के लिए। रिपॉजिटरी, इतिहास के माध्यम से आगे बढ़ें,
-        और एक ऐसे प्रवाह के साथ बदलता है जो डेस्कटॉप गिट क्लाइंट के करीब लगता है।
-      </p>
-
-      <h3>सभी प्रमुख Git providers</h3>
-      <p>
-        GitHub, GitLab, Bitbucket, Azure DevOps पर अपने प्रोजेक्ट्स में एक ही ऐप का उपयोग करें,
-        और गीता.
-      </p>
-
-      <h3>SSH और प्राइवेट रिपॉजिटरी सपोर्ट</h3>
-      <p>
-        SSH से जुड़ें और निजी रिपॉजिटरी के साथ सुरक्षित रूप से काम करें। आपके क्रेडेंशियल पर बने रहेंगे
-        आपका डिवाइस और आपका ट्रैफ़िक सीधे आपके Git प्रोवाइडर के पास जाता है।
-      </p>
-
-      <h3>वास्तविक समीक्षा कार्य के लिए बनाया गया</h3>
-      <p>
-        शाखा से शाखा में परिवर्तनों की समीक्षा करें, कमिट लॉग का निरीक्षण करें, और जल्दी से डिफ़्स खोलें
-        अपने पढ़ने के प्रवाह को तोड़ने के बिना।
-      </p>
-
-      <h3>डिस्कवरी + पर्सनल रिपो</h3>
-      <p>
-        लोकप्रिय ओपन - सोर्स प्रोजेक्ट्स को एक्सप्लोर करें, जल्दी से खोजें, और सीधे अपने आप में कूदें
-        एक ही ऐप से रिपॉजिटरी।
-      </p>
-
-      <h3>निजता और सुरक्षा</h3>
-      <p>
-        GitCode व्यूअर शून्य उपयोगकर्ता डेटा एकत्र करता है। कोई एनालिटिक्स नहीं, कोई ट्रैकिंग नहीं, कोई टेलीमेट्री नहीं।
-        आपका कोड और क्रेडेंशियल आपके डिवाइस को कभी नहीं छोड़ते। पूरा पढ़ें
-        <a href="/privacy/">गोपनीयता नीति</a>.
-      </p>
-    </div>
-  </article>
-
-  <footer class="i18n-footer">
-    <div class="i18n-inner">
-      <div class="i18n-heading">
-        <p class="i18n-title">भाषाएँ</p>
-        <a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-          </svg>
-          <span>GitHub</span>
-        </a>
-      </div>
-      <nav class="i18n-links" aria-label="भाषा चयन">
-        <a class="i18n-link" data-locale="en" href="/">English</a>
-        <a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a>
-        <a class="i18n-link" data-locale="es" href="/es/">Español</a>
-        <a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a>
-        <a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a>
-        <a class="i18n-link" data-locale="ja" href="/ja/">日本語</a>
-        <a class="i18n-link" data-locale="de" href="/de/">Deutsch</a>
-        <a class="i18n-link" data-locale="fr" href="/fr/">Français</a>
-        <a class="i18n-link" data-locale="ko" href="/ko/">한국어</a>
-        <a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a>
-        <a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- JSON-LD for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "GitCode Viewer",
-        "alternateName": "Code Viewer",
-        "applicationCategory": "DeveloperApplication",
-        "applicationSubCategory": "Git Client",
-        "operatingSystem": "Android",
-        "description": "मोबाइल पर डेस्कटॉप-स्तरीय Git: clone, pull, branch, log और diff। प्रमुख Git providers, SSH कनेक्शन और private repositories का समर्थन।",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "image": "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-        "screenshot": [
-          "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-          "https://gitcodeviewer.xdnote.com/images/phone-05-git.jpg",
-          "https://gitcodeviewer.xdnote.com/images/tablet10-05-git.jpg"
-        ],
-        "featureList": [
-          "मोबाइल पर डेस्कटॉप-स्तरीय Git actions: clone, pull, branch, log, diff",
-          "GitHub, GitLab, Bitbucket, Azure DevOps और Gitea का समर्थन",
-          "SSH कनेक्शन और private repositories का समर्थन",
-          "syntax highlighting के साथ offline code reading",
-          "repository discovery और search"
-        ],
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "XiangDa",
-          "email": "ada87@163.com"
-        }
+<html lang="hi"><head><meta charSet="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="preload" as="image" href="/app-icon.png"/><title>GitCode Viewer - मोबाइल पर Git और कोड रीडिंग</title><meta name="description" content="Git रिपॉज़िटरी क्लोन करें और ऑफ़लाइन पढ़ें। 30+ भाषाओं की सिंटैक्स हाइलाइटिंग, PDF, Office व Jupyter प्रीव्यू, Git Blame और हिस्ट्री के साथ।"/><meta name="keywords" content="git,मोबाइल git क्लाइंट,कोड रीडर,ऑफ़लाइन,clone,pull,branch,log,diff,git blame,github,gitlab,ssh,प्राइवेट रिपॉज़िटरी,markdown,pdf,jupyter"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/><meta name="author" content="XiangDa"/><meta name="theme-color" content="#0b0d12"/><link rel="canonical" href="https://gitcodeviewer.xdnote.com/hi/"/><link rel="alternate" hrefLang="x-default" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="en" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/"/><link rel="alternate" hrefLang="es" href="https://gitcodeviewer.xdnote.com/es/"/><link rel="alternate" hrefLang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/"/><link rel="alternate" hrefLang="hi" href="https://gitcodeviewer.xdnote.com/hi/"/><link rel="alternate" hrefLang="ja" href="https://gitcodeviewer.xdnote.com/ja/"/><link rel="alternate" hrefLang="de" href="https://gitcodeviewer.xdnote.com/de/"/><link rel="alternate" hrefLang="fr" href="https://gitcodeviewer.xdnote.com/fr/"/><link rel="alternate" hrefLang="ko" href="https://gitcodeviewer.xdnote.com/ko/"/><link rel="alternate" hrefLang="id" href="https://gitcodeviewer.xdnote.com/id/"/><link rel="alternate" hrefLang="tr" href="https://gitcodeviewer.xdnote.com/tr/"/><link rel="icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/app-icon.png"/><meta name="apple-itunes-app" content="app-id=6800189725"/><meta property="og:type" content="website"/><meta property="og:site_name" content="GitCode Viewer"/><meta property="og:title" content="GitCode Viewer - मोबाइल पर Git और कोड रीडिंग"/><meta property="og:description" content="Git रिपॉज़िटरी क्लोन करें और ऑफ़लाइन पढ़ें। 30+ भाषाओं की सिंटैक्स हाइलाइटिंग, PDF, Office व Jupyter प्रीव्यू, Git Blame और हिस्ट्री के साथ।"/><meta property="og:url" content="https://gitcodeviewer.xdnote.com/hi/"/><meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="2600"/><meta property="og:image:alt" content="फ़ोन पर कोड दिखाता GitCode Viewer"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="GitCode Viewer - मोबाइल पर Git और कोड रीडिंग"/><meta name="twitter:description" content="Git रिपॉज़िटरी क्लोन करें और ऑफ़लाइन पढ़ें। 30+ भाषाओं की सिंटैक्स हाइलाइटिंग, PDF, Office व Jupyter प्रीव्यू, Git Blame और हिस्ट्री के साथ।"/><meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><link rel="stylesheet" href="/style.css"/></head><body><div class="pointer-events-none fixed inset-0 bg-gradient"></div><header class="site-header"><nav class="site-nav" aria-label="Main"><a class="site-logo" href="/hi/"><img src="/app-icon.png" alt="" width="32" height="32"/><span>GitCode Viewer</span></a><div class="site-nav-right"><details class="lang-switch"><summary aria-label="Language"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.93 9h-3.02a15.7 15.7 0 0 0-1.2-5.02A8.02 8.02 0 0 1 19.93 11ZM12 4.07c.5.62 1.13 1.8 1.5 3.23.1.38.18.78.24 1.2h-3.48c.06-.42.14-.82.24-1.2.37-1.43 1-2.61 1.5-3.23ZM8.29 5.98A15.7 15.7 0 0 0 7.09 11H4.07a8.02 8.02 0 0 1 4.22-5.02ZM4.07 13h3.02c.17 2.04.6 3.8 1.2 5.02A8.02 8.02 0 0 1 4.07 13ZM12 19.93c-.5-.62-1.13-1.8-1.5-3.23-.1-.38-.18-.78-.24-1.2h3.48c-.06.42-.14.82-.24 1.2-.37 1.43-1 2.61-1.5 3.23Zm1.44-4.43h-2.88a13.9 13.9 0 0 1 0-5h2.88a13.9 13.9 0 0 1 0 5Zm2.27 2.52c.6-1.22 1.03-2.98 1.2-5.02h3.02a8.02 8.02 0 0 1-4.22 5.02Z"></path></svg><span>हिन्दी</span></summary><ul class="lang-menu"><li><a class="lang-option" href="/">English</a></li><li><a class="lang-option" href="/zh-cn/">简体中文</a></li><li><a class="lang-option" href="/es/">Español</a></li><li><a class="lang-option" href="/pt-br/">Português (Brasil)</a></li><li><span class="lang-option active" aria-current="page">हिन्दी</span></li><li><a class="lang-option" href="/ja/">日本語</a></li><li><a class="lang-option" href="/de/">Deutsch</a></li><li><a class="lang-option" href="/fr/">Français</a></li><li><a class="lang-option" href="/ko/">한국어</a></li><li><a class="lang-option" href="/id/">Bahasa Indonesia</a></li><li><a class="lang-option" href="/tr/">Türkçe</a></li></ul></details><div class="site-nav-links"><a href="/hi/#features">फ़ीचर</a><a href="/hi/#faq">सामान्य सवाल</a><a href="/hi/changelog/">नया क्या है</a><a href="/privacy/">Privacy</a></div></div></nav></header><section class="hero"><div class="hero-content"><p class="hero-label">मोबाइल Git क्लाइंट</p><h1>GitCode Viewer</h1><p class="hero-subtitle">IDE जैसा कोड रीडिंग अनुभव, अब आपकी जेब में।</p><p class="hero-description">GitHub, GitLab, Bitbucket या अपने सर्वर से रिपॉज़िटरी क्लोन करें और कंप्यूटर की तरह पढ़ें। 30+ भाषाओं की हाइलाइटिंग, कोड आउटलाइन, Blame और पूरी हिस्ट्री पाएँ। Markdown, PDF, Office दस्तावेज़ और Jupyter notebooks ऑफ़लाइन भी तुरंत खुलते हैं।</p><div class="cta-container"><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">यहाँ से पाएँ</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">यहाँ से डाउनलोड करें</span><span class="btn-name">App Store</span></span></a></div><div class="cta-meta"><span>मुफ़्त इस्तेमाल करें</span><span class="divider"></span><a href="/privacy/">प्राइवेसी पॉलिसी</a></div></div></div></section><section class="screenshots"><div class="container"><h2 class="section-title">ऐप को काम करते देखें</h2><p class="section-subtitle">देखने के लिए स्वाइप करें</p><div class="gallery"><div class="gallery-tabs"><button class="gallery-tab active" data-device="phone">फ़ोन</button><button class="gallery-tab" data-device="tablet">टैबलेट</button></div><div class="gallery-wrapper" id="phone-wrapper"><button class="gallery-btn prev" data-gallery-id="phone-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="phone-gallery"><div class="gallery-slide"><img src="/images/phone-01-code-720.webp" srcSet="/images/phone-01-code-720.webp 720w, /images/phone-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="मोबाइल पर फ़ुल-स्क्रीन कोड और सिंटैक्स हाइलाइटिंग" loading="lazy" data-full="/images/phone-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-02-docs-720.webp" srcSet="/images/phone-02-docs-720.webp 720w, /images/phone-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="मोबाइल पर Markdown, डायग्राम और दस्तावेज़ पढ़ना" loading="lazy" data-full="/images/phone-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-03-repos-720.webp" srcSet="/images/phone-03-repos-720.webp 720w, /images/phone-03-repos-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="निजी, प्राइवेट और पब्लिक रिपॉज़िटरी ब्राउज़ करना" loading="lazy" data-full="/images/phone-03-repos-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-04-github-720.webp" srcSet="/images/phone-04-github-720.webp 720w, /images/phone-04-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="मोबाइल पर GitHub सर्च और ट्रेंडिंग" loading="lazy" data-full="/images/phone-04-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-05-git-720.webp" srcSet="/images/phone-05-git-720.webp 720w, /images/phone-05-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="मोबाइल पर branch, log और diff" loading="lazy" data-full="/images/phone-05-git-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-06-themes-720.webp" srcSet="/images/phone-06-themes-720.webp 720w, /images/phone-06-themes-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="कोड रीडिंग थीम को मनपसंद बनाना" loading="lazy" data-full="/images/phone-06-themes-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="phone-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div><div class="gallery-wrapper" id="tablet-wrapper" style="display:none"><button class="gallery-btn prev" data-gallery-id="tablet-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="tablet-gallery"><div class="gallery-slide"><img src="/images/tablet-01-code-720.webp" srcSet="/images/tablet-01-code-720.webp 720w, /images/tablet-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="टैबलेट पर कोड और सिंटैक्स हाइलाइटिंग" loading="lazy" data-full="/images/tablet-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-02-docs-720.webp" srcSet="/images/tablet-02-docs-720.webp 720w, /images/tablet-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="टैबलेट पर Markdown और डायग्राम" loading="lazy" data-full="/images/tablet-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-03-github-720.webp" srcSet="/images/tablet-03-github-720.webp 720w, /images/tablet-03-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="टैबलेट पर GitHub सर्च और ट्रेंडिंग" loading="lazy" data-full="/images/tablet-03-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-04-git-720.webp" srcSet="/images/tablet-04-git-720.webp 720w, /images/tablet-04-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="टैबलेट पर pull, branch, log और diff" loading="lazy" data-full="/images/tablet-04-git-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="tablet-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div></div></div><div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true"><button class="lightbox-close" data-lightbox-close="true" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg></button><button class="lightbox-nav prev" data-lightbox-prev="true" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg></button><img class="lightbox-img" alt=""/><button class="lightbox-nav next" data-lightbox-next="true" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></button></div></section><section class="features" id="features"><div class="features-container"><div class="features-header"><h2 class="section-title">कोड को गहराई से पढ़ने के लिए</h2><p>हर फ़ीचर का एक ही लक्ष्य है: छोटी स्क्रीन पर कोड को तेज़ी से समझना।</p></div><div class="features-grid"><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"></path></svg></div><h3 class="feature-title">डेस्कटॉप जैसा Git</h3><p class="feature-description">Clone, pull, branch, log, tag, checkout और diff परिचित तरीके से इस्तेमाल करें। Shallow clone बड़े रिपॉज़िटरी को हल्का रखता है।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"></path></svg></div><h3 class="feature-title">Blame और हिस्ट्री</h3><p class="feature-description">हर लाइन के commit और लेखक को देखें। किसी भी पुराने revision की फ़ाइल खोलें या एक टैप में checkout करें।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"></path></svg></div><h3 class="feature-title">30+ भाषाएँ</h3><p class="feature-description">Tree-sitter से सिंटैक्स हाइलाइटिंग, कोड आउटलाइन और symbol navigation, साथ में टेक्स्ट व identifier सर्च।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"></path></svg></div><h3 class="feature-title">दस्तावेज़ और notebooks</h3><p class="feature-description">PDF, Word, Excel, PowerPoint, CSV और Jupyter ऐप में पढ़ें। Markdown में Mermaid, LaTeX और floating contents मिलते हैं।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"></path></svg></div><h3 class="feature-title">GitHub पर नए प्रोजेक्ट</h3><p class="feature-description">बिल्ट-इन ट्रेंडिंग और सर्च से अच्छे प्रोजेक्ट खोजें और सीधे अपनी reading list में क्लोन करें।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg></div><h3 class="feature-title">सभी Git सेवाएँ</h3><p class="feature-description">GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB और अपने सर्वर को SSH या access token से जोड़ें।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v14"></path></svg></div><h3 class="feature-title">ऑफ़लाइन को प्राथमिकता</h3><p class="feature-description">एक बार क्लोन करें, फिर कहीं भी पढ़ें। कोड, दस्तावेज़ और Git हिस्ट्री बिना नेटवर्क भी उपलब्ध रहते हैं।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 18h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 4v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 10v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 16v4"></path></svg></div><h3 class="feature-title">थीम और ऐप आइकन</h3><p class="feature-description">थीम, रिपॉज़िटरी कार्ड, फ़ुल-स्क्रीन रीडिंग और ऐप आइकन को अपनी पसंद के अनुसार बदलें।</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"></path></svg></div><h3 class="feature-title">प्राइवेसी सबसे पहले</h3><p class="feature-description">कोई analytics, tracking या telemetry नहीं। ट्रैफ़िक सीधे आपके डिवाइस और Git सेवा के बीच जाता है।</p></div></div></div></section><section class="faq" id="faq" aria-labelledby="faq-title"><div class="faq-container"><div class="faq-header"><h2 id="faq-title">सामान्य सवाल</h2><p>कोई और सवाल है? <a href="mailto:ada87@163.com">हमसे संपर्क करें</a>.</p></div><div class="faq-list"><details class="faq-item"><summary><span>क्या GitCode Viewer मुफ़्त है?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">हाँ, इसके लिए अकाउंट नहीं चाहिए। कुछ उन्नत फ़ीचर premium version में मिलते हैं।</p></details><details class="faq-item"><summary><span>कौन-सी भाषाएँ और फ़ाइल फ़ॉर्मैट समर्थित हैं?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">30+ प्रोग्रामिंग भाषाओं और 100+ extensions के लिए हाइलाइटिंग है। प्रमुख भाषाओं में outline और symbol navigation भी मिलता है।</p></details><details class="faq-item"><summary><span>कौन-से दस्तावेज़ खोले जा सकते हैं?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV, TSV, Mermaid और Jupyter।</p></details><details class="faq-item"><summary><span>कौन-सी Git सेवाएँ समर्थित हैं?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB और self-hosted Git server।</p></details><details class="faq-item"><summary><span>क्या SSH और प्राइवेट रिपॉज़िटरी समर्थित हैं?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">हाँ। SSH या access token इस्तेमाल करें; credentials केवल आपके डिवाइस पर रहते हैं।</p></details><details class="faq-item"><summary><span>क्या रिपॉज़िटरी ऑफ़लाइन पढ़ सकते हैं?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">हाँ। क्लोन के बाद कोड, दस्तावेज़ और पूरी Git हिस्ट्री ऑफ़लाइन उपलब्ध रहती है।</p></details><details class="faq-item"><summary><span>क्या premium Android और iOS दोनों पर चलता है?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">नहीं। खरीदारी हर ऐप स्टोर पर अलग से प्रबंधित होती है।</p></details><details class="faq-item"><summary><span>क्या ऐप उपयोगकर्ता डेटा इकट्ठा करता है?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">नहीं। कोई analytics, tracking या telemetry इस्तेमाल नहीं होती।</p></details></div></div></section><section class="cta-section"><div class="cta-content"><h2>मोबाइल पर कोड पढ़ना शुरू करें</h2><p>मुफ़्त, बिना अकाउंट के, और फ़ोन व टैबलेट दोनों के लिए अनुकूलित।</p><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">यहाँ से पाएँ</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">यहाँ से डाउनलोड करें</span><span class="btn-name">App Store</span></span></a></div></div></section><article class="about"><div class="about-content"><h2>GitCode Viewer के बारे में</h2><p>GitCode Viewer एक मोबाइल Git क्लाइंट है जो एक काम पर केंद्रित है: कोड को गंभीरता से पढ़ना। कहीं भी प्रोजेक्ट क्लोन करें, बदलाव समझें और कोड की तह तक जाएँ।</p><h3>मोबाइल पर डेस्कटॉप जैसा Git</h3><p>ज़रूरी Git workflow मोबाइल पर सहज रहते हैं। Shallow clone से बहुत बड़े रिपॉज़िटरी भी आसानी से संभाले जा सकते हैं।</p><h3>कोड की हिस्ट्री समझें</h3><p>लाइन-दर-लाइन Blame, लेखक की जानकारी और पुराने revision से कंप्यूटर के बिना भी बदलावों की जाँच करें।</p><h3>रिपॉज़िटरी की हर फ़ाइल पढ़ें</h3><p>कोड, config, Markdown, PDF, Office दस्तावेज़ और Jupyter notebooks रिपॉज़िटरी में ही खोलें।</p><h3>अपनी Git सेवाएँ जोड़ें</h3><p>लोकप्रिय सेवाओं और अपने सर्वर को, intranet पर भी, SSH या access token के ज़रिए इस्तेमाल करें।</p><h3>ऑफ़लाइन और निजी</h3><p>क्लोन करने के बाद कोड, दस्तावेज़ और हिस्ट्री ऑफ़लाइन उपलब्ध रहते हैं। हम उपयोग का डेटा इकट्ठा नहीं करते। पढ़ें <a href="/privacy/">प्राइवेसी पॉलिसी</a>.</p></div></article><footer class="i18n-footer"><div class="i18n-inner"><div class="i18n-heading"><p class="i18n-title">भाषाएँ</p><a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg><span>GitHub</span></a></div><nav class="i18n-links" aria-label="Language selector"><a class="i18n-link" data-locale="en" href="/">English</a><a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a><a class="i18n-link" data-locale="es" href="/es/">Español</a><a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a><a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a><a class="i18n-link" data-locale="ja" href="/ja/">日本語</a><a class="i18n-link" data-locale="de" href="/de/">Deutsch</a><a class="i18n-link" data-locale="fr" href="/fr/">Français</a><a class="i18n-link" data-locale="ko" href="/ko/">한국어</a><a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a><a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a></nav></div></footer><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "GitCode Viewer",
+      "alternateName": "Code Viewer",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Git Client",
+      "operatingSystem": "Android, iOS",
+      "description": "Clone, pull, branch, log, diff और Blame वाला मोबाइल Git क्लाइंट, ऑफ़लाइन रीडिंग तथा PDF, Office और Jupyter प्रीव्यू के साथ।",
+      "url": "https://gitcodeviewer.xdnote.com/hi/",
+      "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "image": "https://gitcodeviewer.xdnote.com/images/og-image.jpg",
+      "screenshot": [
+        "https://gitcodeviewer.xdnote.com/images/phone-01-code-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/phone-05-git-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/tablet-04-git-720.webp"
+      ],
+      "featureList": [
+        "मोबाइल पर डेस्कटॉप जैसा Git",
+        "लाइन-दर-लाइन Blame और हिस्ट्री",
+        "30+ भाषाओं की हाइलाइटिंग और आउटलाइन",
+        "PDF, Office और Jupyter प्रीव्यू",
+        "Mermaid और LaTeX वाला Markdown",
+        "Git सेवाएँ और अपने सर्वर",
+        "SSH और प्राइवेट रिपॉज़िटरी",
+        "बिना telemetry के ऑफ़लाइन रीडिंग"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       },
-      {
-        "@type": "WebSite",
-        "name": "GitCode Viewer",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "inLanguage": "hi",
-        "description": "GitCode Viewer की आधिकारिक वेबसाइट, जिसमें ऐप फीचर्स, स्क्रीनशॉट और इंस्टॉल लिंक उपलब्ध हैं।"
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "क्या GitCode Viewer Android के लिए अच्छा mobile Git client है?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "हाँ। GitCode Viewer Android पर डेस्कटॉप-स्तरीय Git workflow के लिए बनाया गया है, जिसमें clone, pull, branch, log और diff शामिल हैं।"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "क्या मैं Android पर Git repositories का clone और pull कर सकता हूँ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "हाँ। GitCode Viewer मोबाइल पर सीधे clone और pull का समर्थन करता है।"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "क्या यह branch switching, commit log और diff review को सपोर्ट करता है?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "हाँ। GitCode Viewer मोबाइल पर branch operations, commit log browsing और file diff review का समर्थन करता है।"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer किन Git providers को सपोर्ट करता है?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "GitCode Viewer GitHub, GitLab, Bitbucket, Azure DevOps और Gitea का समर्थन करता है।"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "क्या GitCode Viewer SSH और private repositories को सपोर्ट करता है?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "हाँ। GitCode Viewer SSH connections और private repositories का समर्थन करता है।"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "क्या मैं मोबाइल पर repositories को offline पढ़ सकता हूँ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "हाँ। clone के बाद GitCode Viewer syntax highlighting और history browsing के साथ offline reading का समर्थन करता है।"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "क्या GitCode Viewer user data या tracking analytics एकत्र करता है?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "नहीं। GitCode Viewer analytics या tracking data एकत्र नहीं करता।"
-            }
-          }
-        ]
+      "author": {
+        "@type": "Person",
+        "name": "XiangDa",
+        "email": "ada87@163.com"
       }
-    ]
-  }
-  </script>
-
-  <script src="/script.js"></script>
-</body>
-</html>
-
-
+    },
+    {
+      "@type": "WebSite",
+      "name": "GitCode Viewer",
+      "url": "https://gitcodeviewer.xdnote.com/",
+      "inLanguage": "hi",
+      "description": "Clone, pull, branch, log, diff और Blame वाला मोबाइल Git क्लाइंट, ऑफ़लाइन रीडिंग तथा PDF, Office और Jupyter प्रीव्यू के साथ।"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "क्या GitCode Viewer मुफ़्त है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "हाँ, इसके लिए अकाउंट नहीं चाहिए। कुछ उन्नत फ़ीचर premium version में मिलते हैं।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "कौन-सी भाषाएँ और फ़ाइल फ़ॉर्मैट समर्थित हैं?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "30+ प्रोग्रामिंग भाषाओं और 100+ extensions के लिए हाइलाइटिंग है। प्रमुख भाषाओं में outline और symbol navigation भी मिलता है।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "कौन-से दस्तावेज़ खोले जा सकते हैं?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV, TSV, Mermaid और Jupyter।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "कौन-सी Git सेवाएँ समर्थित हैं?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB और self-hosted Git server।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "क्या SSH और प्राइवेट रिपॉज़िटरी समर्थित हैं?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "हाँ। SSH या access token इस्तेमाल करें; credentials केवल आपके डिवाइस पर रहते हैं।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "क्या रिपॉज़िटरी ऑफ़लाइन पढ़ सकते हैं?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "हाँ। क्लोन के बाद कोड, दस्तावेज़ और पूरी Git हिस्ट्री ऑफ़लाइन उपलब्ध रहती है।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "क्या premium Android और iOS दोनों पर चलता है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "नहीं। खरीदारी हर ऐप स्टोर पर अलग से प्रबंधित होती है।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "क्या ऐप उपयोगकर्ता डेटा इकट्ठा करता है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "नहीं। कोई analytics, tracking या telemetry इस्तेमाल नहीं होती।"
+          }
+        }
+      ]
+    }
+  ]
+}</script><script src="/script.js"></script></body></html>

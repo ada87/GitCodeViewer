@@ -1,450 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitCode Viewer - Desktop-Class Git on Mobile</title>
-  <meta name="description" content="Desktop-class Git on mobile: clone, pull, branch, log, and diff. Works with major Git providers, supports SSH, and supports private repositories.">
-  <meta name="keywords" content="git, mobile git client, clone, pull, branch, log, diff, github, gitlab, bitbucket, azure devops, gitea, ssh, private repos">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="author" content="XiangDa">
-  <meta name="theme-color" content="#0b0d12">
-  <link rel="canonical" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="x-default" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="en" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/">
-  <link rel="alternate" hreflang="es" href="https://gitcodeviewer.xdnote.com/es/">
-  <link rel="alternate" hreflang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/">
-  <link rel="alternate" hreflang="hi" href="https://gitcodeviewer.xdnote.com/hi/">
-  <link rel="alternate" hreflang="ja" href="https://gitcodeviewer.xdnote.com/ja/">
-  <link rel="alternate" hreflang="de" href="https://gitcodeviewer.xdnote.com/de/">
-  <link rel="alternate" hreflang="fr" href="https://gitcodeviewer.xdnote.com/fr/">
-  <link rel="alternate" hreflang="ko" href="https://gitcodeviewer.xdnote.com/ko/">
-  <link rel="alternate" hreflang="id" href="https://gitcodeviewer.xdnote.com/id/">
-  <link rel="alternate" hreflang="tr" href="https://gitcodeviewer.xdnote.com/tr/">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="GitCode Viewer">
-  <meta property="og:title" content="GitCode Viewer - Desktop-Class Git on Mobile">
-  <meta property="og:description" content="Desktop-class Git on mobile: clone, pull, branch, log, and diff. Works with major Git providers, supports SSH, and private repositories.">
-  <meta property="og:url" content="https://gitcodeviewer.xdnote.com/">
-  <meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-  <meta property="og:image:alt" content="GitCode Viewer mobile screenshot with code reading interface">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GitCode Viewer - Desktop-Class Git on Mobile">
-  <meta name="twitter:description" content="Clone, pull, branch, log, and diff on mobile with SSH and private repository support.">
-  <meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <div class="pointer-events-none fixed inset-0 bg-gradient"></div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-label">Mobile App</p>
-      <h1>Code Viewer</h1>
-      <p class="hero-subtitle">Your IDE's reading mode - in your pocket.</p>
-      <p class="hero-description">
-        Reading commits on the train? Studying source code on a flight? Clone from GitHub,
-        GitLab, or Bitbucket - then read with syntax highlighting, Markdown rendering, and
-        full Git history, completely offline. You also get desktop-class Git actions when
-        needed: clone, pull, branch, log, and diff.
-      </p>
-
-      <div class="cta-container">
-        <div class="cta-buttons">
-          <!-- Google Play -->
-          <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-            </svg>
-            Get on Google Play
-          </a>
-          <!-- App Store -->
-          <span class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-            </svg>
-            App Store
-            <span class="badge">Soon</span>
-          </span>
-        </div>
-        <div class="cta-meta">
-          <span>Free to Use</span>
-          <span class="divider"></span>
-          <a href="/privacy/">Privacy Policy</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Section -->
-  <section class="screenshots">
-    <div class="container">
-      <h2 class="section-title">See it in action</h2>
-      <p class="section-subtitle">Swipe to explore</p>
-      <div class="gallery">
-        <!-- Device Tabs -->
-        <div class="gallery-tabs">
-          <button class="gallery-tab active" onclick="switchDevice('phone')">Phone</button>
-          <button class="gallery-tab" onclick="switchDevice('tablet')">Tablet</button>
-        </div>
-
-        <!-- Phone Gallery -->
-        <div class="gallery-wrapper" id="phone-wrapper">
-          <button class="gallery-btn prev" onclick="scrollGallery('phone-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="phone-gallery">
-            <div class="gallery-slide">
-              <img src="/images/phone-01-codeviewer.jpg" alt="Fullscreen code reading with syntax highlighting on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-02-features.jpg" alt="Markdown, diagram, and notebook documentation reading on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-03-repos.jpg" alt="Repository browser for personal, private, and public projects" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-04-github.jpg" alt="GitHub search and trending repository discovery on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-05-git.jpg" alt="Desktop-class Git actions on mobile including branch, log, and diff" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-06-themes.jpg" alt="Theme customization options for mobile code reading" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('phone-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-
-        <!-- Tablet Gallery -->
-        <div class="gallery-wrapper" id="tablet-wrapper" style="display:none">
-          <button class="gallery-btn prev" onclick="scrollGallery('tablet-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="tablet-gallery">
-            <div class="gallery-slide">
-              <img src="/images/tablet10-01-codeviewer.jpg" alt="Tablet code reading layout with syntax highlighting" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-02-features.jpg" alt="Tablet documentation reading with markdown and diagrams" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-04-github.jpg" alt="Tablet repository discovery with GitHub trending and search" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-05-git.jpg" alt="Tablet Git workflow for pull, branch, log, and diff review" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('tablet-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-    <div class="features-container">
-      <div class="features-header">
-        <h2 class="section-title">Desktop-class Git, built for mobile</h2>
-        <p>Clone, pull, branch, log, and diff with the speed and clarity you expect.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">Desktop-Class Git on Mobile</h3>
-          <p class="feature-description">Use a full Git workflow on phone and tablet: clone, pull, branch, log, and diff.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">All Major Git Providers</h3>
-          <p class="feature-description">Connect to GitHub, GitLab, Bitbucket, Azure DevOps, and Gitea from one app.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">SSH + Private Repositories</h3>
-          <p class="feature-description">Use SSH connections and securely access private repositories for real project work.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">Read Docs with Less Friction</h3>
-          <p class="feature-description">Open README files, visual diagrams, and notebook content in a clear, focused reading flow.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">Never Miss Important Updates</h3>
-          <p class="feature-description">Get timely reminders when new app updates are available.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">Manage Storage with Confidence</h3>
-          <p class="feature-description">See what takes space and clean up repositories before storage becomes a problem.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">Follow Changes with Confidence</h3>
-          <p class="feature-description">Switch branches, inspect commit logs, and review diffs without leaving your mobile workspace.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">Privacy First, Always</h3>
-          <p class="feature-description">No analytics and no tracking. Traffic goes directly between your device and your Git provider.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>Start reading code on mobile</h2>
-      <p>Free to use, no account required, and optimized for both phone and tablet.</p>
-      <div class="cta-buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-          </svg>
-          Get on Google Play
-        </a>
-        <span class="btn btn-secondary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-          </svg>
-          App Store
-          <span class="badge">Soon</span>
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <article class="about">
-    <div class="about-content">
-      <h2>About GitCode Viewer</h2>
-
-      <p>
-        GitCode Viewer is a mobile Git client designed for <strong>serious code reading</strong>
-        and real Git operations. It brings a desktop-class workflow to mobile: clone, pull,
-        branch, log, and diff in one focused app.
-      </p>
-
-      <h3>Desktop-Class Git on Mobile</h3>
-      <p>
-        Built for day-to-day work, not just quick previews. Move through repositories, history,
-        and changes with a flow that feels close to desktop Git clients.
-      </p>
-
-      <h3>All Major Git Providers</h3>
-      <p>
-        Use the same app across your projects on GitHub, GitLab, Bitbucket, Azure DevOps,
-        and Gitea.
-      </p>
-
-      <h3>SSH and Private Repository Support</h3>
-      <p>
-        Connect with SSH and work with private repositories safely. Your credentials stay on
-        your device, and your traffic goes directly to your Git provider.
-      </p>
-
-      <h3>Built for Real Review Work</h3>
-      <p>
-        Review changes from branch to branch, inspect commit logs, and open diffs quickly
-        without breaking your reading flow.
-      </p>
-
-      <h3>Discovery + Personal Repos</h3>
-      <p>
-        Explore popular open-source projects, search quickly, and jump straight into your own
-        repositories from the same app.
-      </p>
-
-      <h3>Privacy &amp; Security</h3>
-      <p>
-        GitCode Viewer collects zero user data. No analytics, no tracking, no telemetry.
-        Your code and credentials never leave your device. Read the full
-        <a href="/privacy/">privacy policy</a>.
-      </p>
-    </div>
-  </article>
-
-  <footer class="i18n-footer">
-    <div class="i18n-inner">
-      <div class="i18n-heading">
-        <p class="i18n-title">Languages</p>
-        <a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-          </svg>
-          <span>GitHub</span>
-        </a>
-      </div>
-      <nav class="i18n-links" aria-label="Language selector">
-        <a class="i18n-link" data-locale="en" href="/">English</a>
-        <a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a>
-        <a class="i18n-link" data-locale="es" href="/es/">Español</a>
-        <a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a>
-        <a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a>
-        <a class="i18n-link" data-locale="ja" href="/ja/">日本語</a>
-        <a class="i18n-link" data-locale="de" href="/de/">Deutsch</a>
-        <a class="i18n-link" data-locale="fr" href="/fr/">Français</a>
-        <a class="i18n-link" data-locale="ko" href="/ko/">한국어</a>
-        <a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a>
-        <a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- JSON-LD for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "GitCode Viewer",
-        "alternateName": "Code Viewer",
-        "applicationCategory": "DeveloperApplication",
-        "applicationSubCategory": "Git Client",
-        "operatingSystem": "Android",
-        "description": "Desktop-class Git on mobile with clone, pull, branch, log, and diff. Supports major Git providers, SSH connections, and private repositories.",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "image": "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-        "screenshot": [
-          "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-          "https://gitcodeviewer.xdnote.com/images/phone-05-git.jpg",
-          "https://gitcodeviewer.xdnote.com/images/tablet10-05-git.jpg"
-        ],
-        "featureList": [
-          "Desktop-class Git actions on mobile: clone, pull, branch, log, diff",
-          "Supports GitHub, GitLab, Bitbucket, Azure DevOps, and Gitea",
-          "Supports SSH connections and private repositories",
-          "Offline code reading with syntax highlighting",
-          "Repository discovery and search"
-        ],
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "XiangDa",
-          "email": "ada87@163.com"
-        }
+<html lang="en"><head><meta charSet="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="preload" as="image" href="/app-icon.png"/><title>GitCode Viewer - Desktop-Class Git on Mobile</title><meta name="description" content="Clone Git repos and read them offline on your phone: syntax highlighting for 30+ languages, PDF / Office / Jupyter preview, Git blame and history. Works with GitHub, GitLab, Gitee, and self-hosted servers."/><meta name="keywords" content="git, mobile git client, code reader, clone, pull, branch, log, diff, git blame, github, gitlab, bitbucket, gitea, gitee, cnb, ssh, private repos, pdf preview, jupyter, markdown, mermaid, offline"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/><meta name="author" content="XiangDa"/><meta name="theme-color" content="#0b0d12"/><link rel="canonical" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="x-default" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="en" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/"/><link rel="alternate" hrefLang="es" href="https://gitcodeviewer.xdnote.com/es/"/><link rel="alternate" hrefLang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/"/><link rel="alternate" hrefLang="hi" href="https://gitcodeviewer.xdnote.com/hi/"/><link rel="alternate" hrefLang="ja" href="https://gitcodeviewer.xdnote.com/ja/"/><link rel="alternate" hrefLang="de" href="https://gitcodeviewer.xdnote.com/de/"/><link rel="alternate" hrefLang="fr" href="https://gitcodeviewer.xdnote.com/fr/"/><link rel="alternate" hrefLang="ko" href="https://gitcodeviewer.xdnote.com/ko/"/><link rel="alternate" hrefLang="id" href="https://gitcodeviewer.xdnote.com/id/"/><link rel="alternate" hrefLang="tr" href="https://gitcodeviewer.xdnote.com/tr/"/><link rel="icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/app-icon.png"/><meta name="apple-itunes-app" content="app-id=6800189725"/><meta property="og:type" content="website"/><meta property="og:site_name" content="GitCode Viewer"/><meta property="og:title" content="GitCode Viewer - Desktop-Class Git on Mobile"/><meta property="og:description" content="Clone Git repos and read them offline on your phone: syntax highlighting for 30+ languages, PDF / Office / Jupyter preview, Git blame and history. Works with GitHub, GitLab, Gitee, and self-hosted servers."/><meta property="og:url" content="https://gitcodeviewer.xdnote.com/"/><meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="2600"/><meta property="og:image:alt" content="GitCode Viewer mobile screenshot with code reading interface"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="GitCode Viewer - Desktop-Class Git on Mobile"/><meta name="twitter:description" content="Clone Git repos and read them offline on your phone: syntax highlighting for 30+ languages, PDF / Office / Jupyter preview, Git blame and history. Works with GitHub, GitLab, Gitee, and self-hosted servers."/><meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><link rel="stylesheet" href="/style.css"/></head><body><div class="pointer-events-none fixed inset-0 bg-gradient"></div><header class="site-header"><nav class="site-nav" aria-label="Main"><a class="site-logo" href="/"><img src="/app-icon.png" alt="" width="32" height="32"/><span>GitCode Viewer</span></a><div class="site-nav-right"><details class="lang-switch"><summary aria-label="Language"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.93 9h-3.02a15.7 15.7 0 0 0-1.2-5.02A8.02 8.02 0 0 1 19.93 11ZM12 4.07c.5.62 1.13 1.8 1.5 3.23.1.38.18.78.24 1.2h-3.48c.06-.42.14-.82.24-1.2.37-1.43 1-2.61 1.5-3.23ZM8.29 5.98A15.7 15.7 0 0 0 7.09 11H4.07a8.02 8.02 0 0 1 4.22-5.02ZM4.07 13h3.02c.17 2.04.6 3.8 1.2 5.02A8.02 8.02 0 0 1 4.07 13ZM12 19.93c-.5-.62-1.13-1.8-1.5-3.23-.1-.38-.18-.78-.24-1.2h3.48c-.06.42-.14.82-.24 1.2-.37 1.43-1 2.61-1.5 3.23Zm1.44-4.43h-2.88a13.9 13.9 0 0 1 0-5h2.88a13.9 13.9 0 0 1 0 5Zm2.27 2.52c.6-1.22 1.03-2.98 1.2-5.02h3.02a8.02 8.02 0 0 1-4.22 5.02Z"></path></svg><span>English</span></summary><ul class="lang-menu"><li><span class="lang-option active" aria-current="page">English</span></li><li><a class="lang-option" href="/zh-cn/">简体中文</a></li><li><a class="lang-option" href="/es/">Español</a></li><li><a class="lang-option" href="/pt-br/">Português (Brasil)</a></li><li><a class="lang-option" href="/hi/">हिन्दी</a></li><li><a class="lang-option" href="/ja/">日本語</a></li><li><a class="lang-option" href="/de/">Deutsch</a></li><li><a class="lang-option" href="/fr/">Français</a></li><li><a class="lang-option" href="/ko/">한국어</a></li><li><a class="lang-option" href="/id/">Bahasa Indonesia</a></li><li><a class="lang-option" href="/tr/">Türkçe</a></li></ul></details><div class="site-nav-links"><a href="/#features">Features</a><a href="/#faq">FAQ</a><a href="/changelog/">Changelog</a><a href="/privacy/">Privacy</a></div></div></nav></header><section class="hero"><div class="hero-content"><p class="hero-label">Mobile App</p><h1>Code Viewer</h1><p class="hero-subtitle">Your IDE&#x27;s reading mode - in your pocket.</p><p class="hero-description">Clone a repository from GitHub, GitLab, Bitbucket, or your own server, and read it like you would on your computer: syntax highlighting for 30+ languages, code outline, blame, and full history, plus instant preview for Markdown, PDF, Office documents, and Jupyter notebooks - all available offline.</p><div class="cta-container"><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">GET IT ON</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">GET IT ON</span><span class="btn-name">App Store</span></span></a></div><div class="cta-meta"><span>Free to Use</span><span class="divider"></span><a href="/privacy/">Privacy Policy</a></div></div></div></section><section class="screenshots"><div class="container"><h2 class="section-title">See it in action</h2><p class="section-subtitle">Swipe to explore</p><div class="gallery"><div class="gallery-tabs"><button class="gallery-tab active" data-device="phone">Phone</button><button class="gallery-tab" data-device="tablet">Tablet</button></div><div class="gallery-wrapper" id="phone-wrapper"><button class="gallery-btn prev" data-gallery-id="phone-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="phone-gallery"><div class="gallery-slide"><img src="/images/phone-01-code-720.webp" srcSet="/images/phone-01-code-720.webp 720w, /images/phone-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Fullscreen code reading with syntax highlighting on mobile" loading="lazy" data-full="/images/phone-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-02-docs-720.webp" srcSet="/images/phone-02-docs-720.webp 720w, /images/phone-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Markdown, diagram, and document reading on mobile" loading="lazy" data-full="/images/phone-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-03-repos-720.webp" srcSet="/images/phone-03-repos-720.webp 720w, /images/phone-03-repos-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Repository browser for personal, private, and public projects" loading="lazy" data-full="/images/phone-03-repos-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-04-github-720.webp" srcSet="/images/phone-04-github-720.webp 720w, /images/phone-04-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="GitHub search and trending repository discovery on mobile" loading="lazy" data-full="/images/phone-04-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-05-git-720.webp" srcSet="/images/phone-05-git-720.webp 720w, /images/phone-05-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Desktop-class Git actions on mobile including branch, log, and diff" loading="lazy" data-full="/images/phone-05-git-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-06-themes-720.webp" srcSet="/images/phone-06-themes-720.webp 720w, /images/phone-06-themes-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Theme customization options for mobile code reading" loading="lazy" data-full="/images/phone-06-themes-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="phone-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div><div class="gallery-wrapper" id="tablet-wrapper" style="display:none"><button class="gallery-btn prev" data-gallery-id="tablet-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="tablet-gallery"><div class="gallery-slide"><img src="/images/tablet-01-code-720.webp" srcSet="/images/tablet-01-code-720.webp 720w, /images/tablet-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Tablet code reading layout with syntax highlighting" loading="lazy" data-full="/images/tablet-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-02-docs-720.webp" srcSet="/images/tablet-02-docs-720.webp 720w, /images/tablet-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Tablet documentation reading with markdown and diagrams" loading="lazy" data-full="/images/tablet-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-03-github-720.webp" srcSet="/images/tablet-03-github-720.webp 720w, /images/tablet-03-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Tablet repository discovery with GitHub trending and search" loading="lazy" data-full="/images/tablet-03-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-04-git-720.webp" srcSet="/images/tablet-04-git-720.webp 720w, /images/tablet-04-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Tablet Git workflow for pull, branch, log, and diff review" loading="lazy" data-full="/images/tablet-04-git-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="tablet-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div></div></div><div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true"><button class="lightbox-close" data-lightbox-close="true" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg></button><button class="lightbox-nav prev" data-lightbox-prev="true" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg></button><img class="lightbox-img" alt=""/><button class="lightbox-nav next" data-lightbox-next="true" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></button></div></section><section class="features" id="features"><div class="features-container"><div class="features-header"><h2 class="section-title">A serious reader for serious repositories</h2><p>Everything is built around one goal: understanding code faster on a small screen.</p></div><div class="features-grid"><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"></path></svg></div><h3 class="feature-title">Desktop-Class Git</h3><p class="feature-description">Clone, pull, branch, log, tag, checkout, and diff - as fluid as on your computer. Shallow clone keeps huge repositories manageable.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"></path></svg></div><h3 class="feature-title">Blame &amp; History</h3><p class="feature-description">Inline blame and author annotations trace every line to its commit. View any file at any revision, or check out history with one tap.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"></path></svg></div><h3 class="feature-title">30+ Languages, Real Outline</h3><p class="feature-description">Tree-sitter powered highlighting, outline, and symbols for 30+ languages and 10+ config formats, plus code and identifier search.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"></path></svg></div><h3 class="feature-title">Docs, Office &amp; Notebooks</h3><p class="feature-description">Read PDF, Word, Excel, PowerPoint, CSV, and Jupyter files in place. Markdown renders with Mermaid diagrams, LaTeX math, and a floating TOC.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"></path></svg></div><h3 class="feature-title">Trending &amp; Discovery</h3><p class="feature-description">GitHub trending and search built in - find interesting projects and clone them straight into your reading queue.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg></div><h3 class="feature-title">All Your Git Providers</h3><p class="feature-description">GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB, and self-hosted servers. Secure access via SSH or access tokens.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v14"></path></svg></div><h3 class="feature-title">Offline-First Reading</h3><p class="feature-description">Clone once, read anywhere. Code, docs, and full Git history stay available on a plane, a train, or a dead Wi-Fi zone.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 18h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 4v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 10v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 16v4"></path></svg></div><h3 class="feature-title">Themes &amp; Custom Icons</h3><p class="feature-description">Multiple theme palettes, customizable repository cards, fullscreen reading, and alternate app icons to make it yours.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"></path></svg></div><h3 class="feature-title">Privacy First</h3><p class="feature-description">No analytics, no tracking, no telemetry. Traffic goes directly between your device and your Git provider.</p></div></div></div></section><section class="faq" id="faq" aria-labelledby="faq-title"><div class="faq-container"><div class="faq-header"><h2 id="faq-title">Frequently asked questions</h2><p>If you have anything else you want to ask, <a href="mailto:ada87@163.com">reach out to us</a>.</p></div><div class="faq-list"><details class="faq-item"><summary><span>Is GitCode Viewer free?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Free to use with no account required. Some advanced features require upgrading to the premium version.</p></details><details class="faq-item"><summary><span>Which programming languages and code formats are supported?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Syntax highlighting covers 30+ programming languages and 100+ file extensions. Major languages (C, C++, C#, Go, Rust, Java, Python, JavaScript, TypeScript, PHP, Bash, and more) also get code outline and symbol navigation.</p></details><details class="faq-item"><summary><span>Which document formats can it preview?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV / TSV, Mermaid diagrams, and Jupyter notebooks.</p></details><details class="faq-item"><summary><span>Which Git providers does GitCode Viewer support?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, and CNB, as well as self-hosted Git servers - including servers on your intranet.</p></details><details class="faq-item"><summary><span>Does it support SSH and private repositories?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Yes. You can connect over SSH or with access tokens, and credentials are stored only on your device.</p></details><details class="faq-item"><summary><span>Can I read repositories offline?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Yes. After cloning, code, documents, and full Git history are all available offline.</p></details><details class="faq-item"><summary><span>Is the premium upgrade shared between Android and iOS?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">No. Upgrades are billed through each app store: a purchase made on Google Play cannot be used on iOS, and vice versa. Switching platforms requires purchasing the upgrade again in the respective store.</p></details><details class="faq-item"><summary><span>Does GitCode Viewer collect user data?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">No. It collects no analytics, no tracking, and no telemetry. Network traffic goes directly between your device and your Git provider.</p></details></div></div></section><section class="cta-section"><div class="cta-content"><h2>Start reading code on mobile</h2><p>Free to use, no account required, and optimized for both phone and tablet.</p><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">GET IT ON</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">GET IT ON</span><span class="btn-name">App Store</span></span></a></div></div></section><article class="about"><div class="about-content"><h2>About GitCode Viewer</h2><p>GitCode Viewer is a mobile Git client built for one thing: reading code seriously. It brings the Git and IDE experience from your computer to your phone and tablet - clone, read, trace, and understand, anywhere.</p><h3>Desktop-Class Git on Mobile</h3><p>Clone, pull, branch, log, tag, checkout, and diff with the fluidity you expect from a desktop client. Shallow clone keeps very large repositories practical on mobile storage.</p><h3>Trace Code Like on Desktop</h3><p>Inline Git blame, author annotations, one-tap checkout to historical revisions, and viewing any file at any point in history - code archaeology without a laptop.</p><h3>Read Every File in the Repo</h3><p>Tree-sitter powered highlighting, outline, and symbols cover 30+ programming languages and 10+ config formats. A native engine previews PDF, Word, Excel, PowerPoint, CSV, and Jupyter notebooks, and Markdown renders with Mermaid diagrams, LaTeX math, and a floating table of contents.</p><h3>All Your Git Providers</h3><p>GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, and CNB, plus self-hosted servers behind your intranet. Connect over SSH or access tokens - credentials stay on your device.</p><h3>Offline and Private</h3><p>Once cloned, everything works offline: code, documents, and full history. GitCode Viewer collects zero user data - no analytics, no tracking, no telemetry. Your code and credentials never leave your device. Read the full <a href="/privacy/">privacy policy</a>.</p></div></article><footer class="i18n-footer"><div class="i18n-inner"><div class="i18n-heading"><p class="i18n-title">Languages</p><a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg><span>GitHub</span></a></div><nav class="i18n-links" aria-label="Language selector"><a class="i18n-link" data-locale="en" href="/">English</a><a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a><a class="i18n-link" data-locale="es" href="/es/">Español</a><a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a><a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a><a class="i18n-link" data-locale="ja" href="/ja/">日本語</a><a class="i18n-link" data-locale="de" href="/de/">Deutsch</a><a class="i18n-link" data-locale="fr" href="/fr/">Français</a><a class="i18n-link" data-locale="ko" href="/ko/">한국어</a><a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a><a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a></nav></div></footer><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "GitCode Viewer",
+      "alternateName": "Code Viewer",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Git Client",
+      "operatingSystem": "Android, iOS",
+      "description": "Desktop-class Git on mobile: clone, pull, branch, log, diff, and blame, with offline reading and PDF / Office / Jupyter preview. Supports GitHub, GitLab, Gitee, self-hosted servers, SSH, and private repositories.",
+      "url": "https://gitcodeviewer.xdnote.com/",
+      "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "image": "https://gitcodeviewer.xdnote.com/images/og-image.jpg",
+      "screenshot": [
+        "https://gitcodeviewer.xdnote.com/images/phone-01-code-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/phone-05-git-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/tablet-04-git-720.webp"
+      ],
+      "featureList": [
+        "Desktop-class Git on mobile: clone, pull, branch, log, tag, checkout, diff",
+        "Inline Git blame, author annotations, and historical revision viewing",
+        "Syntax highlighting, outline, and symbols for 30+ languages",
+        "Preview PDF, Word, Excel, PowerPoint, CSV, and Jupyter notebooks",
+        "Markdown rendering with Mermaid diagrams and LaTeX math",
+        "GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB, and self-hosted servers",
+        "SSH and private repository support",
+        "Offline reading, no analytics or tracking"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       },
-      {
-        "@type": "WebSite",
-        "name": "GitCode Viewer",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "inLanguage": "en",
-        "description": "Official GitCode Viewer website with app features, screenshots, and install link."
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Is GitCode Viewer a good mobile Git client for Android?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "GitCode Viewer is built for desktop-class Git workflows on Android, including clone, pull, branch, log, and diff."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I clone and pull Git repositories on Android?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. GitCode Viewer supports cloning and pulling repositories directly on mobile devices."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does it support branch switching, commit logs, and diff review?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. GitCode Viewer supports branch operations, commit log browsing, and file diff review on mobile."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which Git providers does GitCode Viewer support?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "GitCode Viewer supports major providers including GitHub, GitLab, Bitbucket, Azure DevOps, and Gitea."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does GitCode Viewer support SSH and private repositories?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. GitCode Viewer supports SSH connections and private repositories."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I read repositories offline on mobile?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. After cloning, GitCode Viewer supports offline repository reading with syntax highlighting and history browsing."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does GitCode Viewer collect user data or tracking analytics?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. GitCode Viewer does not collect analytics or tracking data."
-            }
-          }
-        ]
+      "author": {
+        "@type": "Person",
+        "name": "XiangDa",
+        "email": "ada87@163.com"
       }
-    ]
-  }
-  </script>
-
-  <script src="/script.js"></script>
-</body>
-</html>
-
+    },
+    {
+      "@type": "WebSite",
+      "name": "GitCode Viewer",
+      "url": "https://gitcodeviewer.xdnote.com/",
+      "inLanguage": "en",
+      "description": "Desktop-class Git on mobile: clone, pull, branch, log, diff, and blame, with offline reading and PDF / Office / Jupyter preview. Supports GitHub, GitLab, Gitee, self-hosted servers, SSH, and private repositories."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is GitCode Viewer free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Free to use with no account required. Some advanced features require upgrading to the premium version."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which programming languages and code formats are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Syntax highlighting covers 30+ programming languages and 100+ file extensions. Major languages (C, C++, C#, Go, Rust, Java, Python, JavaScript, TypeScript, PHP, Bash, and more) also get code outline and symbol navigation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which document formats can it preview?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV / TSV, Mermaid diagrams, and Jupyter notebooks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which Git providers does GitCode Viewer support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, and CNB, as well as self-hosted Git servers - including servers on your intranet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it support SSH and private repositories?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can connect over SSH or with access tokens, and credentials are stored only on your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I read repositories offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. After cloning, code, documents, and full Git history are all available offline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the premium upgrade shared between Android and iOS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Upgrades are billed through each app store: a purchase made on Google Play cannot be used on iOS, and vice versa. Switching platforms requires purchasing the upgrade again in the respective store."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does GitCode Viewer collect user data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It collects no analytics, no tracking, and no telemetry. Network traffic goes directly between your device and your Git provider."
+          }
+        }
+      ]
+    }
+  ]
+}</script><script src="/script.js"></script></body></html>

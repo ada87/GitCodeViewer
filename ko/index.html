@@ -1,452 +1,120 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitCode Viewer - 모바일용 데스크톱급 Git</title>
-  <meta name="description" content="모바일에서 데스크톱급 Git: clone, pull, branch, log, diff. 주요 Git 제공업체, SSH, 비공개 저장소를 지원합니다.">
-  <meta name="keywords" content="git, mobile git client, clone, pull, branch, log, diff, github, gitlab, bitbucket, azure devops, gitea, ssh, private repos">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="author" content="XiangDa">
-  <meta name="theme-color" content="#0b0d12">
-  <link rel="canonical" href="https://gitcodeviewer.xdnote.com/ko/">
-  <link rel="alternate" hreflang="x-default" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="en" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/">
-  <link rel="alternate" hreflang="es" href="https://gitcodeviewer.xdnote.com/es/">
-  <link rel="alternate" hreflang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/">
-  <link rel="alternate" hreflang="hi" href="https://gitcodeviewer.xdnote.com/hi/">
-  <link rel="alternate" hreflang="ja" href="https://gitcodeviewer.xdnote.com/ja/">
-  <link rel="alternate" hreflang="de" href="https://gitcodeviewer.xdnote.com/de/">
-  <link rel="alternate" hreflang="fr" href="https://gitcodeviewer.xdnote.com/fr/">
-  <link rel="alternate" hreflang="ko" href="https://gitcodeviewer.xdnote.com/ko/">
-  <link rel="alternate" hreflang="id" href="https://gitcodeviewer.xdnote.com/id/">
-  <link rel="alternate" hreflang="tr" href="https://gitcodeviewer.xdnote.com/tr/">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="GitCode Viewer">
-  <meta property="og:title" content="GitCode Viewer - 모바일용 데스크톱급 Git">
-  <meta property="og:description" content="모바일에서 데스크톱급 Git: clone, pull, branch, log, diff. 주요 Git 제공업체, SSH, 비공개 저장소를 지원합니다.">
-  <meta property="og:url" content="https://gitcodeviewer.xdnote.com/ko/">
-  <meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-  <meta property="og:image:alt" content="GitCode Viewer mobile screenshot with code reading interface">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GitCode Viewer - 모바일용 데스크톱급 Git">
-  <meta name="twitter:description" content="모바일에서 clone, pull, branch, log, diff를 수행하고 SSH 및 비공개 저장소를 지원합니다.">
-  <meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <div class="pointer-events-none fixed inset-0 bg-gradient"></div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-label">모바일 앱</p>
-      <h1>Code Viewer</h1>
-      <p class="hero-subtitle">IDE의 읽기 모드를 주머니에.</p>
-      <p class="hero-description">
-        이동 중에 commits를 읽고, 비행 중에 source code를 보나요? GitHub에서 clone하고,
-        GitLab이나 Bitbucket도 syntax highlighting, Markdown rendering과 함께
-        전체 Git history를 오프라인으로 읽을 수 있습니다. 필요할 때 데스크톱급 Git actions도 사용 가능:
-        clone, pull, branch, log, diff.
-      </p>
-
-      <div class="cta-container">
-        <div class="cta-buttons">
-          <!-- Google Play -->
-          <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-            </svg>
-            Google Play에서 받기
-          </a>
-          <!-- App Store -->
-          <span class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-            </svg>
-            App Store
-            <span class="badge">곧 출시</span>
-          </span>
-        </div>
-        <div class="cta-meta">
-          <span>무료 사용</span>
-          <span class="divider"></span>
-          <a href="/privacy/">개인정보 처리방침</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Section -->
-  <section class="screenshots">
-    <div class="container">
-      <h2 class="section-title">실제 화면 보기</h2>
-      <p class="section-subtitle">스와이프해서 둘러보기</p>
-      <div class="gallery">
-        <!-- Device Tabs -->
-        <div class="gallery-tabs">
-          <button class="gallery-tab active" onclick="switchDevice('phone')">휴대폰</button>
-          <button class="gallery-tab" onclick="switchDevice('tablet')">태블릿</button>
-        </div>
-
-        <!-- Phone Gallery -->
-        <div class="gallery-wrapper" id="phone-wrapper">
-          <button class="gallery-btn prev" onclick="scrollGallery('phone-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="phone-gallery">
-            <div class="gallery-slide">
-              <img src="/images/phone-01-codeviewer.jpg" alt="Fullscreen code reading with syntax highlighting on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-02-features.jpg" alt="Markdown, diagram, and notebook documentation reading on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-03-repos.jpg" alt="Repository browser for personal, private, and public projects" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-04-github.jpg" alt="GitHub search and trending repository discovery on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-05-git.jpg" alt="Desktop-class Git actions on mobile including branch, log, and diff" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-06-themes.jpg" alt="Theme customization options for mobile code reading" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('phone-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-
-        <!-- Tablet Gallery -->
-        <div class="gallery-wrapper" id="tablet-wrapper" style="display:none">
-          <button class="gallery-btn prev" onclick="scrollGallery('tablet-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="tablet-gallery">
-            <div class="gallery-slide">
-              <img src="/images/tablet10-01-codeviewer.jpg" alt="Tablet code reading layout with syntax highlighting" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-02-features.jpg" alt="Tablet documentation reading with markdown and diagrams" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-04-github.jpg" alt="Tablet repository discovery with GitHub trending and search" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-05-git.jpg" alt="Tablet Git workflow for pull, branch, log, and diff review" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('tablet-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-    <div class="features-container">
-      <div class="features-header">
-        <h2 class="section-title">모바일을 위해 만든 데스크톱급 Git</h2>
-        <p>기대하는 속도와 명확함으로 clone, pull, branch, log, diff를 수행하세요.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">모바일의 데스크톱급 Git</h3>
-          <p class="feature-description">휴대폰과 태블릿에서 전체 Git workflow 사용: clone, pull, branch, log, diff.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">주요 Git 제공업체 모두 지원</h3>
-          <p class="feature-description">하나의 앱에서 GitHub, GitLab, Bitbucket, Azure DevOps, Gitea에 연결.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">SSH + 비공개 저장소</h3>
-          <p class="feature-description">SSH 연결로 비공개 저장소에 안전하게 접근해 실제 프로젝트 작업을 진행하세요.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">더 적은 마찰로 문서 읽기</h3>
-          <p class="feature-description">README, 시각적 다이어그램, notebook 콘텐츠를 명확하고 집중된 흐름으로 읽으세요.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">중요한 업데이트를 놓치지 마세요</h3>
-          <p class="feature-description">새 앱 업데이트가 있으면 적시에 알림을 받습니다.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">스토리지를 안심하고 관리</h3>
-          <p class="feature-description">무엇이 공간을 차지하는지 확인하고, 문제 전에 repositories를 정리하세요.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">변경 사항을 자신 있게 추적</h3>
-          <p class="feature-description">모바일 workspace를 벗어나지 않고 branch 전환, commit log 확인, diff 리뷰를 수행하세요.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">개인정보 보호 우선, 언제나</h3>
-          <p class="feature-description">analytics도 tracking도 없습니다. 트래픽은 기기와 Git 제공업체 사이로 직접 전달됩니다.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>모바일에서 코드 읽기 시작</h2>
-      <p>무료, 계정 불필요, 휴대폰/태블릿 모두 최적화.</p>
-      <div class="cta-buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-          </svg>
-          Google Play에서 받기
-        </a>
-        <span class="btn btn-secondary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-          </svg>
-          App Store
-          <span class="badge">곧 출시</span>
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <article class="about">
-    <div class="about-content">
-      <h2>GitCode Viewer 소개</h2>
-
-      <p>
-        GitCode Viewer는 <strong>진지한 코드 읽기</strong>를 위해 설계된 모바일 Git 클라이언트이며
-        실제 Git 작업을 지원합니다. desktop-class workflow를 모바일로 가져와 clone, pull,
-        branch, log, diff를 하나의 집중된 앱에서 처리합니다.
-      </p>
-
-      <h3>모바일의 데스크톱급 Git</h3>
-      <p>
-        빠른 미리보기용이 아니라 일상 작업을 위해 만들어졌습니다. repositories, history,
-        changes를 desktop Git 클라이언트에 가까운 흐름으로 이동할 수 있습니다.
-      </p>
-
-      <h3>주요 Git 제공업체 모두 지원</h3>
-      <p>
-        GitHub, GitLab, Bitbucket, Azure DevOps 프로젝트에서 같은 앱을 사용하고,
-        Gitea도 지원합니다.
-      </p>
-
-      <h3>SSH 및 private repository 지원</h3>
-      <p>
-        SSH로 연결해 비공개 저장소를 안전하게 사용하세요. 자격 증명은
-        기기에 남아 있고 트래픽은 Git 제공업체로 직접 전송됩니다.
-      </p>
-
-      <h3>실제 리뷰 작업을 위해 제작</h3>
-      <p>
-        branch 간 변경을 리뷰하고 commit logs를 확인하며 diff를 빠르게 열어
-        읽기 흐름을 끊지 않습니다.
-      </p>
-
-      <h3>탐색 + 개인 repos</h3>
-      <p>
-        인기 있는 오픈소스 프로젝트를 탐색하고 빠르게 검색해 바로 내
-        repositories로 이동하세요.
-      </p>
-
-      <h3>개인정보 및 보안</h3>
-      <p>
-        GitCode Viewer는 사용자 데이터를 수집하지 않습니다. analytics, tracking, telemetry 모두 없습니다.
-        코드와 자격 증명은 기기를 벗어나지 않습니다. 전체
-        <a href="/privacy/">개인정보 처리방침</a>.
-      </p>
-    </div>
-  </article>
-
-  <footer class="i18n-footer">
-    <div class="i18n-inner">
-      <div class="i18n-heading">
-        <p class="i18n-title">언어</p>
-        <a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-          </svg>
-          <span>GitHub</span>
-        </a>
-      </div>
-      <nav class="i18n-links" aria-label="언어 선택">
-        <a class="i18n-link" data-locale="en" href="/">English</a>
-        <a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a>
-        <a class="i18n-link" data-locale="es" href="/es/">Español</a>
-        <a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a>
-        <a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a>
-        <a class="i18n-link" data-locale="ja" href="/ja/">日本語</a>
-        <a class="i18n-link" data-locale="de" href="/de/">Deutsch</a>
-        <a class="i18n-link" data-locale="fr" href="/fr/">Français</a>
-        <a class="i18n-link" data-locale="ko" href="/ko/">한국어</a>
-        <a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a>
-        <a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- JSON-LD for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "GitCode Viewer",
-        "alternateName": "Code Viewer",
-        "applicationCategory": "DeveloperApplication",
-        "applicationSubCategory": "Git Client",
-        "operatingSystem": "Android",
-        "description": "모바일에서 데스크톱급 Git 워크플로를 제공합니다. clone, pull, branch, log, diff를 지원하며 주요 Git 제공업체, SSH 연결, 비공개 저장소를 사용할 수 있습니다.",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "image": "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-        "screenshot": [
-          "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-          "https://gitcodeviewer.xdnote.com/images/phone-05-git.jpg",
-          "https://gitcodeviewer.xdnote.com/images/tablet10-05-git.jpg"
-        ],
-        "featureList": [
-          "모바일 데스크톱급 Git 작업: clone, pull, branch, log, diff",
-          "GitHub, GitLab, Bitbucket, Azure DevOps, Gitea 지원",
-          "SSH 연결 및 비공개 저장소 지원",
-          "문법 하이라이트를 포함한 오프라인 코드 읽기",
-          "저장소 탐색 및 검색"
-        ],
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "XiangDa",
-          "email": "ada87@163.com"
-        }
+<html lang="ko"><head><meta charSet="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="preload" as="image" href="/app-icon.png"/><title>GitCode Viewer - 모바일에서 만나는 데스크톱급 Git</title><meta name="description" content="Git 저장소를 클론해 오프라인으로 읽어 보세요. 30개 이상의 언어 구문 강조, PDF·Office·Jupyter 미리보기, Git Blame과 변경 이력을 지원합니다."/><meta name="keywords" content="git,모바일 git 클라이언트,코드 뷰어,오프라인,clone,pull,branch,log,diff,git blame,github,gitlab,ssh,비공개 저장소,markdown,pdf,jupyter"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/><meta name="author" content="XiangDa"/><meta name="theme-color" content="#0b0d12"/><link rel="canonical" href="https://gitcodeviewer.xdnote.com/ko/"/><link rel="alternate" hrefLang="x-default" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="en" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/"/><link rel="alternate" hrefLang="es" href="https://gitcodeviewer.xdnote.com/es/"/><link rel="alternate" hrefLang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/"/><link rel="alternate" hrefLang="hi" href="https://gitcodeviewer.xdnote.com/hi/"/><link rel="alternate" hrefLang="ja" href="https://gitcodeviewer.xdnote.com/ja/"/><link rel="alternate" hrefLang="de" href="https://gitcodeviewer.xdnote.com/de/"/><link rel="alternate" hrefLang="fr" href="https://gitcodeviewer.xdnote.com/fr/"/><link rel="alternate" hrefLang="ko" href="https://gitcodeviewer.xdnote.com/ko/"/><link rel="alternate" hrefLang="id" href="https://gitcodeviewer.xdnote.com/id/"/><link rel="alternate" hrefLang="tr" href="https://gitcodeviewer.xdnote.com/tr/"/><link rel="icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/app-icon.png"/><meta name="apple-itunes-app" content="app-id=6800189725"/><meta property="og:type" content="website"/><meta property="og:site_name" content="GitCode Viewer"/><meta property="og:title" content="GitCode Viewer - 모바일에서 만나는 데스크톱급 Git"/><meta property="og:description" content="Git 저장소를 클론해 오프라인으로 읽어 보세요. 30개 이상의 언어 구문 강조, PDF·Office·Jupyter 미리보기, Git Blame과 변경 이력을 지원합니다."/><meta property="og:url" content="https://gitcodeviewer.xdnote.com/ko/"/><meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="2600"/><meta property="og:image:alt" content="모바일에서 코드를 표시하는 GitCode Viewer 화면"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="GitCode Viewer - 모바일에서 만나는 데스크톱급 Git"/><meta name="twitter:description" content="Git 저장소를 클론해 오프라인으로 읽어 보세요. 30개 이상의 언어 구문 강조, PDF·Office·Jupyter 미리보기, Git Blame과 변경 이력을 지원합니다."/><meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><link rel="stylesheet" href="/style.css"/></head><body><div class="pointer-events-none fixed inset-0 bg-gradient"></div><header class="site-header"><nav class="site-nav" aria-label="Main"><a class="site-logo" href="/ko/"><img src="/app-icon.png" alt="" width="32" height="32"/><span>GitCode Viewer</span></a><div class="site-nav-right"><details class="lang-switch"><summary aria-label="Language"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.93 9h-3.02a15.7 15.7 0 0 0-1.2-5.02A8.02 8.02 0 0 1 19.93 11ZM12 4.07c.5.62 1.13 1.8 1.5 3.23.1.38.18.78.24 1.2h-3.48c.06-.42.14-.82.24-1.2.37-1.43 1-2.61 1.5-3.23ZM8.29 5.98A15.7 15.7 0 0 0 7.09 11H4.07a8.02 8.02 0 0 1 4.22-5.02ZM4.07 13h3.02c.17 2.04.6 3.8 1.2 5.02A8.02 8.02 0 0 1 4.07 13ZM12 19.93c-.5-.62-1.13-1.8-1.5-3.23-.1-.38-.18-.78-.24-1.2h3.48c-.06.42-.14.82-.24 1.2-.37 1.43-1 2.61-1.5 3.23Zm1.44-4.43h-2.88a13.9 13.9 0 0 1 0-5h2.88a13.9 13.9 0 0 1 0 5Zm2.27 2.52c.6-1.22 1.03-2.98 1.2-5.02h3.02a8.02 8.02 0 0 1-4.22 5.02Z"></path></svg><span>한국어</span></summary><ul class="lang-menu"><li><a class="lang-option" href="/">English</a></li><li><a class="lang-option" href="/zh-cn/">简体中文</a></li><li><a class="lang-option" href="/es/">Español</a></li><li><a class="lang-option" href="/pt-br/">Português (Brasil)</a></li><li><a class="lang-option" href="/hi/">हिन्दी</a></li><li><a class="lang-option" href="/ja/">日本語</a></li><li><a class="lang-option" href="/de/">Deutsch</a></li><li><a class="lang-option" href="/fr/">Français</a></li><li><span class="lang-option active" aria-current="page">한국어</span></li><li><a class="lang-option" href="/id/">Bahasa Indonesia</a></li><li><a class="lang-option" href="/tr/">Türkçe</a></li></ul></details><div class="site-nav-links"><a href="/ko/#features">기능</a><a href="/ko/#faq">자주 묻는 질문</a><a href="/ko/changelog/">업데이트 내역</a><a href="/privacy/">Privacy</a></div></div></nav></header><section class="hero"><div class="hero-content"><p class="hero-label">모바일 Git 클라이언트</p><h1>GitCode Viewer</h1><p class="hero-subtitle">IDE의 코드 탐색 경험을 주머니 속에.</p><p class="hero-description">GitHub, GitLab, Bitbucket 또는 자체 서버에서 저장소를 클론하고 컴퓨터에서처럼 살펴보세요. 30개 이상의 언어 구문 강조, 코드 개요, Blame, 전체 변경 이력을 지원합니다. Markdown, PDF, Office 문서와 Jupyter Notebook도 오프라인에서 바로 열 수 있습니다.</p><div class="cta-container"><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">다운로드하기</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">App Store에서 다운로드</span><span class="btn-name">App Store</span></span></a></div><div class="cta-meta"><span>무료로 사용</span><span class="divider"></span><a href="/privacy/">개인정보 처리방침</a></div></div></div></section><section class="screenshots"><div class="container"><h2 class="section-title">실제 화면 살펴보기</h2><p class="section-subtitle">밀어서 둘러보기</p><div class="gallery"><div class="gallery-tabs"><button class="gallery-tab active" data-device="phone">휴대폰</button><button class="gallery-tab" data-device="tablet">태블릿</button></div><div class="gallery-wrapper" id="phone-wrapper"><button class="gallery-btn prev" data-gallery-id="phone-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="phone-gallery"><div class="gallery-slide"><img src="/images/phone-01-code-720.webp" srcSet="/images/phone-01-code-720.webp 720w, /images/phone-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="모바일 전체 화면 코드 탐색과 구문 강조" loading="lazy" data-full="/images/phone-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-02-docs-720.webp" srcSet="/images/phone-02-docs-720.webp 720w, /images/phone-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="모바일에서 Markdown, 다이어그램, 문서 읽기" loading="lazy" data-full="/images/phone-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-03-repos-720.webp" srcSet="/images/phone-03-repos-720.webp 720w, /images/phone-03-repos-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="개인·비공개·공개 저장소 탐색" loading="lazy" data-full="/images/phone-03-repos-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-04-github-720.webp" srcSet="/images/phone-04-github-720.webp 720w, /images/phone-04-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="모바일 GitHub 검색과 트렌드" loading="lazy" data-full="/images/phone-04-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-05-git-720.webp" srcSet="/images/phone-05-git-720.webp 720w, /images/phone-05-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="모바일에서 branch, log, diff 확인" loading="lazy" data-full="/images/phone-05-git-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-06-themes-720.webp" srcSet="/images/phone-06-themes-720.webp 720w, /images/phone-06-themes-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="모바일 코드 화면 테마 설정" loading="lazy" data-full="/images/phone-06-themes-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="phone-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div><div class="gallery-wrapper" id="tablet-wrapper" style="display:none"><button class="gallery-btn prev" data-gallery-id="tablet-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="tablet-gallery"><div class="gallery-slide"><img src="/images/tablet-01-code-720.webp" srcSet="/images/tablet-01-code-720.webp 720w, /images/tablet-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="태블릿 코드 탐색과 구문 강조" loading="lazy" data-full="/images/tablet-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-02-docs-720.webp" srcSet="/images/tablet-02-docs-720.webp 720w, /images/tablet-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="태블릿에서 Markdown과 다이어그램 읽기" loading="lazy" data-full="/images/tablet-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-03-github-720.webp" srcSet="/images/tablet-03-github-720.webp 720w, /images/tablet-03-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="태블릿 GitHub 검색과 트렌드" loading="lazy" data-full="/images/tablet-03-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-04-git-720.webp" srcSet="/images/tablet-04-git-720.webp 720w, /images/tablet-04-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="태블릿에서 pull, branch, log, diff 확인" loading="lazy" data-full="/images/tablet-04-git-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="tablet-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div></div></div><div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true"><button class="lightbox-close" data-lightbox-close="true" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg></button><button class="lightbox-nav prev" data-lightbox-prev="true" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg></button><img class="lightbox-img" alt=""/><button class="lightbox-nav next" data-lightbox-next="true" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></button></div></section><section class="features" id="features"><div class="features-container"><div class="features-header"><h2 class="section-title">코드를 제대로 읽기 위한 도구</h2><p>작은 화면에서도 코드를 더 빠르게 이해할 수 있도록 모든 기능을 설계했습니다.</p></div><div class="features-grid"><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"></path></svg></div><h3 class="feature-title">데스크톱급 Git</h3><p class="feature-description">Clone, Pull, Branch, Log, Tag, Checkout, Diff를 익숙한 흐름으로 사용할 수 있습니다. 대형 저장소에는 얕은 클론을 활용하세요.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"></path></svg></div><h3 class="feature-title">Blame과 변경 이력</h3><p class="feature-description">줄 단위 Blame과 작성자 정보로 각 코드의 커밋을 추적하고, 원하는 리비전의 파일을 열거나 체크아웃할 수 있습니다.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"></path></svg></div><h3 class="feature-title">30개 이상의 언어</h3><p class="feature-description">Tree-sitter 기반 구문 강조, 코드 개요, 심볼 이동을 제공하며 코드와 식별자 검색도 지원합니다.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"></path></svg></div><h3 class="feature-title">문서와 Notebook</h3><p class="feature-description">PDF, Word, Excel, PowerPoint, CSV, Jupyter를 앱 안에서 읽으세요. Markdown은 Mermaid, LaTeX, 플로팅 목차를 지원합니다.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"></path></svg></div><h3 class="feature-title">GitHub 프로젝트 찾기</h3><p class="feature-description">내장된 트렌드와 검색으로 프로젝트를 찾고 읽기 목록에 바로 클론할 수 있습니다.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg></div><h3 class="feature-title">다양한 Git 서비스</h3><p class="feature-description">GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB와 자체 서버에 SSH 또는 토큰으로 연결합니다.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v14"></path></svg></div><h3 class="feature-title">오프라인 우선</h3><p class="feature-description">한 번 클론하면 어디서든 읽을 수 있습니다. 코드, 문서, Git 이력이 네트워크 없이도 유지됩니다.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 18h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 4v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 10v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 16v4"></path></svg></div><h3 class="feature-title">테마와 앱 아이콘</h3><p class="feature-description">테마, 저장소 카드, 전체 화면 읽기, 앱 아이콘을 원하는 방식으로 설정할 수 있습니다.</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"></path></svg></div><h3 class="feature-title">개인정보 보호 우선</h3><p class="feature-description">분석, 추적, 텔레메트리가 없습니다. 통신은 기기와 Git 서비스 사이에서만 이루어집니다.</p></div></div></div></section><section class="faq" id="faq" aria-labelledby="faq-title"><div class="faq-container"><div class="faq-header"><h2 id="faq-title">자주 묻는 질문</h2><p>더 궁금한 점이 있나요? <a href="mailto:ada87@163.com">문의하기</a>.</p></div><div class="faq-list"><details class="faq-item"><summary><span>GitCode Viewer는 무료인가요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">네. 가입 없이 사용할 수 있으며 일부 고급 기능은 프리미엄 버전에서 제공됩니다.</p></details><details class="faq-item"><summary><span>어떤 언어와 파일 형식을 지원하나요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">30개 이상의 프로그래밍 언어와 100개 이상의 확장자에 구문 강조를 제공하며, 주요 언어는 코드 개요와 심볼 이동도 지원합니다.</p></details><details class="faq-item"><summary><span>어떤 문서를 열 수 있나요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV, TSV, Mermaid, Jupyter를 지원합니다.</p></details><details class="faq-item"><summary><span>어떤 Git 서비스를 지원하나요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB와 자체 Git 서버를 지원합니다.</p></details><details class="faq-item"><summary><span>SSH와 비공개 저장소를 지원하나요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">네. SSH 또는 액세스 토큰을 사용할 수 있으며 인증 정보는 기기에만 저장됩니다.</p></details><details class="faq-item"><summary><span>오프라인으로 저장소를 읽을 수 있나요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">네. 클론 후에는 코드, 문서와 전체 Git 이력을 오프라인으로 사용할 수 있습니다.</p></details><details class="faq-item"><summary><span>프리미엄을 Android와 iOS에서 함께 쓸 수 있나요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">아니요. 구매는 각 앱 스토어에서 별도로 관리됩니다.</p></details><details class="faq-item"><summary><span>사용자 데이터를 수집하나요?</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">아니요. 분석, 추적, 텔레메트리를 수집하지 않습니다.</p></details></div></div></section><section class="cta-section"><div class="cta-content"><h2>모바일에서 코드 읽기 시작</h2><p>가입 없이 무료로 사용할 수 있으며 휴대폰과 태블릿에 최적화되어 있습니다.</p><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">다운로드하기</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">App Store에서 다운로드</span><span class="btn-name">App Store</span></span></a></div></div></section><article class="about"><div class="about-content"><h2>GitCode Viewer 소개</h2><p>GitCode Viewer는 코드를 제대로 읽는 데 집중한 모바일 Git 클라이언트입니다. 어디서든 저장소를 클론하고, 변경을 추적하고, 프로젝트를 이해하세요.</p><h3>모바일의 데스크톱급 Git</h3><p>필수 Git 작업을 모바일에서도 자연스럽게 처리하며, 얕은 클론으로 대형 저장소도 부담 없이 다룰 수 있습니다.</p><h3>코드 변경의 맥락 추적</h3><p>줄 단위 Blame, 작성자 정보, 과거 리비전으로 컴퓨터 없이도 변경 이유를 확인할 수 있습니다.</p><h3>저장소의 모든 파일 읽기</h3><p>코드, 설정 파일, Markdown, PDF, Office 문서와 Jupyter Notebook을 저장소 안에서 바로 엽니다.</p><h3>Git 서비스 연결</h3><p>주요 Git 서비스와 자체 서버를 지원하며 사내망에서도 SSH 또는 토큰으로 연결할 수 있습니다.</p><h3>오프라인과 개인정보 보호</h3><p>클론 후에는 코드, 문서, 이력을 오프라인으로 읽을 수 있습니다. 사용 데이터는 수집하지 않습니다. 자세한 내용은 <a href="/privacy/">개인정보 처리방침</a>.</p></div></article><footer class="i18n-footer"><div class="i18n-inner"><div class="i18n-heading"><p class="i18n-title">언어</p><a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg><span>GitHub</span></a></div><nav class="i18n-links" aria-label="Language selector"><a class="i18n-link" data-locale="en" href="/">English</a><a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a><a class="i18n-link" data-locale="es" href="/es/">Español</a><a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a><a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a><a class="i18n-link" data-locale="ja" href="/ja/">日本語</a><a class="i18n-link" data-locale="de" href="/de/">Deutsch</a><a class="i18n-link" data-locale="fr" href="/fr/">Français</a><a class="i18n-link" data-locale="ko" href="/ko/">한국어</a><a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a><a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a></nav></div></footer><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "GitCode Viewer",
+      "alternateName": "Code Viewer",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Git Client",
+      "operatingSystem": "Android, iOS",
+      "description": "Clone, Pull, Branch, Log, Diff, Blame를 지원하는 모바일 Git 클라이언트. 오프라인 읽기와 PDF·Office·Jupyter 미리보기를 제공합니다.",
+      "url": "https://gitcodeviewer.xdnote.com/ko/",
+      "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "image": "https://gitcodeviewer.xdnote.com/images/og-image.jpg",
+      "screenshot": [
+        "https://gitcodeviewer.xdnote.com/images/phone-01-code-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/phone-05-git-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/tablet-04-git-720.webp"
+      ],
+      "featureList": [
+        "모바일의 데스크톱급 Git",
+        "줄 단위 Blame과 변경 이력",
+        "30개 이상 언어의 구문 강조와 개요",
+        "PDF·Office·Jupyter 미리보기",
+        "Mermaid와 LaTeX를 지원하는 Markdown",
+        "Git 서비스와 자체 서버",
+        "SSH와 비공개 저장소",
+        "텔레메트리 없는 오프라인 읽기"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       },
-      {
-        "@type": "WebSite",
-        "name": "GitCode Viewer",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "inLanguage": "ko",
-        "description": "앱 기능, 스크린샷, 설치 링크를 제공하는 GitCode Viewer 공식 웹사이트입니다."
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer는 Android에 적합한 모바일 Git 클라이언트인가요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "네. GitCode Viewer는 Android에서 데스크톱급 Git 워크플로를 제공하며 clone, pull, branch, log, diff를 지원합니다."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Android에서 Git 저장소를 clone/pull 할 수 있나요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "네. GitCode Viewer는 모바일에서 직접 clone과 pull을 지원합니다."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "branch 전환, commit log, diff review를 지원하나요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "네. GitCode Viewer는 모바일에서 branch 작업, commit log 탐색, 파일 diff review를 지원합니다."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer는 어떤 Git 제공업체를 지원하나요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "GitCode Viewer는 GitHub, GitLab, Bitbucket, Azure DevOps, Gitea를 지원합니다."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer는 SSH와 비공개 저장소를 지원하나요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "네. GitCode Viewer는 SSH 연결과 비공개 저장소를 지원합니다."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "모바일에서 저장소를 오프라인으로 읽을 수 있나요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "네. clone 후에는 문법 하이라이트와 히스토리 탐색이 포함된 오프라인 읽기를 지원합니다."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer는 사용자 데이터나 추적 analytics를 수집하나요?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "아니요. GitCode Viewer는 analytics나 추적 데이터를 수집하지 않습니다."
-            }
-          }
-        ]
+      "author": {
+        "@type": "Person",
+        "name": "XiangDa",
+        "email": "ada87@163.com"
       }
-    ]
-  }
-  </script>
-
-  <script src="/script.js"></script>
-</body>
-</html>
-
-
-
+    },
+    {
+      "@type": "WebSite",
+      "name": "GitCode Viewer",
+      "url": "https://gitcodeviewer.xdnote.com/",
+      "inLanguage": "ko",
+      "description": "Clone, Pull, Branch, Log, Diff, Blame를 지원하는 모바일 Git 클라이언트. 오프라인 읽기와 PDF·Office·Jupyter 미리보기를 제공합니다."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "GitCode Viewer는 무료인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. 가입 없이 사용할 수 있으며 일부 고급 기능은 프리미엄 버전에서 제공됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "어떤 언어와 파일 형식을 지원하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "30개 이상의 프로그래밍 언어와 100개 이상의 확장자에 구문 강조를 제공하며, 주요 언어는 코드 개요와 심볼 이동도 지원합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "어떤 문서를 열 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV, TSV, Mermaid, Jupyter를 지원합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "어떤 Git 서비스를 지원하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB와 자체 Git 서버를 지원합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SSH와 비공개 저장소를 지원하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. SSH 또는 액세스 토큰을 사용할 수 있으며 인증 정보는 기기에만 저장됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "오프라인으로 저장소를 읽을 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. 클론 후에는 코드, 문서와 전체 Git 이력을 오프라인으로 사용할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "프리미엄을 Android와 iOS에서 함께 쓸 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. 구매는 각 앱 스토어에서 별도로 관리됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "사용자 데이터를 수집하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. 분석, 추적, 텔레메트리를 수집하지 않습니다."
+          }
+        }
+      ]
+    }
+  ]
+}</script><script src="/script.js"></script></body></html>

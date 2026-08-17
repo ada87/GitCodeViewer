@@ -1,451 +1,120 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitCode Viewer - モバイルで使えるデスクトップ級 Git</title>
-  <meta name="description" content="モバイルでのデスクトップクラスのGit: clone、pull、branch、log、およびdiff。主要なGitプロバイダーと連携し、SSHをサポートし、プライベートリポジトリをサポートします。">
-  <meta name="keywords" content="git, mobile git client, clone, pull, branch, log, diff, github, gitlab, bitbucket, azure devops, gitea, ssh, private repos">
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
-  <meta name="author" content="XiangDa">
-  <meta name="theme-color" content="#0b0d12">
-  <link rel="canonical" href="https://gitcodeviewer.xdnote.com/ja/">
-  <link rel="alternate" hreflang="x-default" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="en" href="https://gitcodeviewer.xdnote.com/">
-  <link rel="alternate" hreflang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/">
-  <link rel="alternate" hreflang="es" href="https://gitcodeviewer.xdnote.com/es/">
-  <link rel="alternate" hreflang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/">
-  <link rel="alternate" hreflang="hi" href="https://gitcodeviewer.xdnote.com/hi/">
-  <link rel="alternate" hreflang="ja" href="https://gitcodeviewer.xdnote.com/ja/">
-  <link rel="alternate" hreflang="de" href="https://gitcodeviewer.xdnote.com/de/">
-  <link rel="alternate" hreflang="fr" href="https://gitcodeviewer.xdnote.com/fr/">
-  <link rel="alternate" hreflang="ko" href="https://gitcodeviewer.xdnote.com/ko/">
-  <link rel="alternate" hreflang="id" href="https://gitcodeviewer.xdnote.com/id/">
-  <link rel="alternate" hreflang="tr" href="https://gitcodeviewer.xdnote.com/tr/">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="GitCode Viewer">
-  <meta property="og:title" content="GitCode Viewer - モバイルで使えるデスクトップ級 Git">
-  <meta property="og:description" content="モバイルでのデスクトップクラスのGit: clone、pull、branch、log、およびdiff。主要なGitプロバイダーと連携し、SSHとプライベートリポジトリをサポートします。">
-  <meta property="og:url" content="https://gitcodeviewer.xdnote.com/ja/">
-  <meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-  <meta property="og:image:alt" content="GitCode Viewer mobile screenshot with code reading interface">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GitCode Viewer - モバイルで使えるデスクトップ級 Git">
-  <meta name="twitter:description" content="モバイルで clone、pull、branch、log、diff。SSH とプライベートリポジトリにも対応。">
-  <meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg">
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <div class="pointer-events-none fixed inset-0 bg-gradient"></div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-label">モバイルアプリ</p>
-      <h1>Code Viewer</h1>
-      <p class="hero-subtitle">IDE の読書モードをポケットに。</p>
-      <p class="hero-description">
-        電車でコミットを読んでいますか？フライト中にソースコードを勉強していますか？ GitHubからのクローン、
-        GitLab、またはBitbucket -構文の強調表示、Markdownレンダリング、および
-        完全にオフラインの完全なGit履歴。デスクトップクラスのGitアクションも
-        必要なもの： clone、pull、branch、log、diff。
-      </p>
-
-      <div class="cta-container">
-        <div class="cta-buttons">
-          <!-- Google Play -->
-          <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-            </svg>
-            Google Playで入手できます
-          </a>
-          <!-- App Store -->
-          <span class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-            </svg>
-            App Store
-            <span class="badge">すぐに</span>
-          </span>
-        </div>
-        <div class="cta-meta">
-          <span>自由に使用</span>
-          <span class="divider"></span>
-          <a href="/privacy/">プライバシーポリシー</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Section -->
-  <section class="screenshots">
-    <div class="container">
-      <h2 class="section-title">動作を見る</h2>
-      <p class="section-subtitle">スワイプして検索</p>
-      <div class="gallery">
-        <!-- Device Tabs -->
-        <div class="gallery-tabs">
-          <button class="gallery-tab active" onclick="switchDevice('phone')">スマホ</button>
-          <button class="gallery-tab" onclick="switchDevice('tablet')">タブレット</button>
-        </div>
-
-        <!-- Phone Gallery -->
-        <div class="gallery-wrapper" id="phone-wrapper">
-          <button class="gallery-btn prev" onclick="scrollGallery('phone-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="phone-gallery">
-            <div class="gallery-slide">
-              <img src="/images/phone-01-codeviewer.jpg" alt="Fullscreen code reading with syntax highlighting on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-02-features.jpg" alt="Markdown, diagram, and notebook documentation reading on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-03-repos.jpg" alt="Repository browser for personal, private, and public projects" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-04-github.jpg" alt="GitHub search and trending repository discovery on mobile" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-05-git.jpg" alt="Desktop-class Git actions on mobile including branch, log, and diff" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/phone-06-themes.jpg" alt="Theme customization options for mobile code reading" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('phone-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-
-        <!-- Tablet Gallery -->
-        <div class="gallery-wrapper" id="tablet-wrapper" style="display:none">
-          <button class="gallery-btn prev" onclick="scrollGallery('tablet-gallery', -1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <div class="gallery-track" id="tablet-gallery">
-            <div class="gallery-slide">
-              <img src="/images/tablet10-01-codeviewer.jpg" alt="Tablet code reading layout with syntax highlighting" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-02-features.jpg" alt="Tablet documentation reading with markdown and diagrams" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-04-github.jpg" alt="Tablet repository discovery with GitHub trending and search" loading="lazy">
-            </div>
-            <div class="gallery-slide">
-              <img src="/images/tablet10-05-git.jpg" alt="Tablet Git workflow for pull, branch, log, and diff review" loading="lazy">
-            </div>
-          </div>
-          <button class="gallery-btn next" onclick="scrollGallery('tablet-gallery', 1)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="features">
-    <div class="features-container">
-      <div class="features-header">
-        <h2 class="section-title">モバイル向けに構築されたデスクトップクラスのGit</h2>
-        <p>期待される速度と明瞭さで、クローン、プル、ブランチ、ログ、および差分を作成します。</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">モバイルでのデスクトップクラスのGit</h3>
-          <p class="feature-description">電話とタブレットで、クローン、プル、ブランチ、ログ、差分の完全なGitワークフローを使用します。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">すべての主要なGitプロバイダー</h3>
-          <p class="feature-description">1つのアプリからGitHub、GitLab、Bitbucket、Azure DevOps、Giteaに接続します。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">SSH +プライベートリポジトリ</h3>
-          <p class="feature-description">SSH接続を使用し、実際のプロジェクト作業のためにプライベートリポジトリに安全にアクセスします。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">わずらわしさの少ないドキュメントを読む</h3>
-          <p class="feature-description">READMEファイル、視覚的なダイアグラム、ノートブックのコンテンツを、明確で焦点を絞った読み取りフローで開きます。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">重要なアップデートを見逃さない</h3>
-          <p class="feature-description">新しいアプリのアップデートが利用可能になったときにタイムリーなリマインダーを受け取ります。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">自信を持ってストレージを管理する</h3>
-          <p class="feature-description">ストレージが問題になる前に、スペースを占有するものを確認し、リポジトリをクリーンアップします。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-            </svg>
-          </div>
-          <h3 class="feature-title">自信を持って変更に従う</h3>
-          <p class="feature-description">モバイルワークスペースを離れることなく、ブランチの切り替え、コミットログの検査、差分の確認ができます。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
-            </svg>
-          </div>
-          <h3 class="feature-title">常にプライバシー第一</h3>
-          <p class="feature-description">分析も追跡もありません。トラフィックは、デバイスとGitプロバイダーの間を直接行き来します。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>モバイルでコードの読み取りを開始する</h2>
-      <p>無料で使用でき、アカウントは不要で、スマートフォンとタブレットの両方に最適化されています。</p>
-      <div class="cta-buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033ZM17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72ZM14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27ZM14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" />
-          </svg>
-          Google Playで入手できます
-        </a>
-        <span class="btn btn-secondary">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z" />
-          </svg>
-          App Store
-          <span class="badge">すぐに</span>
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <article class="about">
-    <div class="about-content">
-      <h2>GitCode Viewerについて</h2>
-
-      <p>
-        GitCode Viewer は <strong>本格的なコード閲覧</strong> のために設計されたモバイル Git クライアントです。
-        そして実際のGit操作です。モバイルにデスクトップクラスのワークフローをもたらします：クローン、プル、
-        ブランチ、ログ、差分を1つのフォーカスアプリにまとめました。
-      </p>
-
-      <h3>モバイルでのデスクトップクラスのGit</h3>
-      <p>
-        簡単なプレビューだけでなく、日々の仕事のために構築されています。リポジトリ、履歴、
-        そして、デスクトップのGitクライアントに近いように感じるフローで変化します。
-      </p>
-
-      <h3>すべての主要なGitプロバイダー</h3>
-      <p>
-        GitHub、GitLab、Bitbucket、Azure DevOps、
-        そしてGitea。
-      </p>
-
-      <h3>SSHとプライベートリポジトリのサポート</h3>
-      <p>
-        SSHに接続し、プライベートリポジトリを安全に使用します。認証情報はオンのままになります
-        トラフィックはGitプロバイダーに直接送られます。
-      </p>
-
-      <h3>実際のレビュー作業のために構築された</h3>
-      <p>
-        ブランチ間の変更を確認し、コミットログを検査し、差分をすばやく開く
-        あなたの読書の流れを壊すことなく。
-      </p>
-
-      <h3>ディスカバリー＋パーソナルリポジトリ</h3>
-      <p>
-        人気のオープンソースプロジェクトを探索し、すばやく検索して、自分のプロジェクトに直接飛び込みましょう
-        同じアプリからのリポジトリ。
-      </p>
-
-      <h3>プライバシー＆セキュリティ</h3>
-      <p>
-        GitCode Viewerは、ゼロユーザーデータを収集します。分析も、追跡も、テレメトリもありません。
-        コードと認証情報がデバイスから離れることはありません。全文を読む
-        <a href="/privacy/">プライバシーポリシー</a>.
-      </p>
-    </div>
-  </article>
-
-  <footer class="i18n-footer">
-    <div class="i18n-inner">
-      <div class="i18n-heading">
-        <p class="i18n-title">言語</p>
-        <a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-          </svg>
-          <span>GitHub</span>
-        </a>
-      </div>
-      <nav class="i18n-links" aria-label="言語セレクター">
-        <a class="i18n-link" data-locale="en" href="/">English</a>
-        <a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a>
-        <a class="i18n-link" data-locale="es" href="/es/">Español</a>
-        <a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a>
-        <a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a>
-        <a class="i18n-link" data-locale="ja" href="/ja/">日本語</a>
-        <a class="i18n-link" data-locale="de" href="/de/">Deutsch</a>
-        <a class="i18n-link" data-locale="fr" href="/fr/">Français</a>
-        <a class="i18n-link" data-locale="ko" href="/ko/">한국어</a>
-        <a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a>
-        <a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a>
-      </nav>
-    </div>
-  </footer>
-
-  <!-- JSON-LD for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "GitCode Viewer",
-        "alternateName": "Code Viewer",
-        "applicationCategory": "DeveloperApplication",
-        "applicationSubCategory": "Git Client",
-        "operatingSystem": "Android",
-        "description": "モバイルでデスクトップ級の Git ワークフローを実現。clone、pull、branch、log、diff に対応し、主要な Git プロバイダー、SSH、プライベートリポジトリをサポート。",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
-        "image": "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-        "screenshot": [
-          "https://gitcodeviewer.xdnote.com/images/phone-01-codeviewer.jpg",
-          "https://gitcodeviewer.xdnote.com/images/phone-05-git.jpg",
-          "https://gitcodeviewer.xdnote.com/images/tablet10-05-git.jpg"
-        ],
-        "featureList": [
-          "モバイルでデスクトップ級 Git 操作: clone, pull, branch, log, diff",
-          "GitHub、GitLab、Bitbucket、Azure DevOps、Gitea に対応",
-          "SSH 接続とプライベートリポジトリをサポート",
-          "シンタックスハイライト付きのオフラインコード閲覧",
-          "リポジトリの発見と検索"
-        ],
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "XiangDa",
-          "email": "ada87@163.com"
-        }
+<html lang="ja"><head><meta charSet="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="preload" as="image" href="/app-icon.png"/><title>GitCode Viewer - モバイルで本格的なGitとコード閲覧</title><meta name="description" content="Gitリポジトリをクローンしてオフラインで閲覧。30以上の言語、PDF・Office・Jupyterのプレビュー、Blameと履歴に対応。"/><meta name="keywords" content="git,モバイル,コード閲覧,クローン,branch,diff,blame,github,gitlab,ssh,プライベートリポジトリ,markdown,pdf,jupyter"/><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/><meta name="author" content="XiangDa"/><meta name="theme-color" content="#0b0d12"/><link rel="canonical" href="https://gitcodeviewer.xdnote.com/ja/"/><link rel="alternate" hrefLang="x-default" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="en" href="https://gitcodeviewer.xdnote.com/"/><link rel="alternate" hrefLang="zh-CN" href="https://gitcodeviewer.xdnote.com/zh-cn/"/><link rel="alternate" hrefLang="es" href="https://gitcodeviewer.xdnote.com/es/"/><link rel="alternate" hrefLang="pt-BR" href="https://gitcodeviewer.xdnote.com/pt-br/"/><link rel="alternate" hrefLang="hi" href="https://gitcodeviewer.xdnote.com/hi/"/><link rel="alternate" hrefLang="ja" href="https://gitcodeviewer.xdnote.com/ja/"/><link rel="alternate" hrefLang="de" href="https://gitcodeviewer.xdnote.com/de/"/><link rel="alternate" hrefLang="fr" href="https://gitcodeviewer.xdnote.com/fr/"/><link rel="alternate" hrefLang="ko" href="https://gitcodeviewer.xdnote.com/ko/"/><link rel="alternate" hrefLang="id" href="https://gitcodeviewer.xdnote.com/id/"/><link rel="alternate" hrefLang="tr" href="https://gitcodeviewer.xdnote.com/tr/"/><link rel="icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/app-icon.png"/><meta name="apple-itunes-app" content="app-id=6800189725"/><meta property="og:type" content="website"/><meta property="og:site_name" content="GitCode Viewer"/><meta property="og:title" content="GitCode Viewer - モバイルで本格的なGitとコード閲覧"/><meta property="og:description" content="Gitリポジトリをクローンしてオフラインで閲覧。30以上の言語、PDF・Office・Jupyterのプレビュー、Blameと履歴に対応。"/><meta property="og:url" content="https://gitcodeviewer.xdnote.com/ja/"/><meta property="og:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="2600"/><meta property="og:image:alt" content="GitCode Viewerでコードを閲覧するモバイル画面"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="GitCode Viewer - モバイルで本格的なGitとコード閲覧"/><meta name="twitter:description" content="Gitリポジトリをクローンしてオフラインで閲覧。30以上の言語、PDF・Office・Jupyterのプレビュー、Blameと履歴に対応。"/><meta name="twitter:image" content="https://gitcodeviewer.xdnote.com/images/og-image.jpg"/><link rel="stylesheet" href="/style.css"/></head><body><div class="pointer-events-none fixed inset-0 bg-gradient"></div><header class="site-header"><nav class="site-nav" aria-label="Main"><a class="site-logo" href="/ja/"><img src="/app-icon.png" alt="" width="32" height="32"/><span>GitCode Viewer</span></a><div class="site-nav-right"><details class="lang-switch"><summary aria-label="Language"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm7.93 9h-3.02a15.7 15.7 0 0 0-1.2-5.02A8.02 8.02 0 0 1 19.93 11ZM12 4.07c.5.62 1.13 1.8 1.5 3.23.1.38.18.78.24 1.2h-3.48c.06-.42.14-.82.24-1.2.37-1.43 1-2.61 1.5-3.23ZM8.29 5.98A15.7 15.7 0 0 0 7.09 11H4.07a8.02 8.02 0 0 1 4.22-5.02ZM4.07 13h3.02c.17 2.04.6 3.8 1.2 5.02A8.02 8.02 0 0 1 4.07 13ZM12 19.93c-.5-.62-1.13-1.8-1.5-3.23-.1-.38-.18-.78-.24-1.2h3.48c-.06.42-.14.82-.24 1.2-.37 1.43-1 2.61-1.5 3.23Zm1.44-4.43h-2.88a13.9 13.9 0 0 1 0-5h2.88a13.9 13.9 0 0 1 0 5Zm2.27 2.52c.6-1.22 1.03-2.98 1.2-5.02h3.02a8.02 8.02 0 0 1-4.22 5.02Z"></path></svg><span>日本語</span></summary><ul class="lang-menu"><li><a class="lang-option" href="/">English</a></li><li><a class="lang-option" href="/zh-cn/">简体中文</a></li><li><a class="lang-option" href="/es/">Español</a></li><li><a class="lang-option" href="/pt-br/">Português (Brasil)</a></li><li><a class="lang-option" href="/hi/">हिन्दी</a></li><li><span class="lang-option active" aria-current="page">日本語</span></li><li><a class="lang-option" href="/de/">Deutsch</a></li><li><a class="lang-option" href="/fr/">Français</a></li><li><a class="lang-option" href="/ko/">한국어</a></li><li><a class="lang-option" href="/id/">Bahasa Indonesia</a></li><li><a class="lang-option" href="/tr/">Türkçe</a></li></ul></details><div class="site-nav-links"><a href="/ja/#features">機能</a><a href="/ja/#faq">よくある質問</a><a href="/ja/changelog/">更新履歴</a><a href="/privacy/">Privacy</a></div></div></nav></header><section class="hero"><div class="hero-content"><p class="hero-label">モバイルGitクライアント</p><h1>GitCode Viewer</h1><p class="hero-subtitle">本格的なコード閲覧を、いつでも手元に。</p><p class="hero-description">GitHub、GitLab、Backlog、または自分のサーバーからリポジトリをクローン。30以上の言語のハイライト、アウトライン、Blame、履歴を使って、PCのようにコードを読めます。Markdown、PDF、Office、Jupyterもオフラインでその場で開けます。</p><div class="cta-container"><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">GOOGLE PLAY で手に入れよう</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">APP STORE からダウンロード</span><span class="btn-name">App Store</span></span></a></div><div class="cta-meta"><span>無料で利用可能</span><span class="divider"></span><a href="/privacy/">プライバシーポリシー</a></div></div></div></section><section class="screenshots"><div class="container"><h2 class="section-title">実際の画面</h2><p class="section-subtitle">スワイプして見る</p><div class="gallery"><div class="gallery-tabs"><button class="gallery-tab active" data-device="phone">スマートフォン</button><button class="gallery-tab" data-device="tablet">タブレット</button></div><div class="gallery-wrapper" id="phone-wrapper"><button class="gallery-btn prev" data-gallery-id="phone-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="phone-gallery"><div class="gallery-slide"><img src="/images/phone-01-code-720.webp" srcSet="/images/phone-01-code-720.webp 720w, /images/phone-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="モバイルでの全画面コード閲覧と構文ハイライト" loading="lazy" data-full="/images/phone-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-02-docs-720.webp" srcSet="/images/phone-02-docs-720.webp 720w, /images/phone-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="Markdown、図表、文書の閲覧" loading="lazy" data-full="/images/phone-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-03-repos-720.webp" srcSet="/images/phone-03-repos-720.webp 720w, /images/phone-03-repos-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="個人・非公開・公開リポジトリのブラウズ" loading="lazy" data-full="/images/phone-03-repos-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-04-github-720.webp" srcSet="/images/phone-04-github-720.webp 720w, /images/phone-04-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="モバイルでのGitHub検索とトレンド" loading="lazy" data-full="/images/phone-04-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-05-git-720.webp" srcSet="/images/phone-05-git-720.webp 720w, /images/phone-05-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="branch、log、diffなどのGit操作" loading="lazy" data-full="/images/phone-05-git-1440.webp"/></div><div class="gallery-slide"><img src="/images/phone-06-themes-720.webp" srcSet="/images/phone-06-themes-720.webp 720w, /images/phone-06-themes-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="コード閲覧用テーマのカスタマイズ" loading="lazy" data-full="/images/phone-06-themes-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="phone-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div><div class="gallery-wrapper" id="tablet-wrapper" style="display:none"><button class="gallery-btn prev" data-gallery-id="tablet-gallery" data-gallery-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"></path></svg></button><div class="gallery-track" id="tablet-gallery"><div class="gallery-slide"><img src="/images/tablet-01-code-720.webp" srcSet="/images/tablet-01-code-720.webp 720w, /images/tablet-01-code-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="タブレットでのコード閲覧" loading="lazy" data-full="/images/tablet-01-code-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-02-docs-720.webp" srcSet="/images/tablet-02-docs-720.webp 720w, /images/tablet-02-docs-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="タブレットでの文書と図表の閲覧" loading="lazy" data-full="/images/tablet-02-docs-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-03-github-720.webp" srcSet="/images/tablet-03-github-720.webp 720w, /images/tablet-03-github-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="タブレットでのGitHub検索とトレンド" loading="lazy" data-full="/images/tablet-03-github-1440.webp"/></div><div class="gallery-slide"><img src="/images/tablet-04-git-720.webp" srcSet="/images/tablet-04-git-720.webp 720w, /images/tablet-04-git-1440.webp 1440w" sizes="(max-width: 640px) 80vw, 360px" alt="タブレットでのpull、branch、log、diff" loading="lazy" data-full="/images/tablet-04-git-1440.webp"/></div></div><button class="gallery-btn next" data-gallery-id="tablet-gallery" data-gallery-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></button></div></div></div><div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true"><button class="lightbox-close" data-lightbox-close="true" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg></button><button class="lightbox-nav prev" data-lightbox-prev="true" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg></button><img class="lightbox-img" alt=""/><button class="lightbox-nav next" data-lightbox-next="true" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></button></div></section><section class="features" id="features"><div class="features-container"><div class="features-header"><h2 class="section-title">コードをじっくり読むために</h2><p>小さな画面でも、リポジトリを理解しやすくすることを最優先にしています。</p></div><div class="features-grid"><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75v6.75m0 0-3-3m3 3 3-3m-8.25 6a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"></path></svg></div><h3 class="feature-title">モバイルでも本格Git</h3><p class="feature-description">clone、pull、branch、log、tag、checkout、diffに対応。大きなリポジトリは浅いクローンで扱えます。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"></path></svg></div><h3 class="feature-title">Blameと履歴</h3><p class="feature-description">行ごとのBlameと作者情報で変更の由来を確認。任意のリビジョンのファイルを開けます。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"></path></svg></div><h3 class="feature-title">30以上の言語とアウトライン</h3><p class="feature-description">Tree-sitterによるハイライト、アウトライン、シンボル移動と、コード・識別子の検索に対応。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5 1.125A1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"></path></svg></div><h3 class="feature-title">文書とノートブック</h3><p class="feature-description">PDF、Word、Excel、PowerPoint、CSV、Jupyterをアプリ内で閲覧。MarkdownはMermaid、LaTeX、目次に対応。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"></path></svg></div><h3 class="feature-title">GitHubを探す</h3><p class="feature-description">トレンドと検索を内蔵。気になるプロジェクトを見つけたら、そのままクローンできます。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg></div><h3 class="feature-title">さまざまなGitサービス</h3><p class="feature-description">GitHub、GitLab、Bitbucket、Azure DevOps、Gitea、Gitee、CNB、自前サーバーにSSHまたはトークンで接続。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2Z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v14"></path></svg></div><h3 class="feature-title">オフライン優先</h3><p class="feature-description">一度クローンすれば、コード、文書、履歴をネットワークなしでも読めます。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 18h16"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 4v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 10v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 16v4"></path></svg></div><h3 class="feature-title">テーマとアイコン</h3><p class="feature-description">テーマ、リポジトリカード、全画面表示、アプリアイコンを好みに合わせて設定できます。</p></div><div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"></path></svg></div><h3 class="feature-title">プライバシーを重視</h3><p class="feature-description">利用分析、追跡、テレメトリーは行いません。通信は端末とGitサービスの間だけです。</p></div></div></div></section><section class="faq" id="faq" aria-labelledby="faq-title"><div class="faq-container"><div class="faq-header"><h2 id="faq-title">よくある質問</h2><p>ほかに質問がある場合は、 <a href="mailto:ada87@163.com">お問い合わせください</a>.</p></div><div class="faq-list"><details class="faq-item"><summary><span>GitCode Viewerは無料ですか？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">登録不要で無料で使えます。一部の高度な機能はプレミアム版で利用できます。</p></details><details class="faq-item"><summary><span>対応する言語と形式は？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">30以上のプログラミング言語と100以上の拡張子に対応し、主要言語ではアウトラインとシンボル移動も使えます。</p></details><details class="faq-item"><summary><span>どの文書をプレビューできますか？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">Markdown、PDF、Word、Excel、PowerPoint、RTF、CSV、TSV、Mermaid、Jupyterに対応しています。</p></details><details class="faq-item"><summary><span>対応するGitサービスは？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">GitHub、GitLab、Bitbucket、Azure DevOps、Gitea、Gitee、CNB、自前Gitサーバーに対応します。</p></details><details class="faq-item"><summary><span>SSHと非公開リポジトリは使えますか？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">はい。SSHまたはアクセストークンを利用でき、認証情報は端末内だけに保存されます。</p></details><details class="faq-item"><summary><span>オフラインで読めますか？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">はい。クローン後はコード、文書、履歴をオフラインで閲覧できます。</p></details><details class="faq-item"><summary><span>プレミアム版はAndroidとiOSで共有できますか？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">共有できません。購入は各アプリストアで個別に処理されます。</p></details><details class="faq-item"><summary><span>ユーザーデータを収集しますか？</span><svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg></summary><p class="faq-answer">利用分析、追跡、テレメトリーは収集しません。</p></details></div></div></section><section class="cta-section"><div class="cta-content"><h2>モバイルでコードを読み始めよう</h2><p>無料、登録不要。スマートフォンとタブレットに最適化。</p><div class="cta-buttons"><a href="https://play.google.com/store/apps/details?id=com.xdnote.codeviewer" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><svg viewBox="0 0 24 24"><path d="M3.827 1.353a1.2 1.2 0 0 0-.527 1.025v19.244a1.2 1.2 0 0 0 .527 1.025l.058.033L14.15 12.415v-.83L3.885 1.32l-.058.033Z" fill="#00A0FF"></path><path d="M14.15 11.585V11.315l3.15-3.148-12.1-6.878a1.2 1.2 0 0 0-1.257 0l-.058.033 7.115 7.115 3.15 3.148Z" fill="#00F076"></path><path d="M17.3 15.563l-3.15-3.148v-.83L17.3 8.437l.07.04 3.733 2.12a1.2 1.2 0 0 1 0 2.086l-3.733 2.12-.07.04v.72Z" fill="#FFE000"></path><path d="M14.15 12.415l-3.15 3.148-7.115 7.115.058.033a1.2 1.2 0 0 0 1.257 0l12.1-6.878-3.15-3.148v-.27Z" fill="#FF3A44"></path></svg><span class="btn-text"><span class="btn-caption">GOOGLE PLAY で手に入れよう</span><span class="btn-name">Google Play</span></span></a><a href="https://apps.apple.com/app/id6800189725" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"></path></svg><span class="btn-text"><span class="btn-caption">APP STORE からダウンロード</span><span class="btn-name">App Store</span></span></a></div></div></section><article class="about"><div class="about-content"><h2>GitCode Viewerについて</h2><p>GitCode Viewerは、コードを真剣に読むためのモバイルGitクライアントです。クローン、閲覧、追跡、理解をどこでも行えます。</p><h3>モバイルで使える本格Git</h3><p>日常的なGit操作をモバイル向けに快適に行え、大きなリポジトリには浅いクローンを利用できます。</p><h3>コードの履歴を追う</h3><p>行ごとのBlame、作者情報、過去のリビジョンを使い、PCなしで変更を調べられます。</p><h3>リポジトリ内のファイルを読む</h3><p>コード、設定、Markdown、PDF、Office文書、Jupyterノートブックをリポジトリ内で確認できます。</p><h3>Gitサービスに接続</h3><p>主要サービスと自前サーバーに対応し、社内ネットワークでもSSHまたはトークンで接続できます。</p><h3>オフラインとプライバシー</h3><p>クローン後はコード、文書、履歴をオフラインで閲覧できます。利用データは収集しません。詳細は <a href="/privacy/">プライバシーポリシー</a>.</p></div></article><footer class="i18n-footer"><div class="i18n-inner"><div class="i18n-heading"><p class="i18n-title">言語</p><a class="github-link" href="https://github.com/ada87/GitCodeViewer" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"></path></svg><span>GitHub</span></a></div><nav class="i18n-links" aria-label="Language selector"><a class="i18n-link" data-locale="en" href="/">English</a><a class="i18n-link" data-locale="zh-cn" href="/zh-cn/">简体中文</a><a class="i18n-link" data-locale="es" href="/es/">Español</a><a class="i18n-link" data-locale="pt-br" href="/pt-br/">Português (Brasil)</a><a class="i18n-link" data-locale="hi" href="/hi/">हिन्दी</a><a class="i18n-link" data-locale="ja" href="/ja/">日本語</a><a class="i18n-link" data-locale="de" href="/de/">Deutsch</a><a class="i18n-link" data-locale="fr" href="/fr/">Français</a><a class="i18n-link" data-locale="ko" href="/ko/">한국어</a><a class="i18n-link" data-locale="id" href="/id/">Bahasa Indonesia</a><a class="i18n-link" data-locale="tr" href="/tr/">Türkçe</a></nav></div></footer><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "GitCode Viewer",
+      "alternateName": "Code Viewer",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Git Client",
+      "operatingSystem": "Android, iOS",
+      "description": "モバイルでclone、pull、branch、log、diff、Blameを使えるGitクライアント。オフライン閲覧とPDF・Office・Jupyterのプレビューに対応。",
+      "url": "https://gitcodeviewer.xdnote.com/ja/",
+      "installUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.xdnote.codeviewer",
+      "image": "https://gitcodeviewer.xdnote.com/images/og-image.jpg",
+      "screenshot": [
+        "https://gitcodeviewer.xdnote.com/images/phone-01-code-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/phone-05-git-720.webp",
+        "https://gitcodeviewer.xdnote.com/images/tablet-04-git-720.webp"
+      ],
+      "featureList": [
+        "モバイル向け本格Git",
+        "行ごとのBlameと履歴",
+        "30以上の言語のハイライトとアウトライン",
+        "PDF、Office、Jupyterのプレビュー",
+        "MermaidとLaTeX対応のMarkdown",
+        "Gitサービスと自前サーバー",
+        "SSHと非公開リポジトリ",
+        "オフライン閲覧、テレメトリーなし"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       },
-      {
-        "@type": "WebSite",
-        "name": "GitCode Viewer",
-        "url": "https://gitcodeviewer.xdnote.com/",
-        "inLanguage": "ja",
-        "description": "GitCode Viewer 公式サイト。アプリ機能、スクリーンショット、インストールリンクを掲載。"
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer は Android に適したモバイル Git クライアントですか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "はい。GitCode Viewer は Android でデスクトップ級 Git ワークフローを実現でき、clone、pull、branch、log、diff に対応しています。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Android で Git リポジトリを clone / pull できますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "はい。GitCode Viewer はモバイル端末で直接 clone と pull を行えます。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "branch 切り替え、commit log、diff レビューに対応していますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "はい。GitCode Viewer はモバイルで branch 操作、commit log 閲覧、ファイル diff レビューに対応しています。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer はどの Git プロバイダーに対応していますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "GitCode Viewer は GitHub、GitLab、Bitbucket、Azure DevOps、Gitea に対応しています。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer は SSH とプライベートリポジトリに対応していますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "はい。GitCode Viewer は SSH 接続とプライベートリポジトリに対応しています。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "モバイルでリポジトリをオフライン閲覧できますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "はい。clone 後はシンタックスハイライトと履歴閲覧付きでオフライン閲覧できます。"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "GitCode Viewer はユーザーデータや追跡 analytics を収集しますか？",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "いいえ。GitCode Viewer は analytics や追跡データを収集しません。"
-            }
-          }
-        ]
+      "author": {
+        "@type": "Person",
+        "name": "XiangDa",
+        "email": "ada87@163.com"
       }
-    ]
-  }
-  </script>
-
-  <script src="/script.js"></script>
-</body>
-</html>
-
-
+    },
+    {
+      "@type": "WebSite",
+      "name": "GitCode Viewer",
+      "url": "https://gitcodeviewer.xdnote.com/",
+      "inLanguage": "ja",
+      "description": "モバイルでclone、pull、branch、log、diff、Blameを使えるGitクライアント。オフライン閲覧とPDF・Office・Jupyterのプレビューに対応。"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "GitCode Viewerは無料ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "登録不要で無料で使えます。一部の高度な機能はプレミアム版で利用できます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "対応する言語と形式は？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "30以上のプログラミング言語と100以上の拡張子に対応し、主要言語ではアウトラインとシンボル移動も使えます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "どの文書をプレビューできますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Markdown、PDF、Word、Excel、PowerPoint、RTF、CSV、TSV、Mermaid、Jupyterに対応しています。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "対応するGitサービスは？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GitHub、GitLab、Bitbucket、Azure DevOps、Gitea、Gitee、CNB、自前Gitサーバーに対応します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SSHと非公開リポジトリは使えますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "はい。SSHまたはアクセストークンを利用でき、認証情報は端末内だけに保存されます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "オフラインで読めますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "はい。クローン後はコード、文書、履歴をオフラインで閲覧できます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "プレミアム版はAndroidとiOSで共有できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "共有できません。購入は各アプリストアで個別に処理されます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ユーザーデータを収集しますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "利用分析、追跡、テレメトリーは収集しません。"
+          }
+        }
+      ]
+    }
+  ]
+}</script><script src="/script.js"></script></body></html>

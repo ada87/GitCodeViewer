@@ -1,33 +1,42 @@
 # GitCode Viewer
 
-GitCode Viewer is a mobile Git client for reading and reviewing code on Android.
+Desktop-class Git on mobile: clone, pull, branch, log, diff, and blame, with offline reading and PDF / Office / Jupyter preview. Supports GitHub, GitLab, Gitee, self-hosted servers, SSH, and private repositories.
 
 ## Canonical URLs
 - https://gitcodeviewer.xdnote.com/
 - https://gitcodeviewer.xdnote.com/privacy/
 
 ## Key Product Facts
-- Desktop-class Git actions on mobile: clone, pull, branch, log, and diff.
-- Supports major Git providers: GitHub, GitLab, Bitbucket, Azure DevOps, and Gitea.
-- Supports SSH connections and private repositories.
-- Offline-first code reading with syntax highlighting and repository history.
-- No analytics or tracking data collection.
+- Desktop-class Git on mobile: clone, pull, branch, log, tag, checkout, diff.
+- Inline Git blame, author annotations, and historical revision viewing.
+- Syntax highlighting, outline, and symbols for 30+ languages.
+- Preview PDF, Word, Excel, PowerPoint, CSV, and Jupyter notebooks.
+- Markdown rendering with Mermaid diagrams and LaTeX math.
+- GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, CNB, and self-hosted servers.
+- SSH and private repository support.
+- Offline reading, no analytics or tracking.
 
 ## FAQ (Search-Friendly)
-- Q: Can I clone and pull repositories on Android?
-  A: Yes. GitCode Viewer supports clone and pull directly on mobile.
-- Q: Does it support branch, log, and diff?
-  A: Yes. GitCode Viewer supports branch operations, commit log browsing, and file diff review.
-- Q: Which Git providers are supported?
-  A: GitHub, GitLab, Bitbucket, Azure DevOps, and Gitea.
+- Q: Is GitCode Viewer free?
+  A: Free to use with no account required. Some advanced features require upgrading to the premium version.
+- Q: Which programming languages and code formats are supported?
+  A: Syntax highlighting covers 30+ programming languages and 100+ file extensions. Major languages (C, C++, C#, Go, Rust, Java, Python, JavaScript, TypeScript, PHP, Bash, and more) also get code outline and symbol navigation.
+- Q: Which document formats can it preview?
+  A: Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV / TSV, Mermaid diagrams, and Jupyter notebooks.
+- Q: Which Git providers does GitCode Viewer support?
+  A: GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, and CNB, as well as self-hosted Git servers - including servers on your intranet.
 - Q: Does it support SSH and private repositories?
-  A: Yes. SSH connections and private repositories are supported.
+  A: Yes. You can connect over SSH or with access tokens, and credentials are stored only on your device.
 - Q: Can I read repositories offline?
-  A: Yes. After cloning, repositories can be read offline.
+  A: Yes. After cloning, code, documents, and full Git history are all available offline.
+- Q: Is the premium upgrade shared between Android and iOS?
+  A: No. Upgrades are billed through each app store: a purchase made on Google Play cannot be used on iOS, and vice versa. Switching platforms requires purchasing the upgrade again in the respective store.
+- Q: Does GitCode Viewer collect user data?
+  A: No. It collects no analytics, no tracking, and no telemetry. Network traffic goes directly between your device and your Git provider.
 
 ## Official App Link
 - https://play.google.com/store/apps/details?id=com.xdnote.codeviewer
-
+- https://apps.apple.com/app/id6800189725
 ## Contact
 - Developer: XiangDa
 - Email: ada87@163.com
