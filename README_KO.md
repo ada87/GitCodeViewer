@@ -8,7 +8,7 @@
 </a>
 &nbsp;&nbsp;
 <a href='https://apps.apple.com/app/id6800189725'>
-  <img alt='Download on the App Store' src='./other/app-store-badge.png'/>
+  <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
 언제 어디서나 코드를 볼 수 있도록 도와주는 고성능 소스 코드 읽기 도구입니다.

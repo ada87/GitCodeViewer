@@ -8,7 +8,7 @@
 </a>
 &nbsp;&nbsp;
 <a href='https://apps.apple.com/app/id6800189725'>
-  <img alt='Download on the App Store' src='./other/app-store-badge.png'/>
+  <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
 एक उच्च-प्रदर्शन सोर्स कोड रीडिंग टूल है जो आपको कभी भी, कहीं भी कोड देखने में मदद करता है।

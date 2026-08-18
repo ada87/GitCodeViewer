@@ -9,7 +9,7 @@ English | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español
 </a>
 &nbsp;&nbsp;
 <a href='https://apps.apple.com/app/id6800189725'>
-  <img alt='Download on the App Store' src='./other/app-store-badge.png'/>
+  <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
 **Code Viewer** is a high-performance Git client and code reader for Android. It is designed for developers who need to read code, review PRs, and study open-source projects offline.

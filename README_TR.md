@@ -9,7 +9,7 @@
 </a>
 &nbsp;&nbsp;
 <a href='https://apps.apple.com/app/id6800189725'>
-  <img alt='Download on the App Store' src='./other/app-store-badge.png'/>
+  <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
 **Code Viewer**, Android için yüksek performanslı bir Git istemcisi ve kod okuyucusudur. Kod okumak, PR incelemek ve açık kaynak projeleri çevrimdışı çalışmak için tasarlanmıştır.

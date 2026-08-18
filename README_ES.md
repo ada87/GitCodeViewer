@@ -8,7 +8,7 @@
 </a>
 &nbsp;&nbsp;
 <a href='https://apps.apple.com/app/id6800189725'>
-  <img alt='Download on the App Store' src='./other/app-store-badge.png'/>
+  <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
 Una herramienta de lectura de código fuente de alto rendimiento que te ayuda a ver código en cualquier momento y lugar.

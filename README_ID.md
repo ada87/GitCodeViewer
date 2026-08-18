@@ -9,7 +9,7 @@
 </a>
 &nbsp;&nbsp;
 <a href='https://apps.apple.com/app/id6800189725'>
-  <img alt='Download on the App Store' src='./other/app-store-badge.png'/>
+  <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
 **Code Viewer** adalah klien Git dan pembaca kode berperforma tinggi untuk Android. Aplikasi ini dibuat untuk developer yang perlu membaca kode, mereview PR, dan mempelajari proyek open source secara offline.
