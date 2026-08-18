@@ -4,11 +4,11 @@
 
 ![Feature Graphic](./other/feature-graphic.png)
 <a href='https://play.google.com/store/apps/details?id=com.xdnote.codeviewer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-  <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/>
+  <img alt='Get it on Google Play' src='./other/google-play-badge.png'/>
 </a>
 &nbsp;&nbsp;
 <a href='https://apps.apple.com/app/id6800189725'>
-  <img alt='Download on the App Store' src='https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg' width="240" height="80"/>
+  <img alt='Download on the App Store' src='./other/app-store-badge.png'/>
 </a>
 
 Una herramienta de lectura de código fuente de alto rendimiento que te ayuda a ver código en cualquier momento y lugar.
