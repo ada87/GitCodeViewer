@@ -12,15 +12,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-**Code Viewer**, Android için yüksek performanslı bir Git istemcisi ve kod okuyucusudur. Kod okumak, PR incelemek ve açık kaynak projeleri çevrimdışı çalışmak için tasarlanmıştır.
+GitCode Viewer, bilgisayarınızdaki Git ve kod okuma deneyimini telefon ve tabletinize taşır — kodu ve belgeleri her yerde okuyun.
+
+Deponuz sizin bilgi tabanınızdır. Yerleşik AI asistanı; depoları keşfetmenize, hataları bulmanıza, kodu açıklamanıza, belgeleri özetlemenize, commit kayıtlarını incelemenize, çeviri yapmanıza ve daha fazlasına yardımcı olur.
 
 ## Özellikler
 
-1. **Çevrimdışı Git:** Bir kez klonlayın, her yerde okuyun. Branch, log ve diğer Git işlemlerini, özel depolar dahil, destekler.
-2. **Sözdizimi Renklendirme:** HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML ve daha birçok yaygın dili destekler.
-3. **Doküman Okuma:** Markdown (`.md`, `.markdown`) ve MDX (`.mdx`, okuma için Markdown olarak görüntülenir), Mermaid (`.mmd`, `.mermaid`), Jupyter (`.ipynb`), Draw.io ve diğer yapılandırılmış formatları destekler.
-4. **Temalar:** Açık/Koyu mod ve VS Code/JetBrains tema stillerini destekler.
-5. **GitHub:** Popüler herkese açık projeleri hızlıca keşfetmeyi ve indirmeyi sağlar.
+- 🤖 **Akıllı:** Popüler ve özel AI model sağlayıcılarını destekler, OpenAI ve Anthropic formatındaki API'lerle uyumludur.
+- 🌿 **Akıcı:** Clone / Branch / Log / Diff, bilgisayardaki kadar rahat.
+- 🎨 **Kod:** 30'dan fazla dilde (Java / C# / JavaScript vb.) sözdizimi vurgulama, kod yapısı ve sembol gezintisi.
+- 📚 **Belgeler:** Markdown / Mermaid / Jupyter / Office / PDF dosyalarını anında açın.
+- 🔎 **Keşfet:** Yerleşik GitHub trendleri ve aramasıyla popüler projeleri hızla bulun.
+- 📁 **Yönet:** GitHub / GitLab / Bitbucket gibi servislerde ve kendi sunucularınızda özel depolar, SSH / PAT ile güvenli erişim.
+- 🧩 **Kolay:** Çevrimdışı okuma, reklamsız, hemen başlayın.
 
 ## Canlı Demo
 

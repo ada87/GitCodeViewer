@@ -11,15 +11,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-Ein leistungsstarkes Quellcode-Lesewerkzeug, das Ihnen hilft, Code jederzeit und überall anzuzeigen.
+GitCode Viewer bringt das Git- und Code-Leseerlebnis vom Computer auf Smartphone und Tablet — Code und Dokumente überall lesen.
+
+Dein Repo ist deine Wissensdatenbank. Der integrierte AI-Assistent hilft dir, Repos zu erkunden, Bugs zu finden, Code zu erklären, Dokumente zusammenzufassen, Commit-Verläufe zu durchsuchen, zu übersetzen und mehr.
 
 ## Hauptfunktionen
 
-1. **Offline-Git:** Nach dem Klonen offline anzeigen. Unterstützt branch, log und andere Git-Operationen sowie private Repositories.
-2. **Syntaxhervorhebung:** Unterstützt gängige Sprachen (HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML usw.).
-3. **Dokumentenlesen:** Unterstützt Markdown, Mermaid (.mmd, .mermaid), Jupyter (.ipynb) und mehr.
-4. **Themes:** Unterstützt Hell-/Dunkelmodus und VS Code-/JetBrains-Theme-Stile.
-5. **GitHub:** Entdecken und laden Sie schnell beliebte öffentliche Projekte herunter.
+- 🤖 **Smart:** Unterstützt gängige und eigene AI-Modell-Anbieter, kompatibel mit OpenAI- und Anthropic-APIs.
+- 🌿 **Flüssig:** Clone / Branch / Log / Diff – so komfortabel wie am Computer.
+- 🎨 **Code:** Syntax-Highlighting für über 30 Sprachen (Python / Java / C++ u. a.), mit Code-Gliederung und Symbolnavigation.
+- 📚 **Dokumente:** Markdown / Mermaid / Jupyter / Office / PDF sofort öffnen.
+- 🔎 **Entdecken:** Integrierte GitHub-Trends und -Suche, beliebte Projekte schnell finden.
+- 📁 **Verwalten:** Private Repos auf GitHub / GitLab / Bitbucket u. a. und auf eigenen Servern, sicher per SSH / PAT.
+- 🧩 **Einfach:** Offline lesen, werbefrei, sofort startklar.
 
 ## 🚀 Live-Demo
 

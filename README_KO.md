@@ -11,15 +11,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-언제 어디서나 코드를 볼 수 있도록 도와주는 고성능 소스 코드 읽기 도구입니다.
+GitCode Viewer는 컴퓨터에서 누리던 Git 작업과 코드 읽기 경험을 휴대폰과 태블릿으로 가져옵니다. 어디서든 코드와 문서를 읽으세요.
+
+내 저장소가 곧 지식 베이스입니다. 내장 AI 어시스턴트가 저장소 탐색, 버그 찾기, 코드 설명, 문서 요약, 커밋 로그 조회, 번역 등을 도와줍니다.
 
 ## 주요 기능
 
-1. **오프라인 Git:** 복제 후 오프라인으로 보기. branch, log 및 기타 Git 작업과 비공개 저장소를 지원합니다.
-2. **구문 강조:** 주요 언어 지원 (HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML 등).
-3. **문서 읽기:** Markdown, Mermaid (.mmd, .mermaid), Jupyter (.ipynb) 등을 지원합니다.
-4. **테마:** 라이트/다크 모드 및 VS Code/JetBrains 테마 스타일을 지원합니다.
-5. **GitHub:** 인기 있는 공개 프로젝트를 빠르게 발견하고 다운로드합니다.
+- 🤖 **똑똑함:** 주요 및 사용자 지정 AI 모델 제공업체 지원, OpenAI·Anthropic 형식 API 호환.
+- 🌿 **매끄러움:** Clone / Branch / Log / Diff, 컴퓨터와 다름없는 사용감.
+- 🎨 **코드:** 30여 개 언어(Java / Python / JavaScript 등) 구문 강조, 코드 개요와 심볼 이동 지원.
+- 📚 **문서:** Markdown / Mermaid / Jupyter / Office / PDF를 바로 열람.
+- 🔎 **둘러보기:** GitHub 트렌드와 검색 내장, 인기 프로젝트를 빠르게 탐색.
+- 📁 **관리:** GitHub / GitLab / Bitbucket 등 및 자체 호스팅 비공개 저장소 지원, SSH / PAT로 안전하게 접속.
+- 🧩 **간편함:** 오프라인 열람, 광고 없음, 바로 시작.
 
 ## 🚀 라이브 데모
 

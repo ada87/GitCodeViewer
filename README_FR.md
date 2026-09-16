@@ -11,15 +11,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-Un outil de lecture de code source haute performance qui vous aide à visualiser le code à tout moment et en tout lieu.
+GitCode Viewer transpose sur téléphone et tablette le confort de Git et de la lecture de code sur ordinateur : lisez code et documents partout.
+
+Votre dépôt est votre base de connaissances. L'assistant IA intégré vous aide à explorer vos dépôts, repérer les bugs, expliquer le code, résumer la documentation, consulter l'historique des commits, traduire et plus encore.
 
 ## Fonctionnalités principales
 
-1. **Git hors ligne :** Visualisez hors ligne après le clonage. Prend en charge branch, log et autres opérations Git, ainsi que les dépôts privés.
-2. **Coloration syntaxique :** Prend en charge les principaux langages (HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML, etc.).
-3. **Lecture de documents :** Prend en charge Markdown, Mermaid (.mmd, .mermaid), Jupyter (.ipynb) et plus encore.
-4. **Thèmes :** Prend en charge les modes Clair/Sombre et les styles de thème VS Code/JetBrains.
-5. **GitHub :** Découvrez et téléchargez rapidement des projets publics populaires.
+- 🤖 **Malin :** Prend en charge les principaux fournisseurs de modèles IA, standards ou personnalisés, compatible avec les API aux formats OpenAI et Anthropic.
+- 🌿 **Fluide :** Clone / Branch / Log / Diff, aussi agréable que sur ordinateur.
+- 🎨 **Code :** Coloration syntaxique de plus de 30 langages (Python / JavaScript / PHP, etc.), avec plan du code et navigation par symboles.
+- 📚 **Documents :** Ouvrez instantanément Markdown / Mermaid / Jupyter / Office / PDF.
+- 🔎 **Découverte :** Tendances et recherche GitHub intégrées pour explorer vite les projets populaires.
+- 📁 **Gestion :** Dépôts privés sur GitHub / GitLab / Bitbucket, entre autres, et serveurs auto-hébergés, accès sécurisé via SSH / PAT.
+- 🧩 **Simple :** Lecture hors ligne, sans publicité, prise en main immédiate.
 
 ## 🚀 Démo en direct
 

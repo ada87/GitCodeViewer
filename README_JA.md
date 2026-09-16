@@ -11,15 +11,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-いつでもどこでもコードを表示できる高性能なソースコード閲覧ツールです。
+GitCode Viewerは、パソコンでのGit操作とコード閲覧の快適さをスマートフォンやタブレットへ。どこでもコードとドキュメントを読めます。
+
+あなたのリポジトリが、そのまま知識ベースになります。内蔵のAIアシスタントが、リポジトリの探索、バグの発見、コードの解説、ドキュメントの要約、コミット履歴の確認、翻訳などを手伝います。
 
 ## 主な機能
 
-1. **オフライン Git:** クローン後はオフラインで表示。branch、log などの Git 操作とプライベートリポジトリをサポート。
-2. **シンタックスハイライト:** 主要な言語をサポート（HTML、JS、CSS、Python、TypeScript、Java、C++、PHP、Rust、Go、Ruby、Kotlin、Dart、Bash、SQL、YAML など）。
-3. **ドキュメント閲覧:** Markdown、Mermaid（.mmd、.mermaid）、Jupyter（.ipynb）などをサポート。
-4. **テーマ:** ライト/ダークモード、VS Code/JetBrains テーマスタイルをサポート。
-5. **GitHub:** 人気のある公開プロジェクトをすばやく発見してダウンロード。
+- 🤖 **かしこい:** 主要・カスタムのAIモデルプロバイダーに対応。OpenAIおよびAnthropic形式のAPIと互換。
+- 🌿 **快適:** Clone / Branch / Log / Diff — パソコンと同じ操作感で。
+- 🎨 **コード:** 30以上の言語（Python / Java / Rubyなど）の構文ハイライト、アウトラインとシンボル移動に対応。
+- 📚 **ドキュメント:** Markdown / Mermaid / Jupyter / Office / PDFをすぐ閲覧。
+- 🔎 **見つける:** GitHubのトレンドと検索を内蔵。人気プロジェクトをすばやく探索。
+- 📁 **管理:** GitHub / GitLab / Backlogなど、セルフホストのプライベートリポジトリに対応。SSH / PATで安全に接続。
+- 🧩 **手軽:** オフライン閲覧、広告なし、すぐ使えます。
 
 ## 🚀 ライブデモ
 

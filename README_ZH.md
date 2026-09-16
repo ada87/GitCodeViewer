@@ -2,7 +2,7 @@
 
 [English](./README.md) | 简体中文 | [Deutsch](./README_DE.md) | [Español](./README_ES.md) | [Français](./README_FR.md) | [हिन्दी](./README_HI.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Português (Brasil)](./README_PT_BR.md) | [Bahasa Indonesia](./README_ID.md) | [Türkçe](./README_TR.md)
 
-![Feature Graphic](./other/feature-graphic.png)
+![Feature Graphic](./other/feature-graphic-zh.png)
 <a href='https://play.google.com/store/apps/details?id=com.xdnote.codeviewer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
   <img alt='Get it on Google Play' src='./other/google-play-badge.png'/>
 </a>
@@ -11,16 +11,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-一款高性能源码阅读工具，助您随时随地查看代码。
+GitCode Viewer 把电脑上的 Git 与代码阅读体验带到手机和平板，随时随地阅读代码与文档。
 
+你的仓库就是你的知识库。使用 AI 助手可以帮你快速探索仓库、定位 Bug、解释代码、总结文档、查询提交日志、翻译等。
 
 ## 功能特性
 
-1. **离线Git：** 克隆之后离线查看，支持 branch、log 等 Git 操作，支持私有仓库。
-2. **语言高亮：** 支持几乎所有主流编程语言（HTML、JS、CSS、Python、TypeScript、Java、C++、PHP、Rust、Go、Ruby、Kotlin、Dart、Bash、SQL、YAML 等）。
-3. **文档阅读：** 支持 Markdown、Mermaid（.mmd、.mermaid）、Jupyter（.ipynb）等文档。
-4. **皮肤样式：** 支持明/暗皮肤，支持 VS Code/JetBrains 皮肤样式。
-5. **GitHub：** 快速发现并下载热门公开项目。
+- 🤖 **智能：** 支持主流与自定义 AI 模型服务商，兼容 OpenAI 与 Anthropic 格式接口。
+- 🌿 **流畅：** Clone / Branch / Log / Diff，和电脑上一样顺手。
+- 🎨 **代码：** 主流 30+ 种编程语言（Java / TypeScript / Go 等），支持代码大纲与符号跳转。
+- 📚 **文档：** Markdown / Mermaid / Jupyter / Office / PDF 即点即读。
+- 🔎 **发现：** 集成 GitHub 热榜与搜索，快速探索热门项目。
+- 📁 **管理：** 支持 GitHub / Gitee / GitLab 等服务商及自建私有仓库，SSH / PAT 安全接入。
+- 🧩 **易用：** 离线阅读、无广告、上手轻松。
 
 ## 🚀 在线演示
 

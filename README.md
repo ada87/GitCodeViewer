@@ -12,15 +12,19 @@ English | [简体中文](./README_ZH.md) | [Deutsch](./README_DE.md) | [Español
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-**Code Viewer** is a high-performance Git client and code reader for Android. It is designed for developers who need to read code, review PRs, and study open-source projects offline.
+GitCode Viewer brings the Git and code reading experience from your computer to your phone and tablet — read code and docs anywhere.
+
+Your repo is your knowledge base. The built-in AI assistant helps you explore repositories, hunt down bugs, explain code, summarize docs, review commit logs, translate and more.
 
 ## Features
 
-1. **Offline Git:** Clone once, read anywhere. Supports branch, log, and other Git operations, including private repositories.
-2. **Syntax Highlight:** Supports mainstream languages such as HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML, and more.
-3. **Document Reading:** Supports Markdown (`.md`, `.markdown`) and MDX (`.mdx`, rendered as Markdown for reading), Mermaid (`.mmd`, `.mermaid`), Jupyter (`.ipynb`), Draw.io, and other structured formats.
-4. **Themes:** Supports Light/Dark modes and VS Code/JetBrains theme styles.
-5. **GitHub:** Quickly discover and download popular public projects.
+- 🤖 **Smart:** Works with major and custom AI model providers, compatible with OpenAI- and Anthropic-style APIs.
+- 🌿 **Smooth:** Clone / Branch / Log / Diff, just as fluid as on your computer.
+- 🎨 **Code:** Syntax highlighting for 30+ languages (Python / C / Java and more), with code outline and symbol navigation.
+- 📚 **Docs:** Read Markdown / Mermaid / Jupyter / Office / PDF instantly.
+- 🔎 **Discover:** GitHub trending and search built in, explore popular projects fast.
+- 📁 **Manage:** Private repos on GitHub, GitLab, Bitbucket and more — self-hosted included, secure access via SSH / PAT.
+- 🧩 **Easy:** Offline reading, no ads, easy to get started.
 
 ## Live Demo
 

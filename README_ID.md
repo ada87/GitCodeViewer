@@ -12,15 +12,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-**Code Viewer** adalah klien Git dan pembaca kode berperforma tinggi untuk Android. Aplikasi ini dibuat untuk developer yang perlu membaca kode, mereview PR, dan mempelajari proyek open source secara offline.
+GitCode Viewer menghadirkan pengalaman Git dan membaca kode dari komputer ke ponsel dan tablet — baca kode dan dokumen di mana saja.
+
+Repo-mu adalah basis pengetahuanmu. Asisten AI bawaan membantumu menjelajahi repositori, menemukan bug, memahami kode, meringkas dokumen, menelusuri log commit, menerjemahkan, dan lainnya.
 
 ## Fitur
 
-1. **Git Offline:** Clone sekali, baca di mana saja. Mendukung branch, log, dan operasi Git lainnya, termasuk repository privat.
-2. **Syntax Highlight:** Mendukung bahasa populer seperti HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML, dan lainnya.
-3. **Pembacaan Dokumen:** Mendukung Markdown (`.md`, `.markdown`) dan MDX (`.mdx`, ditampilkan sebagai Markdown untuk dibaca), Mermaid (`.mmd`, `.mermaid`), Jupyter (`.ipynb`), Draw.io, dan format terstruktur lainnya.
-4. **Tema:** Mendukung mode terang/gelap serta gaya tema VS Code/JetBrains.
-5. **GitHub:** Temukan dan unduh proyek publik populer dengan cepat.
+- 🤖 **Cerdas:** Mendukung penyedia model AI populer dan kustom, kompatibel dengan API format OpenAI dan Anthropic.
+- 🌿 **Lancar:** Clone / Branch / Log / Diff, semulus di komputer.
+- 🎨 **Kode:** Penyorotan sintaks untuk 30+ bahasa (JavaScript / PHP / Python, dll.), dengan outline kode dan navigasi simbol.
+- 📚 **Dokumen:** Buka Markdown / Mermaid / Jupyter / Office / PDF seketika.
+- 🔎 **Jelajahi:** Tren dan pencarian GitHub bawaan, temukan proyek populer dengan cepat.
+- 📁 **Kelola:** Repo privat di GitHub / GitLab / Bitbucket, dan lainnya, serta server sendiri, akses aman via SSH / PAT.
+- 🧩 **Mudah:** Baca offline, tanpa iklan, langsung bisa dipakai.
 
 ## Demo Langsung
 

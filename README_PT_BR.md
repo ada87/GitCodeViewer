@@ -11,15 +11,19 @@
   <img alt='Download on the App Store' src='./other/app-store-badge.svg'/>
 </a>
 
-Uma ferramenta de leitura de código-fonte de alto desempenho, ajudando você a visualizar código a qualquer hora e em qualquer lugar.
+GitCode Viewer leva para o celular e o tablet a experiência de usar Git e ler código no computador — leia código e documentos em qualquer lugar.
+
+Seu repositório é sua base de conhecimento. O assistente de IA integrado ajuda você a explorar repositórios, encontrar bugs, entender código, resumir documentos, consultar logs de commits, traduzir e muito mais.
 
 ## Recursos
 
-1. **Git Offline:** Visualize offline após clonar. Suporta branch, log e outras operações do Git, além de repositórios privados.
-2. **Destaque de Sintaxe:** Suporta linguagens principais (HTML, JS, CSS, Python, TypeScript, Java, C++, PHP, Rust, Go, Ruby, Kotlin, Dart, Bash, SQL, YAML, etc.).
-3. **Leitura de Documentos:** Suporta Markdown, Mermaid (.mmd, .mermaid), Jupyter (.ipynb) e muito mais.
-4. **Temas:** Suporta modos Claro/Escuro e estilos VS Code/JetBrains.
-5. **GitHub:** Descubra e baixe rapidamente projetos públicos populares.
+- 🤖 **Inteligente:** Compatível com os principais provedores de modelos de IA, padrão ou personalizados, e com APIs nos formatos OpenAI e Anthropic.
+- 🌿 **Fluido:** Clone / Branch / Log / Diff, tão ágil quanto no computador.
+- 🎨 **Código:** Realce de sintaxe para mais de 30 linguagens (Java / JavaScript / Python, entre outras), com estrutura do código e navegador de símbolos.
+- 📚 **Documentos:** Abra Markdown / Mermaid / Jupyter / Office / PDF na hora.
+- 🔎 **Descubra:** Tendências e busca do GitHub integradas para explorar projetos populares.
+- 📁 **Gerencie:** Repos privados no GitHub / GitLab / Bitbucket, entre outros, e servidores próprios, acesso seguro via SSH / PAT.
+- 🧩 **Fácil:** Leitura offline, sem anúncios, comece em segundos.
 
 ## 🚀 Demonstração ao Vivo
 
