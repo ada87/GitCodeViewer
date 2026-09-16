@@ -1,12 +1,14 @@
 # GitCode Viewer
 
-Desktop-class Git on mobile: clone, pull, branch, log, diff, and blame, with offline reading and PDF / Office / Jupyter preview. Supports GitHub, GitLab, Gitee, self-hosted servers, SSH, and private repositories.
+Desktop-class Git on mobile: clone, pull, branch, log, diff, and blame, with offline reading and PDF / Office / Jupyter preview — plus a bring-your-own-key AI assistant that explores repos, explains code, and summarizes docs. Supports GitHub, GitLab, Gitee, self-hosted servers, SSH, and private repositories.
 
 ## Canonical URLs
 - https://gitcodeviewer.xdnote.com/
 - https://gitcodeviewer.xdnote.com/privacy/
 
 ## Key Product Facts
+- AI assistant that explores repos, explains code, hunts bugs, and summarizes or translates docs.
+- Bring your own API key: 20+ provider presets or any OpenAI-compatible endpoint, read-only and on-device.
 - Desktop-class Git on mobile: clone, pull, branch, log, tag, checkout, diff.
 - Inline Git blame, author annotations, and historical revision viewing.
 - Syntax highlighting, outline, and symbols for 30+ languages.
@@ -23,6 +25,14 @@ Desktop-class Git on mobile: clone, pull, branch, log, diff, and blame, with off
   A: Syntax highlighting covers 30+ programming languages and 100+ file extensions. Major languages (C, C++, C#, Go, Rust, Java, Python, JavaScript, TypeScript, PHP, Bash, and more) also get code outline and symbol navigation.
 - Q: Which document formats can it preview?
   A: Markdown, PDF, Word, Excel, PowerPoint, RTF, CSV / TSV, Mermaid diagrams, and Jupyter notebooks.
+- Q: Does it provide AI services?
+  A: No. The AI assistant requires you to bring your own API key. The app is fully offline — your key is encrypted and stored only on your phone, never sent anywhere, and it can't be viewed again once saved.
+- Q: Can the AI assistant modify my code?
+  A: No. The AI assistant helps you understand, learn, explore, and search code, but it can't modify or run code. For that, we recommend dedicated desktop tools such as Codex or Claude Code.
+- Q: Any tips for using the AI?
+  A: Beyond reading code, the AI can also read Office / PDF documents, view Git commit history, and save documents. Just describe what you want in natural language and it will use these abilities for you.
+- Q: Which AI model should I choose?
+  A: Since the app doesn't write code itself, a good-value mainstream model is usually enough and keeps token costs low. We recommend models that support thinking / streaming.
 - Q: Which Git providers does GitCode Viewer support?
   A: GitHub, GitLab, Bitbucket, Azure DevOps, Gitea, Gitee, and CNB, as well as self-hosted Git servers - including servers on your intranet.
 - Q: Does it support SSH and private repositories?
