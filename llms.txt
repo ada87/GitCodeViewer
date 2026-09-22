@@ -13,7 +13,7 @@ This file gives agents a concise, LLM-friendly overview of GitCode Viewer and li
 ## Download
 
 - [GitCode Viewer on Google Play](https://play.google.com/store/apps/details?id=com.xdnote.codeviewer): Android release.
-- [GitCode Viewer on the App Store](https://apps.apple.com/app/id6800189725): iOS release.
+- [GitCode Viewer on the App Store](https://apps.apple.com/app/id6813480763): iOS release.
 
 ## Key Product Facts
 
@@ -73,6 +73,10 @@ Yes. After cloning, code, documents, and full Git history are all available offl
 ### Is the premium upgrade shared between Android and iOS?
 
 No. Upgrades are billed through each app store: a purchase made on Google Play cannot be used on iOS, and vice versa. Switching platforms requires purchasing the upgrade again in the respective store.
+
+### What's the difference between the China and international versions on the App Store?
+
+Functionally, nothing. To comply with Chinese regulations, the mainland China version ships without presets for AI providers like OpenAI — you can still add them manually with a custom base URL. In the China version, the "OpenAI compatible" and "Anthropic compatible" labels appear as "Chat compatible" and "Messages compatible". Everything else is identical.
 
 ### Does GitCode Viewer collect user data?
 
