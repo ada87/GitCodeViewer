@@ -9,6 +9,7 @@ This file gives agents a concise, LLM-friendly overview of GitCode Viewer and li
 - [Home](https://gitcodeviewer.xdnote.com/): Product overview, feature list, FAQs, and download links.
 - [Changelog](https://gitcodeviewer.xdnote.com/changelog/): Release notes, newest first.
 - [Privacy Policy](https://gitcodeviewer.xdnote.com/privacy/): Data handling — the app collects no analytics, tracking, or telemetry.
+- [Terms of Service](https://gitcodeviewer.xdnote.com/terms/): Licence, one-time paid upgrade, refunds, AI assistant, and liability.
 
 ## Download
 
