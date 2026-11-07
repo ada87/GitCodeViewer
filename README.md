@@ -20,6 +20,8 @@ GitCode Viewer brings the Git and code reading experience from your computer to 
 
 Your repo is your knowledge base. The built-in AI assistant helps you explore repositories, hunt down bugs, explain code, summarize docs, review commit logs, translate and more.
 
+[Changelog](https://gitcodeviewer.xdnote.com/changelog/)
+
 ## Features
 
 - 🤖 **Smart:** Works with major and custom AI model providers, compatible with OpenAI- and Anthropic-style APIs.

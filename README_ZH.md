@@ -19,6 +19,8 @@ GitCode Viewer 把电脑上的 Git 与代码阅读体验带到手机和平板，
 
 你的仓库就是你的知识库。使用 AI 助手可以帮你快速探索仓库、定位 Bug、解释代码、总结文档、查询提交日志、翻译等。
 
+[更新日志](https://gitcodeviewer.xdnote.com/changelog/)
+
 ## 功能特性
 
 - 🤖 **智能：** 支持主流与自定义 AI 模型服务商，兼容 OpenAI 与 Anthropic 格式接口。
