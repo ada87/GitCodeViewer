@@ -19,7 +19,7 @@ This file gives agents a concise, LLM-friendly overview of GitCode Viewer and li
 ## Key Product Facts
 
 - AI assistant that explores repos, explains code, hunts bugs, and summarizes or translates docs.
-- Bring your own API key: 20+ provider presets or any OpenAI-compatible endpoint, read-only and on-device.
+- Bring your own API key: 24 provider presets or any OpenAI-compatible endpoint, read-only and on-device.
 - High-performance Git on mobile: clone, pull, branch, log, tag, checkout, diff.
 - Inline Git blame, author annotations, and historical revision viewing.
 - Syntax highlighting, outline, and symbols for 30+ languages.
