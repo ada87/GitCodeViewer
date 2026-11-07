@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /*?from=app
 Sitemap: https://gitcodeviewer.xdnote.com/sitemap.xml

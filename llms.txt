@@ -1,6 +1,6 @@
 # GitCode Viewer
 
-> Desktop-class Git on mobile: clone, pull, branch, log, diff, and blame, with offline reading and PDF / Office / Jupyter preview — plus a bring-your-own-key AI assistant that explores repos, explains code, and summarizes docs. Supports GitHub, GitLab, Gitee, self-hosted servers, SSH, and private repositories.
+> Mobile Git client: clone, pull, branch, log, diff, and blame, with offline reading and PDF / Office / Jupyter preview — plus a bring-your-own-key AI assistant that explores repos, explains code, and summarizes docs. Supports GitHub, GitLab, Gitee, self-hosted servers, SSH, and private repositories.
 
 This file gives agents a concise, LLM-friendly overview of GitCode Viewer and links to the pages worth reading.
 
@@ -20,7 +20,7 @@ This file gives agents a concise, LLM-friendly overview of GitCode Viewer and li
 
 - AI assistant that explores repos, explains code, hunts bugs, and summarizes or translates docs.
 - Bring your own API key: 20+ provider presets or any OpenAI-compatible endpoint, read-only and on-device.
-- Desktop-class Git on mobile: clone, pull, branch, log, tag, checkout, diff.
+- High-performance Git on mobile: clone, pull, branch, log, tag, checkout, diff.
 - Inline Git blame, author annotations, and historical revision viewing.
 - Syntax highlighting, outline, and symbols for 30+ languages.
 - Preview PDF, Word, Excel, PowerPoint, CSV, and Jupyter notebooks.
@@ -75,9 +75,9 @@ Yes. After cloning, code, documents, and full Git history are all available offl
 
 No. Upgrades are billed through each app store: a purchase made on Google Play cannot be used on iOS, and vice versa. Switching platforms requires purchasing the upgrade again in the respective store.
 
-### What's the difference between the China and international versions on the App Store?
+### What's the difference between the mainland China listing and the standard App Store listing?
 
-Functionally, nothing. To comply with Chinese regulations, the mainland China version ships without presets for AI providers like OpenAI — you can still add them manually with a custom base URL. In the China version, the "OpenAI compatible" and "Anthropic compatible" labels appear as "Chat compatible" and "Messages compatible". Everything else is identical.
+Functionally, nothing. To comply with Chinese regulations, the mainland China listing ships without presets for AI providers like OpenAI — you can still add them manually with a custom base URL. In that listing, the "OpenAI compatible" and "Anthropic compatible" labels appear as "Chat compatible" and "Messages compatible". Everything else is identical.
 
 ### Does GitCode Viewer collect user data?
 
